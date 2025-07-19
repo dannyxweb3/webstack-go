@@ -18,17 +18,17 @@ func (s *service) List(ctx context.Context, _ *v1.CategoryListReq) (*v1.Category
 		return nil, err
 	}
 
-	categoryList := make([]v1.CategoryList, len(categories))
+	categoryList := make([]v1.Category, len(categories))
 	for i, category := range categories {
-		categoryList[i] = v1.CategoryList{
-			Id:     category.ID,
-			Pid:    category.ParentID,
-			Name:   category.Title,
-			Icon:   category.Icon,
-			Desc:   category.Desc,
-			IsUsed: category.IsUsed,
-			Sort:   category.Sort,
-			Level:  category.Level,
+		categoryList[i] = v1.Category{
+			ID:       category.ID,
+			ParentID: category.ParentID,
+			Title:    category.Title,
+			Icon:     category.Icon,
+			Desc:     category.Desc,
+			IsUsed:   category.IsUsed,
+			Sort:     category.Sort,
+			Level:    category.Level,
 		}
 	}
 

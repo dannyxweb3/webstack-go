@@ -15,13 +15,16 @@ import (
 
 func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.CategoryCreateResp, error) {
 	// 如果存在则更新
-	existItem, _ := s.categoryRepo.WithContext(ctx).FindOne(s.categoryRepo.WhereByTitle(req.Name))
+	existItem, _ := s.categoryRepo.WithContext(ctx).FindOne(s.categoryRepo.WhereByTitle(req.Title))
 	if existItem != nil {
 		if req.Desc != "" {
 			existItem.Desc = req.Desc
 		}
 		if req.Icon != "" {
 			existItem.Icon = req.Icon
+		}
+		if req.IconCss != "" {
+			existItem.IconCss = req.IconCss
 		}
 		_, err := s.categoryRepo.WithContext(ctx).Update(existItem, s.categoryRepo.WhereByID(existItem.ID))
 		if err != nil {
@@ -49,13 +52,13 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 		category, err := s.categoryRepo.WithContext(ctx).
 			Create(&model.StCategory{
 				ParentID: req.ParentID,
-				Title:    req.Name,
+				Title:    req.Title,
 				Icon:     req.Icon,
 				IconCss:  req.IconCss,
 				Desc:     req.Desc,
 				Level:    req.Level,
 				IsUsed:   req.IsUsed,
-				Sort:     req.SortID,
+				Sort:     req.Sort,
 			})
 		if err != nil {
 			return nil, err
