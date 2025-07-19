@@ -8,6 +8,7 @@ package index
 import (
 	"context"
 	"sort"
+	"time"
 
 	"golang.org/x/sync/errgroup"
 
@@ -47,6 +48,7 @@ func categorySites(sites []*model.StSite, treeNodes []*v1.TreeNode) (data []*v1.
 	for _, node := range treeNodes {
 		categorySite := &v1.CategorySite{
 			Category: node.Name,
+			CateId:   node.Id,
 			SiteList: []model.StSite{},
 		}
 
@@ -82,13 +84,16 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		categories []*model.StCategory
 	)
 
+	// s.Logger.Info("Test Index") // ok
 	g.Go(func() (err error) {
 		categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByIsUsed(true))
+		// s.Logger.Info("Get Categories:", zap.Any("categories", categories), zap.Error(err)) // ok
 		return err
 	})
 
 	g.Go(func() (err error) {
 		sites, err = s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByIsUsed(true))
+		// s.Logger.Info("Get Sites:", zap.Any("sites", sites), zap.Error(err)) // ok
 		return err
 	})
 
@@ -132,5 +137,6 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		},
 		CategoryTree:  categoryTree,
 		CategorySites: categorySites,
+		Ts:            time.Now().Unix(),
 	}, nil
 }

@@ -34,6 +34,7 @@ func (s *service) BatchCreate(ctx context.Context, req *v1.SiteCreateReq) (*v1.S
 
 	var successCnt int
 	var failURLs []string
+	var failErrs []error
 	for _, u := range s.parseURL(req.Url) {
 		workerPool.AddJob(func() {
 			var (
@@ -59,6 +60,7 @@ func (s *service) BatchCreate(ctx context.Context, req *v1.SiteCreateReq) (*v1.S
 			if err := g.Wait(); err != nil {
 				if !req.FailSwitch {
 					failURLs = append(failURLs, u)
+					failErrs = append(failErrs, err)
 					return
 				}
 			}
@@ -74,6 +76,7 @@ func (s *service) BatchCreate(ctx context.Context, req *v1.SiteCreateReq) (*v1.S
 			})
 			if err != nil {
 				failURLs = append(failURLs, u)
+				failErrs = append(failErrs, err)
 				return
 			}
 
@@ -87,5 +90,6 @@ func (s *service) BatchCreate(ctx context.Context, req *v1.SiteCreateReq) (*v1.S
 		FailCount:    len(failURLs),
 		SuccessCount: successCnt,
 		FailURLs:     failURLs,
+		FailErrs:     failErrs,
 	}, nil
 }

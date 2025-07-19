@@ -18,11 +18,13 @@ type StSite struct {
 	Icon        string     `gorm:"column:icon;type:text" json:"icon"`
 	Description string     `gorm:"column:description;type:varchar(500)" json:"description"`
 	URL         string     `gorm:"column:url;type:varchar(255);not null" json:"url"`
+	ImgPreview  string     `gorm:"column:img_preview;type:varchar(255);not null" json:"img_preview"`
 	IsUsed      bool       `gorm:"column:is_used;type:bool;default:false" json:"is_used"`
 	CreatedAt   *time.Time `gorm:"column:created_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"created_at"`
 	UpdatedAt   *time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"updated_at"`
 	DeletedAt   *time.Time `gorm:"column:deleted_at;type:datetime" json:"deleted_at"`
 	Sort        int        `gorm:"column:sort;type:int(11)" json:"sort"`
+	IconCss     string     `gorm:"column:icon_css;type:varchar(255);not null" json:"icon_css"`
 }
 
 // TableName StSite's table name

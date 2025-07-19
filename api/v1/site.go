@@ -23,6 +23,8 @@ type Site struct {
 	Sort        int    `json:"sort" form:"sort"` // 排序
 	CreatedAt   string `json:"created_at"`       // 创建时间
 	UpdatedAt   string `json:"updated_at"`       // 更新时间
+	ImgPreview  string `json:"img_preview"`
+	IconCss     string `json:"icon_css"`
 }
 
 type (
@@ -67,6 +69,26 @@ type (
 		SuccessCount int      `json:"successCount"` // 成功计数
 		FailCount    int      `json:"failCount"`    // 失败计数
 		FailURLs     []string `json:"failURLs"`     // 失败URL
+		FailErrs     []error  `json:"failErrs"`     // 失败errors
+	}
+)
+
+type (
+	SiteAddReq struct {
+		CategoryID  int    `form:"category_id"` // 类别ID
+		Url         string `form:"url"`         // 网址地址
+		IsUsed      bool   `form:"is_used"`     // 是否启用
+		Title       string `form:"title"`
+		Icon        string `form:"icon"`
+		Description string `form:"description"`
+		ImgPreview  string `form:"img_preview"`
+		IconCss     string `form:"icon_css"`
+
+		// FailSwitch bool   `form:"fail_switch"` // 失败开关
+	}
+
+	SiteAddResp struct {
+		Id int `json:"id"`
 	}
 )
 

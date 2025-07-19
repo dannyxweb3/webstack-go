@@ -25,6 +25,7 @@ func (s *service) List(ctx context.Context, _ *v1.CategoryListReq) (*v1.Category
 			Pid:    category.ParentID,
 			Name:   category.Title,
 			Icon:   category.Icon,
+			Desc:   category.Desc,
 			IsUsed: category.IsUsed,
 			Sort:   category.Sort,
 			Level:  category.Level,

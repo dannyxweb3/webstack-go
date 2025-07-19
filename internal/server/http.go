@@ -62,8 +62,8 @@ func NewHTTPServer(
 	// Middleware
 	s.Use(
 		middleware.CORSMiddleware(),
-		middleware.RequestLogMiddleware(logger),
-		middleware.ResponseLogMiddleware(logger),
+		// middleware.RequestLogMiddleware(logger),
+		// middleware.ResponseLogMiddleware(logger),
 	)
 	// 404
 	s.NoRoute(v1.ErrHandler404)
@@ -130,6 +130,7 @@ func NewHTTPServer(
 			strictAuthRouter.GET("/site", siteHandler.List)
 			strictAuthRouter.GET("/site/sync/:id", siteHandler.SyncSite)
 			strictAuthRouter.POST("/site", siteHandler.Create)
+			strictAuthRouter.POST("/site/add", siteHandler.Add)
 			strictAuthRouter.DELETE("/site/:id", siteHandler.Delete)
 			strictAuthRouter.PUT("/site/:id", siteHandler.Update)
 			strictAuthRouter.GET("/site/export", siteHandler.Export)

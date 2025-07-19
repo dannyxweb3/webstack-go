@@ -13,6 +13,8 @@ type Category struct {
 	Sort      int        `json:"sort"`       // 排序
 	Title     string     `json:"title"`      // 名称
 	Icon      string     `json:"icon"`       // 图标
+	IconCss   string     `json:"icon_css"`   // 图标
+	Desc      string     `json:"desc"`       // 描述
 	CreatedAt *time.Time `json:"created_at"` // 创建时间
 	UpdatedAt *time.Time `json:"updated_at"` // 更新时间
 	IsUsed    bool       `json:"is_used"`    // 是否启用 1:是 0:否
@@ -25,6 +27,8 @@ type (
 		Level    int32  `form:"level"`     // 分类等级 1 一级分类  2 二级分类
 		Name     string `form:"name"`      // 菜单名称
 		Icon     string `form:"icon"`      // 图标
+		IconCss  string `form:"icon_css"`  // 图标
+		Desc     string `form:"desc"`      // 描述
 		IsUsed   bool   `form:"is_used"`   // 是否启用 1:是 0:否
 		SortID   int    `form:"sort_id"`   // 排序 ID
 	}
@@ -36,14 +40,16 @@ type (
 
 type (
 	CategoryList struct {
-		Id     int    `json:"id"`      // ID
-		Pid    int    `json:"pid"`     // 父类ID
-		Name   string `json:"name"`    // 菜单名称
-		Link   string `json:"link"`    // 链接地址
-		Icon   string `json:"icon"`    // 图标
-		IsUsed bool   `json:"is_used"` // 是否启用 1=启用 0=禁用
-		Sort   int    `json:"sort"`    // 排序
-		Level  int32  `json:"level"`   // 分类等级 1 一级分类  2 二级分类
+		Id      int    `json:"id"`       // ID
+		Pid     int    `json:"pid"`      // 父类ID
+		Name    string `json:"name"`     // 菜单名称
+		Link    string `json:"link"`     // 链接地址
+		Icon    string `json:"icon"`     // 图标
+		IconCss string `json:"icon_css"` // 图标
+		Desc    string `json:"desc"`     // 描述
+		IsUsed  bool   `json:"is_used"`  // 是否启用 1=启用 0=禁用
+		Sort    int    `json:"sort"`     // 排序
+		Level   int32  `json:"level"`    // 分类等级 1 一级分类  2 二级分类
 	}
 
 	CategoryListReq struct{}

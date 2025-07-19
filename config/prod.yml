@@ -8,12 +8,13 @@ security:
 data:
   db:
     user:
-      driver: sqlite
-      dsn: storage/webstack-go.db?_busy_timeout=5000
+      driver: mysql
+      # dsn: storage/webstack-go.db?_busy_timeout=5000
+      dsn: webpackgo:webpackgo@tcp(127.0.0.1:13306)/webpackgo?charset=utf8mb4&parseTime=True&loc=Local
 
 log:
   log_level: info
-  encoding: json           # json or console
+  encoding: console           # json or console
   log_file_name: "./storage/logs/server.log"
   max_backups: 30
   max_age: 7

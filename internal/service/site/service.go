@@ -38,6 +38,8 @@ type Service interface {
 	Update(ctx *gin.Context, req *v1.SiteUpdateReq) (resp *v1.SiteUpdateResp, err error)
 	// BatchCreate 批量创建站点
 	BatchCreate(ctx context.Context, req *v1.SiteCreateReq) (resp *v1.SiteCreateResp, err error)
+	// Add 通过接口增加单条
+	Add(ctx context.Context, req *v1.SiteAddReq) (resp *v1.SiteAddResp, err error)
 	// Sync 同步站点信息
 	Sync(ctx *gin.Context, req *v1.SiteSyncReq) (resp *v1.SiteSyncResp, err error)
 	// Export 导出站点信息

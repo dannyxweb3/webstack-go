@@ -32,6 +32,7 @@ func main() {
 	flag.Parse()
 
 	conf := config.NewConfig(*envConf)
+
 	logger := log.NewLog(conf)
 
 	app, cleanup, err := wire.NewWire(conf, logger)

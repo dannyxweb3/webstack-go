@@ -17,7 +17,8 @@ type TreeNode struct {
 }
 
 type CategorySite struct {
-	Category string         // 分类
+	Category string // 分类
+	CateId   int
 	SiteList []model.StSite // 站点列表
 }
 
@@ -42,8 +43,10 @@ type IndexResp struct {
 	ConfigSite    *ConfigSite     // 站点配置
 	CategoryTree  []*TreeNode     // 分类树
 	CategorySites []*CategorySite // 归类站点数据
+	Ts            int64
 }
 
 type AboutResp struct {
 	About
+	Ts int64
 }
