@@ -15,8 +15,10 @@ import (
 
 func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.CategoryCreateResp, error) {
 	// 如果存在则更新
-	existItem, _ := s.categoryRepo.WithContext(ctx).FindOne(s.categoryRepo.WhereByTitle(req.Title))
-	if existItem != nil {
+	// existItem, _ := s.categoryRepo.WithContext(ctx).FindOne(s.categoryRepo.WhereByTitle(req.Title))
+	existItems, _ := s.categoryRepo.WithContext(ctx).FindAll(s.categoryRepo.WhereByTitle(req.Title))
+	if len(existItems) > 0 {
+		existItem := existItems[0]
 		if req.Desc != "" {
 			existItem.Desc = req.Desc
 		}

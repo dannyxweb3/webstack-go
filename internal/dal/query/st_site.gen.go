@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"errors"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -31,6 +32,8 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 	_stSite.CategoryID = field.NewInt(tableName, "category_id")
 	_stSite.Title = field.NewString(tableName, "title")
 	_stSite.Icon = field.NewString(tableName, "icon")
+	_stSite.IconCss = field.NewString(tableName, "icon_css")
+	_stSite.ImgPreview = field.NewString(tableName, "img_preview")
 	_stSite.Description = field.NewString(tableName, "description")
 	_stSite.URL = field.NewString(tableName, "url")
 	_stSite.IsUsed = field.NewBool(tableName, "is_used")
@@ -52,7 +55,9 @@ type stSite struct {
 	CategoryID  field.Int
 	Title       field.String
 	Icon        field.String
+	IconCss     field.String
 	Description field.String
+	ImgPreview  field.String
 	URL         field.String
 	IsUsed      field.Bool
 	CreatedAt   field.Time
@@ -79,7 +84,9 @@ func (s *stSite) updateTableName(table string) *stSite {
 	s.CategoryID = field.NewInt(table, "category_id")
 	s.Title = field.NewString(table, "title")
 	s.Icon = field.NewString(table, "icon")
+	s.IconCss = field.NewString(table, "icon_css")
 	s.Description = field.NewString(table, "description")
+	s.ImgPreview = field.NewString(table, "img_preview")
 	s.URL = field.NewString(table, "url")
 	s.IsUsed = field.NewBool(table, "is_used")
 	s.CreatedAt = field.NewTime(table, "created_at")
@@ -115,7 +122,9 @@ func (s *stSite) fillFieldMap() {
 	s.fieldMap["category_id"] = s.CategoryID
 	s.fieldMap["title"] = s.Title
 	s.fieldMap["icon"] = s.Icon
+	s.fieldMap["icon_css"] = s.IconCss
 	s.fieldMap["description"] = s.Description
+	s.fieldMap["img_preview"] = s.ImgPreview
 	s.fieldMap["url"] = s.URL
 	s.fieldMap["is_used"] = s.IsUsed
 	s.fieldMap["created_at"] = s.CreatedAt
@@ -311,6 +320,9 @@ func (s stSiteDo) Save(values ...*model.StSite) error {
 
 func (s stSiteDo) First() (*model.StSite, error) {
 	if result, err := s.DO.First(); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
 		return nil, err
 	} else {
 		return result.(*model.StSite), nil

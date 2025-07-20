@@ -76,6 +76,7 @@ type (
 type (
 	SiteAddReq struct {
 		CategoryID  int    `form:"category_id"` // 类别ID
+		Category    string `form:"category"`    // 类别
 		Url         string `form:"url"`         // 网址地址
 		IsUsed      bool   `form:"is_used"`     // 是否启用
 		Title       string `form:"title"`

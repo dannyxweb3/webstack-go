@@ -7,6 +7,7 @@ package site
 
 import (
 	"context"
+	"strconv"
 
 	"github.com/duke-git/lancet/v2/condition"
 	"go.uber.org/zap"
@@ -18,10 +19,28 @@ import (
 func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp, error) {
 
 	var id = 0
+	if req.Category != "" {
+		existCates, _ := s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByTitle(req.Category))
+		if len(existCates) > 0 && existCates[0].ID > 0 {
+			req.CategoryID = existCates[0].ID
+		}
+		existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByIconCss(req.Category))
+		if len(existCates) > 0 && existCates[0].ID > 0 {
+			req.CategoryID = existCates[0].ID
+		}
+		predictCateId, _ := strconv.Atoi(req.Category)
+		if predictCateId > 0 {
+			existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByID(predictCateId))
+			if len(existCates) > 0 && existCates[0].ID > 0 {
+				req.CategoryID = existCates[0].ID
+			}
+		}
+	}
 
 	// 先查询是否存在,存在则更新
-	existItem, _ := s.siteRepository.WithContext(ctx).FindOne(s.siteRepository.WhereByURL(req.Url))
-	if existItem != nil {
+	existItems, _ := s.siteRepository.WithContext(ctx).FindAll(s.siteRepository.WhereByURL(req.Url))
+	if len(existItems) > 0 {
+		existItem := existItems[0]
 		// do update
 		if req.Title != "" {
 			existItem.Title = req.Title
@@ -67,7 +86,7 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 		}
 		if newItem != nil {
 			id = newItem.ID
-			s.Logger.Logger.Info("add by new", zap.Any("existitem", existItem))
+			s.Logger.Logger.Info("add by new", zap.Any("newItem", newItem))
 		}
 	}
 

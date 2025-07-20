@@ -24,6 +24,7 @@ type iWhereStSiteFunc interface {
 	WhereByCategoryID(categoryId int) func(dao gen.Dao) gen.Dao
 	WhereByTitle(title string) func(dao gen.Dao) gen.Dao
 	WhereByIcon(icon string) func(dao gen.Dao) gen.Dao
+	WhereByIconCss(iconcss string) func(dao gen.Dao) gen.Dao
 	WhereByDescription(description string) func(dao gen.Dao) gen.Dao
 	WhereByURL(url string) func(dao gen.Dao) gen.Dao
 	WhereByIsUsed(isUsed bool) func(dao gen.Dao) gen.Dao
@@ -79,6 +80,12 @@ func (s *stSiteDao) WhereByTitle(title string) func(dao gen.Dao) gen.Dao {
 func (s *stSiteDao) WhereByIcon(icon string) func(dao gen.Dao) gen.Dao {
 	return func(dao gen.Dao) gen.Dao {
 		return dao.Where(query.StSite.Icon.Eq(icon))
+	}
+}
+
+func (s *stSiteDao) WhereByIconCss(iconcss string) func(dao gen.Dao) gen.Dao {
+	return func(dao gen.Dao) gen.Dao {
+		return dao.Where(query.StSite.IconCss.Eq(iconcss))
 	}
 }
 

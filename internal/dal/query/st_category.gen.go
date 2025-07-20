@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"errors"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -32,6 +33,7 @@ func newStCategory(db *gorm.DB, opts ...gen.DOOption) stCategory {
 	_stCategory.Sort = field.NewInt(tableName, "sort")
 	_stCategory.Title = field.NewString(tableName, "title")
 	_stCategory.Icon = field.NewString(tableName, "icon")
+	_stCategory.IconCss = field.NewString(tableName, "icon_css")
 	_stCategory.Level = field.NewInt32(tableName, "level")
 	_stCategory.IsUsed = field.NewBool(tableName, "is_used")
 	_stCategory.CreatedAt = field.NewTime(tableName, "created_at")
@@ -52,6 +54,7 @@ type stCategory struct {
 	Sort      field.Int
 	Title     field.String
 	Icon      field.String
+	IconCss   field.String
 	Level     field.Int32
 	IsUsed    field.Bool
 	CreatedAt field.Time
@@ -78,6 +81,7 @@ func (s *stCategory) updateTableName(table string) *stCategory {
 	s.Sort = field.NewInt(table, "sort")
 	s.Title = field.NewString(table, "title")
 	s.Icon = field.NewString(table, "icon")
+	s.IconCss = field.NewString(table, "icon_css")
 	s.Level = field.NewInt32(table, "level")
 	s.IsUsed = field.NewBool(table, "is_used")
 	s.CreatedAt = field.NewTime(table, "created_at")
@@ -115,6 +119,7 @@ func (s *stCategory) fillFieldMap() {
 	s.fieldMap["sort"] = s.Sort
 	s.fieldMap["title"] = s.Title
 	s.fieldMap["icon"] = s.Icon
+	s.fieldMap["icon_css"] = s.IconCss
 	s.fieldMap["level"] = s.Level
 	s.fieldMap["is_used"] = s.IsUsed
 	s.fieldMap["created_at"] = s.CreatedAt
@@ -309,6 +314,9 @@ func (s stCategoryDo) Save(values ...*model.StCategory) error {
 
 func (s stCategoryDo) First() (*model.StCategory, error) {
 	if result, err := s.DO.First(); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
 		return nil, err
 	} else {
 		return result.(*model.StCategory), nil
@@ -325,6 +333,9 @@ func (s stCategoryDo) Take() (*model.StCategory, error) {
 
 func (s stCategoryDo) Last() (*model.StCategory, error) {
 	if result, err := s.DO.Last(); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
 		return nil, err
 	} else {
 		return result.(*model.StCategory), nil
@@ -333,6 +344,9 @@ func (s stCategoryDo) Last() (*model.StCategory, error) {
 
 func (s stCategoryDo) Find() ([]*model.StCategory, error) {
 	result, err := s.DO.Find()
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
+	}
 	return result.([]*model.StCategory), err
 }
 
@@ -342,11 +356,18 @@ func (s stCategoryDo) FindInBatch(batchSize int, fc func(tx gen.Dao, batch int) 
 		defer func() { results = append(results, buf...) }()
 		return fc(tx, batch)
 	})
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return results, nil
+	}
 	return results, err
 }
 
 func (s stCategoryDo) FindInBatches(result *[]*model.StCategory, batchSize int, fc func(tx gen.Dao, batch int) error) error {
-	return s.DO.FindInBatches(result, batchSize, fc)
+	err := s.DO.FindInBatches(result, batchSize, fc)
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil
+	}
+	return err
 }
 
 func (s stCategoryDo) Attrs(attrs ...field.AssignExpr) IStCategoryDo {
@@ -389,6 +410,9 @@ func (s stCategoryDo) FirstOrCreate() (*model.StCategory, error) {
 
 func (s stCategoryDo) FindByPage(offset int, limit int) (result []*model.StCategory, count int64, err error) {
 	result, err = s.Offset(offset).Limit(limit).Find()
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return result, count, nil
+	}
 	if err != nil {
 		return
 	}
