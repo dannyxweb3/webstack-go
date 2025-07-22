@@ -138,19 +138,19 @@
             </ul>
             <ul class="user-info-menu right-links list-inline list-unstyled">
                 <!-- https://www.w3schools.com/icons/icons_reference.asp -->
-                <li class="hidden-sm hidden-xs">
+                <!-- <li class="hidden-sm hidden-xs">
                     <a href="https://github.com/dannyxweb3/webstack-go" target="_blank">
                         <i class="fa-github"></i> GitHub
                     </a>
-                </li>
-                <!-- <li class="hidden-sm hidden-xs">
-                    <a href="/addyoursite" target="_blank">
-                        <i class="fa-code"></i> Add Your Site
-                    </a>
                 </li> -->
                 <li class="hidden-sm hidden-xs">
+                    <a href="/contactus.html" target="_blank">
+                        <i class="fa fa-address-book"></i> Contact Us
+                    </a>
+                </li>
+                <li class="hidden-sm hidden-xs">
                     <a href="/about.html" target="_blank">
-                        <i class="fa-info-circle"></i> About
+                        <i class="fa fa-info-circle"></i> About
                     </a>
                 </li>
             </ul>
@@ -187,11 +187,12 @@
         <!-- 常用推荐 -->
         {{ range .CategorySites }}
         {{ if .SiteList }}
-        <h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="cate_{{ .CateId }}"></i>{{ .Category }}</h4>
+        <!-- <h4 class="text-gray"><i class="linecons-tag" style="margin-right: 7px;" id="cate_{{ .CateId }}"></i>{{ .Category }}</h4> -->
+        <h4 class="text-gray" id="cate_{{ .CateId }}"> <img class="icon-site" src="{{ .CateIcon }}" loading="lazy" data-level="0" style="width: 20px;height: 20px;"/>{{ .Category }}</h4>
         <div class="row">
             {{ range .SiteList }}
             <div class="col-sm-3">
-                <a href="{{.URL}}" class="thumbnail" target="_blank">
+                <a href="{{.URL}}" class="thumbnail" target="_blank" alt="{{.URL}}">
                     <img data-src="{{ .ImgPreview }}" class="lozad " width="96%">
                     <div class="caption text-center " 
                         data-toggle="tooltip" data-placement="bottom" title="" data-original-title="{{ .URL }}">

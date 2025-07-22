@@ -19,6 +19,7 @@ type TreeNode struct {
 type CategorySite struct {
 	Category string // 分类
 	CateId   int
+	CateIcon string
 	SiteList []model.StSite // 站点列表
 }
 

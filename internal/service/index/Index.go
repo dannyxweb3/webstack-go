@@ -49,6 +49,7 @@ func categorySites(sites []*model.StSite, treeNodes []*v1.TreeNode) (data []*v1.
 		categorySite := &v1.CategorySite{
 			Category: node.Name,
 			CateId:   node.Id,
+			CateIcon: node.Icon,
 			SiteList: []model.StSite{},
 		}
 
