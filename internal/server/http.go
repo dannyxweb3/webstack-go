@@ -70,9 +70,15 @@ func NewHTTPServer(
 	// Index HTML
 	s.GET("/", indexHandler.Index)
 	// About HTML
-	s.GET("/about", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "about.html", nil)
-	})
+	// s.GET("/about", func(ctx *gin.Context) {
+	// 	ctx.HTML(http.StatusOK, "about.html", nil)
+	// })
+	s.GET("/about", indexHandler.About)
+	// s.GET("/contactus", func(ctx *gin.Context) {
+	// 	ctx.HTML(http.StatusOK, "contactus.html", nil)
+	// })
+	s.GET("/contactus", indexHandler.ContactUs)
+	s.POST("/addyoursite", indexHandler.AddYourSite)
 	// Login HTML
 	s.GET("login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "admin_login.html", nil)

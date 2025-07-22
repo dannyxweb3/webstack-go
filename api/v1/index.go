@@ -48,5 +48,29 @@ type IndexResp struct {
 
 type AboutResp struct {
 	About
-	Ts int64
+	ConfigSite *ConfigSite // 站点配置
+	Ts         int64
+}
+type ContactUsResp struct {
+	ConfigSite *ConfigSite // 站点配置
+	Ts         int64
+	Csrftoken  string
+}
+
+type AddYourSiteReq struct {
+	Title     string `form:"title" json:"title"`
+	Url       string `form:"url" json:"url"`
+	Icon      string `form:"icon" json:"icon"`
+	Category  string `form:"category" json:"category"`
+	Desc      string `form:"desc" json:"desc"`
+	Contact   string `form:"contact" json:"contact"`
+	Msg       string `form:"msg" json:"msg"`
+	Csrftoken string `form:"csrftoken" json:"csrftoken"`
+}
+
+type AddYourSiteResp struct {
+	// ConfigSite *ConfigSite // 站点配置
+	Ts        int64
+	Csrftoken string `form:"csrftoken" json:"csrftoken"`
+	Msg       string `form:"msg" json:"msg"`
 }

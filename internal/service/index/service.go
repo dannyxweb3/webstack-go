@@ -24,6 +24,10 @@ type Service interface {
 	Index(ctx context.Context) (*v1.IndexResp, error)
 	// About 关于我
 	About(ctx *gin.Context) (*v1.AboutResp, error)
+	// ContactUs
+	ContactUs(ctx *gin.Context) (*v1.ContactUsResp, error)
+	// AddYourSite
+	AddYourSite(ctx *gin.Context) (*v1.AddYourSiteResp, error)
 }
 
 type service struct {
