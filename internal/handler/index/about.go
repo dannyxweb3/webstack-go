@@ -22,3 +22,12 @@ func (h *Handler) About(ctx *gin.Context) {
 
 	v1.HandleSuccess(ctx, resp)
 }
+func (h *Handler) AboutHtml(ctx *gin.Context) {
+	resp, err := h.indexService.About(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	ctx.HTML(http.StatusOK, "about.html", resp)
+}
