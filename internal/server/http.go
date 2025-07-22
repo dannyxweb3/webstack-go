@@ -69,6 +69,7 @@ func NewHTTPServer(
 	s.NoRoute(v1.ErrHandler404)
 	// Index HTML
 	s.GET("/", indexHandler.Index)
+	s.GET("/index.html", indexHandler.Index)
 	// About HTML
 	// s.GET("/about", func(ctx *gin.Context) {
 	// 	ctx.HTML(http.StatusOK, "about.html", nil)
