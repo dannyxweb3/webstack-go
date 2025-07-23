@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	"github.com/ch3nnn/webstack-go/api/v1"
+	v1 "github.com/ch3nnn/webstack-go/api/v1"
 	"github.com/ch3nnn/webstack-go/pkg/jwt"
 	"github.com/ch3nnn/webstack-go/pkg/log"
 )
@@ -74,7 +74,7 @@ func NoStrictAuth(j *jwt.JWT, logger *log.Logger) gin.HandlerFunc {
 				"url":    ctx.Request.URL,
 				"params": ctx.Params,
 			}))
-			ctx.Redirect(http.StatusFound, "/login")
+			ctx.Redirect(http.StatusFound, "/xmanalogin")
 			ctx.Abort()
 			return
 		}
@@ -86,7 +86,7 @@ func NoStrictAuth(j *jwt.JWT, logger *log.Logger) gin.HandlerFunc {
 				"params": ctx.Params,
 			}), zap.Error(err))
 
-			ctx.Redirect(http.StatusFound, "/login")
+			ctx.Redirect(http.StatusFound, "/xmanalogin")
 			ctx.Abort()
 			return
 		}

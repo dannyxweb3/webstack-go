@@ -126,7 +126,7 @@
                     let date = new Date();
                     date.setTime(date.getTime() + 24 * 60 * 60 * 1000); // 24 * 60 * 60 * 1000 表示 24 小时
                     $.cookie('_login_token_', data.token, {expires: date});
-                    location.href = "/admin";
+                    location.href = "/xmana";
                 },
                 function (response) {
                     AjaxError(response);

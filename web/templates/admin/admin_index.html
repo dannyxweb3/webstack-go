@@ -165,7 +165,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li>
-                                <a class="multitabs dropdown-item" data-url="/admin/modify_password" href="javascript:void(0)"> <i class="mdi mdi-lock-outline"></i> 修改密码 </a>
+                                <a class="multitabs dropdown-item" data-url="/xmana/modify_password" href="javascript:void(0)"> <i class="mdi mdi-lock-outline"></i> 修改密码 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li>
@@ -204,7 +204,7 @@
             function (data) {
                 $("#nickname").html(data.nickname);
                 $(".nav-drawer").html("");
-                let li = '<li class="nav-item active"><a class="multitabs" href="/admin/dashboard"><i class="lni lni-bar-chart"></i> <span>仪表盘</span></a></li>';
+                let li = '<li class="nav-item active"><a class="multitabs" href="/xmana/dashboard"><i class="lni lni-bar-chart"></i> <span>仪表盘</span></a></li>';
 
                 if (data.menu.length > 0) {
                     let newArr = [];
@@ -251,9 +251,9 @@
                     $.cookie('_login_token_', '');
 
                     if (window.frames.length !== parent.frames.length) {
-                        parent.window.open("/login", '_self');
+                        parent.window.open("/xmanalogin", '_self');
                     } else {
-                        window.open("/login", '_self');
+                        window.open("/xmanalogin", '_self');
                     }
                 },
                 function (response) {
