@@ -83,11 +83,11 @@ func NewHTTPServer(
 	s.GET("/contactus.html", indexHandler.ContactUs)
 	s.POST("/addyoursite", indexHandler.AddYourSite)
 	// Login HTML
-	s.GET("login", func(ctx *gin.Context) {
+	s.GET("/xmana/login", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "admin_login.html", nil)
 	})
 	// Render HTML
-	render := s.Group("/admin").Use(middleware.NoStrictAuth(jwt, logger))
+	render := s.Group("/xmana").Use(middleware.NoStrictAuth(jwt, logger))
 	{
 		render.GET("", func(ctx *gin.Context) {
 			ctx.HTML(http.StatusOK, "admin_index.html", nil)
