@@ -1,2 +1,2 @@
 go build cmd/server/main.go
-./main -conf config/prod.yml
+./main -conf config/prod_ai.yml

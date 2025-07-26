@@ -10,12 +10,8 @@
     <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}">
     <meta name="description" content="{{ .ConfigSite.SiteDesc }}">
 
-    {{ if .ConfigSite.SiteFavicon }}
-        <link rel="shortcut icon" href="data:image/png;base64,{{ .ConfigSite.SiteFavicon }}">
-    {{ else }}
-        <link rel="shortcut" href="/assets/static/index/images/ai/favicon.ico">
-        <link rel="icon" href="/assets/static/index/images/ai/favicon.ico">
-    {{ end }}
+    <link rel="shortcut" href="/assets/static/index/images/ai/favicon.ico">
+    <link rel="icon" href="/assets/static/index/images/ai/favicon.ico">
 
     <link rel="stylesheet" href="/assets/static/index/css/fonts/linecons/css/linecons.css?t={{.Ts}}">
     <link rel="stylesheet" href="/assets/static/index/css/fonts/fontawesome/css/font-awesome.min.css?t={{.Ts}}">
