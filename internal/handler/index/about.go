@@ -29,11 +29,7 @@ func (h *Handler) AboutHtml(ctx *gin.Context) {
 		return
 	}
 
-	isSave := ctx.GetString("_save")
-	if isSave == "1" {
-		saveHTMLToFile(h, resp, "about.html")
-		ctx.Header("X-HTML-Saved", "about.html")
-	}
+	h.saveHTMLToFile(ctx, resp, "about.html")
 
 	ctx.HTML(http.StatusOK, "about.html", resp)
 }

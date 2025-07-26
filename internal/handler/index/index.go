@@ -20,11 +20,7 @@ func (h *Handler) Index(ctx *gin.Context) {
 		return
 	}
 
-	isSave := ctx.GetString("_save")
-	if isSave == "1" {
-		saveHTMLToFile(h, resp, "index.html")
-		ctx.Header("X-HTML-Saved", "index.html")
-	}
+	h.saveHTMLToFile(ctx, resp, "index.html")
 
 	ctx.HTML(http.StatusOK, "index.html", resp)
 }
