@@ -22,4 +22,4 @@ log:
   compress: true
 
 template:
-  index_theme: "index" # the name under templates/
+  index_theme: "index_ai" # the name under templates/

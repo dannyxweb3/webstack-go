@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="viggo"/>
+    <title>{{ .ConfigSite.SiteTitle }}</title>
+    <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
+    <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
+
+    <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
+    <link rel="stylesheet" href="/assets/static/index/css/fonts/linecons/css/linecons.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/fonts/fontawesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-core.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-components.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-skins.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/nav.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/hclonely.css"/>
+    <script src="assets/static/index/js/jquery-1.11.1.min.js"></script>
+</head>
+
+<body class="page-body boxed-container">
+<nav class="navbar horizontal-menu navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="navbar-brand">
+            <a href="/" class="logo">
+                <img src="assets/static/index/images/ai/logo_dark@2x.png" style="max-width: 200px; max-height: 85px;" alt="" class="hidden-xs"/>
+                <img src="assets/static/index/images/ai/logo@2x.png" style="max-width: 200px; max-height: 85px;" alt="" class="visible-xs"/>
+            </a>
+        </div>
+        <div class="navbar-mobile-clear"></div>
+        <a href="https://github.com/dannyxweb3/webstack-go" target="_blank">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"/>
+        </a>
+    </div>
+</nav>
+<div class="page-container">
+    <div class="main-content" style="">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <h4 class="text-gray">About This Site</h4>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-12" id="website">
+                                <blockquote>
+                                    <h3>About AI Tools Online</h3>
+                                    <p>Welcome to AI Tools Online Navigation, your one-stop artificial intelligence tool collection website, 1000+ AI tool navigation. </p>
+                                    <p></p>
+                                    <h3>Introduction to AI Tools Online</h3>
+                                    <p>AI Tools Online focuses on collecting and recommending popular, creative, interesting, and cutting-edge AI tools and websites in the global market, and is committed to providing everyone with a portal and entry to quickly access any artificial intelligence website. Our goal is to allow everyone to explore AI technology quickly and easily, so that you can fully utilize the potential of artificial intelligence in your personal learning, life, and work. </p>
+                                    <p></p>
+                                    <h3>Explore AI Tools Online</h3>
+                                    <p>On the AI Tools Online website, you can explore any aspect of AI:</p>
+                                    <p></p>
+                                    <p>AI Tools and Websites: On AI Tools Online, you can view a wide collection of AI tools and applications. This site includes hundreds of different types of AI tools, and updates and adds the latest AI tools daily, including but not limited to AI writing tools, AI image generation, AI audio conversion, AI video production, AI programming development, AI creative design and other categories to meet your different needs.</p>
+                                    <p>AI Tutorials and Guides: Learn the ins and outs of artificial intelligence through our easy-to-understand tutorials, guides, and encyclopedias. Even if you are a beginner or have no knowledge of AI at all, it can help you develop new skills and increase your knowledge in the growing field of artificial intelligence.</p>
+                                    <p>AI News and Updates: AI Tools Online is equipped with an AI Updates section with the latest information. It updates major events in the AI industry almost every day, so that you can keep abreast of the latest trends, breakthroughs and events in the field of artificial intelligence, and bring you the most important and exciting updates in the field of artificial intelligence! </p>
+                                    <p></p>
+                                    <h3>Advertising and free inclusion</h3>
+                                    <p>If you are interested in advertising, please check the advertising cooperation details page. </p>
+                                    <p></p>
+                                    <p>If you only want free inclusion, please fill in your or the latest product you found in the submission AI tool. </p>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Main Footer -->
+        <footer class="main-footer sticky footer-type-1 fixed">
+            <div class="footer-inner">
+                <div class="footer-text">
+                    &copy; 2022- 2025
+                    <a href="/"><strong>My Adult Contents</strong></a>
+                    design by <a href="https://ch3nnn.cn" target="_blank"><strong>Ch3nnn</strong></a>
+                    All Rights Reserved
+                </div>
+                <div class="go-up">
+                    <a href="#" rel="go-top">
+                        <i class="fa-angle-up"></i>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<!-- Bottom Scripts -->
+<script src="assets/static/index/js/bootstrap.min.js"></script>
+<script src="assets/static/index/js/TweenMax.min.js"></script>
+<script src="assets/static/index/js/resizeable.js"></script>
+<!-- JavaScripts initializations and stuff -->
+<script type="text/javascript" src="/assets/static/admin/js/httpclient.js"></script>
+<script type="text/javascript" src="/assets/static/plugin/bootstrap-markdown-editor/js/marked.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        return;
+        AjaxForm(
+            "GET",
+            "/api/about",
+            "",
+            function () {},
+            function (data) {
+                // 将字符串解析为 HTML 文档
+                const parser = new DOMParser();
+                const site_doc = parser.parseFromString(marked(data.about_site), 'text/html');
+                const website = document.getElementById('website');
+                website.innerHTML = '';
+                website.appendChild(site_doc.body)
+
+                const about = document.getElementById('about');
+                const author_doc = parser.parseFromString(marked(data.about_author), 'text/html');
+                about.innerHTML = '';
+                about.appendChild(author_doc.body)
+
+            },
+            function (response) {
+                AjaxError(response);
+            }
+        )
+
+
+    })
+</script>
+
+<textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arimo, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 18.5714px; width: 53px;" class="autosizejs" id="autosizejs"></textarea>
+</body>
+</html>

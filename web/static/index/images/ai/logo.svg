@@ -1,0 +1,30 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- 定义渐变 -->
+  <defs>
+    <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a8dff"/>
+      <stop offset="100%" stop-color="#a95dff"/>
+    </linearGradient>
+
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ffe0"/>
+      <stop offset="100%" stop-color="#00b7ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 六边形漩涡效果 -->
+  <g transform="translate(100, 100)">
+    <g opacity="0.3">
+      <polygon points="0,-80 69.28,-40 69.28,40 0,80 -69.28,40 -69.28,-40" fill="url(#hexGradient)" transform="rotate(0)" />
+      <polygon points="0,-70 60.62,-35 60.62,35 0,70 -60.62,35 -60.62,-35" fill="url(#hexGradient)" transform="rotate(20)" />
+      <polygon points="0,-60 51.96,-30 51.96,30 0,60 -51.96,30 -51.96,-30" fill="url(#hexGradient)" transform="rotate(40)" />
+    </g>
+  </g>
+
+  <!-- 放大的 AI 字体 -->
+  <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle"
+        font-size="108" font-family="Arial, sans-serif"
+        fill="url(#textGradient)" style="font-weight:bold;">
+    AI
+  </text>
+</svg>

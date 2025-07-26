@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="viggo"/>
+    <title>{{ .ConfigSite.SiteTitle }}</title>
+    <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
+    <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
+
+    <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
+    <link rel="stylesheet" href="/assets/static/index/css/fonts/linecons/css/linecons.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/fonts/fontawesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-core.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-components.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-skins.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/nav.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/hclonely.css"/>
+    <script src="assets/static/index/js/jquery-1.11.1.min.js"></script>
+</head>
+
+<body class="page-body boxed-container">
+<nav class="navbar horizontal-menu navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="navbar-brand">
+            <a href="/" class="logo">
+                <img src="assets/static/index/images/ai/logo_dark@2x.png" style="max-width: 200px; max-height: 85px;" alt="" class="hidden-xs"/>
+                <img src="assets/static/index/images/ai/logo@2x.png" style="max-width:200px; max-height: 85px;" alt="" class="visible-xs"/>
+            </a>
+        </div>
+        <div class="navbar-mobile-clear"></div>
+        <a href="https://github.com/dannyxweb3/webstack-go" target="_blank">
+            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"/>
+        </a>
+    </div>
+</nav>
+<script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
+<div class="page-container">
+    <div class="main-content td-linl-items" style="">
+
+        <div class="row">&nbsp;</div>
+        <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                    <h3>Contact Us</h3>
+                    <!--  -->
+                    <p><string>Webmaster Email:</string> admin@mydomain.com </p>
+                    <h3>Application for inclusion</h3>
+                    <p><strong>Inclusion process:</strong></p>
+                    <p>1. After your application, the system will spit out an exclusive independent URL. Please be sure to use the URL given by the system</p>
+                    <p>2. After the link is uploaded, please wait for the webmaster to review. If you do not see the site display after 24 hours, you can contact me by the email above.</p>
+                    <p>3. The system is tested daily. If the IP is less than 30, it will be unlinked. After the link is full, it will be put on the shelf</p>
+                    <p>4. The order of this site is adjusted from time to time, and it is sorted according to the traffic level</p>
+                    <p>※It is recommended that the webmaster can place our site in a conspicuous position</p>
+                    <p>5. If you encounter any problems, you can send MAIL to admin@mydomain.com for feedback! </p>
+                    <p>※ Picture sites, novel sites, after application, just notify the site owner to change the category. </p>
+                    
+                    <p><strong>Inclusion standards: (No further notice will be given if there is any violation)</strong></p>
+                    <p>1. Non-square images, suspected minors, and bestiality-related images are not accepted. If there is any violation, the image will be replaced</p>
+                    <p>2. Minors, bestiality sites, and related sensitive words are not accepted</p>
+                    <p>3. This site mainly includes free sites. Please put free content when submitting the URL</p>
+                    <p>※ If you violate the 2nd and 3rd points, you will be directly blacklisted and will never be included※</p>                </div>
+                <div class="col-sm-6">
+
+                    <form action="/addyoursite" method="post" class="form1" id="form1" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="">
+                            
+                            <!-- <div class="mdui-divider mdui-m-b-2 mdui-hidden-sm-up"></div> -->
+                            <div class="" style="border-bottom: 2px #F1F2F9 solid;">
+                                <h3> Submit your Website</h3>
+                            </div>
+                            <div class="">
+                                <div class="form-group">
+                                    <label for="name" style="font-size: 18px; color: #ff4081!important;">
+                                        Website Name <small style="font-size: 80%; color: #000000!important;">(No more than 30 characters)</small></label>
+                                    <input type="text" class="form-control" id="site_name" name="title" value="" placeholder="请输入您的网站名称">
+                                    <div id="name_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;">No more than 30 characters</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="url" style="font-size: 18px; color: #ff4081!important;">
+                                        Website URL <small style="font-size: 80%; color: #000000!important;">Must start with http:// or https:// ）One domain can be submitted once.</small></label>
+                                    <input type="text" class="form-control" id="site_url" name="url" value="" placeholder="http://">
+                                    <div id="url_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="icon" style="font-size: 18px; color: #ff4081!important;">
+                                        Website Icon <small style="font-size: 80%; color: #000000!important;">Only URL accepted</small></label>
+                                    <input type="text" class="form-control" id="site_icon" name="icon" value="">
+                                    <div id="icon_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
+                                        Website type： <small style="font-size: 80%; color: #000000!important;">(Illegal information will be put into the blacklist)</small></label>
+                                    <select class="form-control" name="category" id="category_id">
+                                        <option value="">Select your website type:</option>
+                                        <option value="3">Video</option>
+                                        <option value="28">Navigator</option>
+                                    </select>
+                                    <div id="category_id_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
+                                        Description <small style="font-size: 80%; color: #000000!important;">(No more than 20 words)</small></label>
+                                    <input type="text" class="form-control" id="site_description" name="description" value="" placeholder="Please input your website description">
+                                    <div id="description_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
+                                        Contact <small style="font-size: 80%; color: #000000!important;">(Only Email and Telegram accepted)</small></label>
+                                    <input type="text" class="form-control" id="site_email" name="contact" value="" placeholder="Please input your contact email">
+                                    <div id="email_msg" class="form-text text-danger " style="font-size: 110%;font-weight: bold;"></div>
+                                    <input type="text" class="form-control" id="site_telegram_acc" name="telegram_acc" value="" placeholder="Please input your contact Telegram">
+                                    <div id="telegram_acc_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
+                                        Message To Us <small style="font-size: 80%; color: #000000!important;"></small></label>
+                                    <input type="text" class="form-control" id="site_webmaster" name="msg" value="" placeholder="Please input the message to us">
+                                </div>
+                                <div class="form-group">
+                                    <!-- <div class="g-recaptcha" data-sitekey="6LcbJlUcAAAAAJ0SNE-FB6Mn1sG-tNUtbZVC_CWx"><div style="width: 304px; height: 78px;"><div><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-qa5cza4hixyt" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/anchor?ar=2&amp;k=6LcbJlUcAAAAAJ0SNE-FB6Mn1sG-tNUtbZVC_CWx&amp;co=aHR0cHM6Ly94eC1tYXAuY29tOjQ0Mw..&amp;hl=en&amp;v=3jpV4E_UA9gZWYy11LtggjoU&amp;size=normal&amp;anchor-ms=20000&amp;execute-ms=15000&amp;cb=2pvqjzlljchh"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div> -->
+                                    <input type="hidden" name="token">
+
+                                    <a id="submit" style="text-decoration: none;width: 100%;background-color: #445566;" class="btn btn-primary">Submit</a>
+                                </div>
+                                <div class="form-group">
+                                    <span class="text-danger" id="form_result"></span>
+                                    <div style="font-size: 18px; color: #ff4081!important;">After the application is completed, please link to our website as soon as possible and click once for self-service inclusion! ! ! If you do not click, it will not be included</div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- Bottom Scripts -->
+<script src="assets/static/index/js/bootstrap.min.js"></script>
+<script src="assets/static/index/js/TweenMax.min.js"></script>
+<script src="assets/static/index/js/resizeable.js"></script>
+<!-- JavaScripts initializations and stuff -->
+<script type="text/javascript" src="/assets/static/admin/js/httpclient.js"></script>
+<script type="text/javascript" src="/assets/static/plugin/bootstrap-markdown-editor/js/marked.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#form1').on('submit', function(e) {
+            e.preventDefault(); // 阻止表单默认提交（避免页面跳转）
+                // 发送 AJAX 请求
+            $.ajax({
+                url: $(this).attr('action') || window.location.href, // 表单的 action 属性，或当前页面 URL
+                type: $(this).attr('method') || 'POST', // 表单的 method 属性，默认 POST
+                data: $(this).serialize(), // 序列化表单数据
+                success: function(response) {
+                    // 成功后，将后端返回的 msg 显示在 #form_result 中
+                    $('#form_result').text(response.msg); // 假设后端返回 JSON: { "msg": "操作成功" }
+                },
+                error: function(xhr, status, error) {
+                    // 错误处理
+                    $('#form_result').text('请求失败: ' + error);
+                }
+            });
+        });
+        return;
+        AjaxForm(
+            "GET",
+            "/api/about",
+            "",
+            function () {},
+            function (data) {
+                // 将字符串解析为 HTML 文档
+                const parser = new DOMParser();
+                const site_doc = parser.parseFromString(marked(data.about_site), 'text/html');
+                const website = document.getElementById('website');
+                website.innerHTML = '';
+                website.appendChild(site_doc.body)
+
+                const about = document.getElementById('about');
+                const author_doc = parser.parseFromString(marked(data.about_author), 'text/html');
+                about.innerHTML = '';
+                about.appendChild(author_doc.body)
+
+            },
+            function (response) {
+                AjaxError(response);
+            }
+        )
+
+
+    })
+</script>
+
+<script>
+
+    var submitFlag = true ;
+    $('#site_url').blur( function() {
+        console.log( 'mouse out') ;
+        let urlVal = $(this).val();
+        checkUrl( urlVal) ;
+    }) ;
+
+    $('#site_description').blur( function() {
+        console.log( 'mouse out') ;
+        let textVal = $(this).val();
+        checkDescription( textVal) ;
+    }) ;
+
+    $('#site_name').blur( function() {
+        console.log( 'mouse out') ;
+        let nameVal = $(this).val();
+        checkName( nameVal) ;
+    }) ;
+
+    $('#site_email').blur( function() {
+        console.log( 'mouse out') ;
+        let emailVal = $(this).val();
+        checkEmail( emailVal) ;
+    }) ;
+
+    $('#submit').click( function () {
+        // $('.form1').submit() ;
+        $('input[type=text]').each( function () {
+            let inp_name = $(this).attr('name') ;
+            let colVal = $(this).val() ;
+            let urlVal = $('#site_url').val();
+            let textVal = $('#site_description').val();
+            let nameVal = $('#site_name').val();
+            let emailVal = $('#site_email').val();
+            var msgObj = $('#'+inp_name+'_msg') ;
+            switch ( inp_name) {
+                case "name" :
+                    checkName( nameVal)
+                    break ;
+                case "description" :
+                    checkDescription( textVal) ;
+                    break ;
+                case "code" :
+                    if ( colVal.length == 0) {
+                        submitFlag = false ;
+                        msgObj.removeClass('hidden') ;
+                        msgObj.html('認証碼未填寫') ;
+                    } else {
+                        msgObj.addClass('hidden') ;
+                    }
+                    break ;
+                case "url" :
+                    checkUrl( urlVal) ;
+                    break ;
+                case "email" : 
+                    checkEmail( emailVal) ;
+                    break ;
+            }
+        }) ;
+
+
+        // if  ($('input[name=telegram_acc]').val().length == 0) {
+        //     submitFlag = false ;
+        //     $('#telegram_acc_msg').html('连系飞机号未填写') ;
+        //     $('#telegram_acc_msg').removeClass('hidden') ;
+
+        // } else if ( $('input[name=telegram_acc]').val().length != 0) {
+        //     $('#telegram_acc_msg').addClass('hidden') ;
+        // }
+
+        $('input[type=file]').each( function () {
+            let re = /\.(jpg|gif)$/i;  //允許的圖片副檔名
+            let inp_name = $(this).attr('name') ;
+            let colVal = $(this).val() ;
+            var msgObj = $('#'+inp_name+'_msg') ;
+            if ( colVal.length === 0) {
+                submitFlag = false;
+                msgObj.html('网站Icon未上传');
+                msgObj.removeClass('hidden');
+            } else if ( !re.test(colVal)) {
+                submitFlag = false;
+                msgObj.html('只允许上传JPG或GIF影像档');
+                msgObj.removeClass('hidden');
+            } else {
+                msgObj.addClass('hidden') ;
+            }
+        }) ;
+        let colVal = $('#category_id').val() ;
+        var msgObj = $('#category_id_msg') ;
+        if ( colVal == '') {
+            submitFlag = false ;
+            msgObj.html('网站类别未选择') ;
+            msgObj.removeClass('hidden') ;
+        } else {
+            msgObj.addClass('hidden') ;
+        }
+
+        console.log( submitFlag) ;
+        if ( submitFlag){
+            console.log(".form1.submit()") ;
+            $('.form1').submit() ;
+        }
+        return submitFlag ;
+    });
+
+    function checkUrl( urlVal, ) {
+        re = /^(http|https):\/\/([\w.]+\/?)\S/g;
+        found = urlVal.match(re);
+        if ( found === null) {
+            submitFlag = false;
+            $('#url_msg').html('请确认网站网址是否正确');
+            $('#url_msg').removeClass('hidden');
+        } else if ( urlVal.length == 0) {
+            submitFlag = false;
+            $('#url_msg').html('未填写网站网址');
+            $('#url_msg').removeClass('hidden');
+        } else {
+            $('#url_msg').addClass('hidden');
+            // $.ajax({
+            //     url: '/addmysite',
+            //     type: 'post',
+            //     data: {
+            //         "_token": "CBJDtJChEdplb0grsx3S2ufEUoIhflGmeSq6BkZR",
+            //         checkUrl: urlVal,
+            //     },
+            //     success: function (data) {
+            //         // data2=JSON.parse(data);
+            //         if (data.code == '0') {
+            //             submitFlag = true;
+            //             $('#url_msg').addClass('hidden');
+            //             // msgObj.addClass('hidden') ;
+            //         } else {
+            //             submitFlag = false;
+            //             $('#url_msg').html(data.message);
+            //             $('#url_msg').removeClass('hidden');
+            //             // msgObj.html(data.message);
+            //             // msgObj.removeClass('hidden');
+            //         }
+            //     }
+            // });
+        }
+    }
+
+    function checkDescription( textVal) {
+        if (strlen( textVal) > 20 ) {
+            submitFlag = false ;
+            $('#description_msg').html('网站叙述長度過長 (20个中文字符以内)') ;
+            $('#description_msg').removeClass('hidden') ;
+        } else if ( textVal.length == 0) {
+            submitFlag = false ;
+            $('#description_msg').html('网站叙述未填写') ;
+            $('#description_msg').removeClass('hidden') ;
+        } else {
+            console.log(textVal);
+            $('#description_msg').addClass('hidden');
+            // $.ajax({
+            //     url: '/adoptDescription',
+            //     type: 'post',
+            //     data: {
+            //         "_token": "CBJDtJChEdplb0grsx3S2ufEUoIhflGmeSq6BkZR",
+            //         checkDescription: textVal,
+            //     },
+
+            //     success: function (data) {
+            //         // data2=JSON.parse(data);
+            //         if (data.code == '0') {
+            //             submitFlag = true;
+            //             $('#description_msg').addClass('hidden');
+            //             // msgObj.addClass('hidden') ;
+            //         } else {
+            //             submitFlag = false;
+            //             $('#description_msg').html(data.message);
+            //             $('#description_msg').removeClass('hidden');
+            //             // msgObj.html(data.message);
+            //             // msgObj.removeClass('hidden');
+            //         }
+            //     }
+            // });
+        }
+    }
+
+    function checkName( nameVal) {
+        if ( strlen( nameVal) > 16 ) {
+            submitFlag = false ;
+            $('#name_msg').html('网站名称長度過長 (8个中文字符以内)') ;
+            $('#name_msg').removeClass('hidden') ;
+        } else if ( nameVal.length == 0) {
+            submitFlag = false ;
+            $('#name_msg').html('网站名称未填寫') ;
+            $('#name_msg').removeClass('hidden') ;
+        } else {
+            $('#name_msg').addClass('hidden');
+            console.log(nameVal);
+            // $.ajax({
+            //     url: '/adoptName',
+            //     type: 'post',
+            //     data: {
+            //         "_token": "CBJDtJChEdplb0grsx3S2ufEUoIhflGmeSq6BkZR",
+            //         checkName: nameVal,
+            //     },
+
+            //     success: function (data) {
+            //         // data2=JSON.parse(data);
+            //         if (data.code == '0') {
+            //             submitFlag = true;
+            //             $('#name_msg').addClass('hidden');
+            //             // msgObj.addClass('hidden') ;
+            //         } else {
+            //             submitFlag = false;
+            //             $('#name_msg').html(data.message);
+            //             $('#name_msg').removeClass('hidden');
+            //             // msgObj.html(data.message);
+            //             // msgObj.removeClass('hidden');
+            //         }
+            //     }
+            // });
+        }
+    }
+
+    function checkEmail( emailVal, ) {
+        if (emailVal.length == 0 ) {
+            submitFlag = false ;
+            $('#email_msg').html('连系电子邮件未填写') ;
+            $('#email_msg').removeClass('hidden');
+        } else if (emailVal.length > 1){
+            console.log('長度大於1');
+            if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(emailVal)) {
+                submitFlag = true;
+                document.querySelector('#email_msg').classList.add('hidden');
+            } else {
+                submitFlag = false;
+                document.querySelector('#email_msg').innerHTML = '连系电子邮件格式错误';
+                document.querySelector('#email_msg').classList.remove('hidden');
+            }
+        }
+    }
+
+    function strlen(str) {
+        var s = 0;
+        for(var i = 0; i < str.length; i++) {
+            if(str.charAt(i).match(/[u0391-uFFE5]/)) {
+                s += 2;
+            } else {
+                s++;
+            }
+        }
+        return s;
+    }
+</script>
+<textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arimo, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 18.5714px; width: 53px;" class="autosizejs" id="autosizejs"></textarea>
+</body>
+</html>
