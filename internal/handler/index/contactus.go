@@ -20,6 +20,12 @@ func (h *Handler) ContactUs(ctx *gin.Context) {
 		return
 	}
 
+	isSave := ctx.GetString("_save")
+	if isSave == "1" {
+		saveHTMLToFile(h, resp, "contactus.html")
+		ctx.Header("X-HTML-Saved", "contactus.html")
+	}
+
 	// v1.HandleSuccess(ctx, resp)
 	ctx.HTML(http.StatusOK, "contactus.html", resp)
 }
