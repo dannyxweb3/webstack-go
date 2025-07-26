@@ -48,7 +48,14 @@ func NewHTTPServer(
 	s.MaxMultipartMemory = 32 << 20 // 32MB
 
 	s.StaticFS("/assets", http.FS(assets.Static))
-	s.SetHTMLTemplate(template.Must(template.New("").ParseFS(assets.Templates, "templates/**/*")))
+	// s.SetHTMLTemplate(template.Must(template.New("").ParseFS(assets.Templates, "templates/**/*")))
+	temp := template.Must(template.New("").ParseFS(assets.Templates, "templates/**/*"))
+	confIndexTheme := conf.GetString("template.index_theme")
+	if confIndexTheme != "" {
+		// s.LoadHTMLGlob(fmt.Sprintf("templates/%s/*", confIndexTheme))
+		template.Must(temp.ParseGlob(fmt.Sprintf("web/templates/%s/*", confIndexTheme)))
+	}
+	s.SetHTMLTemplate(temp)
 
 	// Swagger Doc
 	docs.SwaggerInfo.BasePath = "/v1"

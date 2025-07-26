@@ -20,3 +20,6 @@ log:
   max_age: 7
   max_size: 1024
   compress: true
+
+template:
+  index_theme: "index" # the name under templates/
