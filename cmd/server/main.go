@@ -10,6 +10,7 @@ import (
 	"github.com/ch3nnn/webstack-go/cmd/server/wire"
 	"github.com/ch3nnn/webstack-go/pkg/config"
 	"github.com/ch3nnn/webstack-go/pkg/log"
+	// _ "net/http/pprof"
 )
 
 // @title          webstack-go API
@@ -30,6 +31,11 @@ import (
 func main() {
 	envConf := flag.String("conf", "config/local.yml", "config path, eg: -conf ./config/local.yml")
 	flag.Parse()
+
+	// Enable pprof for debugging
+	// go func() {
+	// 	http.ListenAndServe("0.0.0.0:6060", nil)
+	// }()
 
 	conf := config.NewConfig(*envConf)
 
