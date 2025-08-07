@@ -1,3 +1,20 @@
+body:before {
+    content: "";
+    position: absolute;
+    top: 0 !important;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 550px;
+    /* background-image: url(wp/wp-content/uploads/2023/07/blury-shape-bg-light.png); */
+    background-image: linear-gradient(180deg, #ffffff03, #fff 85%),
+      radial-gradient(ellipse at top left, #0d6efd80, transparent 50%),
+      radial-gradient(ellipse at top right, #ffe48480, transparent 50%),
+      radial-gradient(ellipse at center right, #712cf980, transparent 50%),
+      radial-gradient(ellipse at center left, #d6338480, transparent 50%);
+    background-size: cover;
+    z-index: -1;
+  }
 
 .io-black-mode body:before {
 	/* background-image: url(wp/wp-content/uploads/2024/01/blury-shape-bg-dark.png); */
@@ -320,10 +337,11 @@ div.card-app.card {
     text-align: left;
 }
 .io-grey-mode .sidebar-nav .logo {
-    background-color: rgb(249, 249, 249);
+    /* 灰色菜单 */
+    /* background-color: rgb(249, 249, 249); */
 }
 .io-black-mode .sidebar-nav .logo {
-    background-color: #2c2e2f;
+    /* background-color: #2c2e2f; */
 }
 .sidebar-nav .logo-expanded {
     padding-left: 10px;
