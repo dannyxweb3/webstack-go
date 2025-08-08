@@ -19898,6 +19898,15 @@
                       <!-- 动态生成新闻项 -->
                   </div>
               </div>
+
+              <!-- 新增热门分类板块 -->
+              <div class="right-sidebar-section categories-section">
+                <div class="section-title">热门分类</div>
+                <div class="categories-container" id="categoriesList">
+                    <!-- 动态生成分类标签 -->
+                </div>
+              </div>
+
           </div>
         </div>
 
@@ -20392,7 +20401,7 @@
                   <a href="${item.url}" target="_blank" class="recommend-item">
                       <div class="recommend-header">
                           <img src="${item.logo}" class="recommend-logo" alt="${item.name}" 
-                               onerror="this.src='https://via.placeholder.com/32'">
+                               __onerror="this.src='https://via.placeholder.com/32'">
                           <div class="recommend-name">${item.name}</div>
                       </div>
                       <div class="recommend-desc">${item.desc}</div>
@@ -20422,19 +20431,19 @@
               {
                   time: "2025-01-01 10:00",
                   title: "AI技术在医疗领域的应用",
-                  logo: "https://example.com/logo1.png",
+                  logo: "/favicon.ico",
                   source: "Tech News"
               },
               {
                   time: "2025-01-02 12:30",
                   title: "新一代AI模型发布",
-                  logo: "https://example.com/logo2.png",
+                  logo: "/favicon.ico",
                   source: "AI Daily"
               },
               {
                   time: "2025-01-03 15:45",
                   title: "AI助力自动驾驶技术进步",
-                  logo: "https://example.com/logo3.png",
+                  logo: "/favicon.ico",
                   source: "Auto Tech"
               }
           ];
@@ -20460,7 +20469,7 @@
                   <a href="#" class="news-item" target="_blank">
                       <div class="news-header">
                           <img src="${item.logo}" class="news-logo" alt="${item.source}"
-                              onerror="this.src='https://via.placeholder.com/24'">
+                              __onerror="this.src='https://via.placeholder.com/24'">
                           <div class="news-title">${item.title}</div>
                       </div>
                       <div class="news-meta">
@@ -20482,6 +20491,68 @@
               alert('实际项目中这里会跳转到新闻详情页');
               // window.open(newsUrl, '_blank');
           });
+      });
+    </script>
+
+    <script>
+      // 从隐藏元素加载分类数据
+      function loadCategoriesData() {
+          const categories = [
+              {
+                  id: 1,
+                  name: "AI工具",
+                  url: "sites/ai-tools.html"
+              },
+              {
+                  id: 2,
+                  name: "AI学习",
+                  url: "sites/ai-learning.html"
+              },
+              {
+                  id: 3,
+                  name: "AI应用",
+                  url: "sites/ai-applications.html"
+              },
+              {
+                  id: 4,
+                  name: "AI开发",
+                  url: "sites/ai-development.html"
+              },
+              {
+                  id: 5,
+                  name: "AI赚钱",
+                  url: "sites/ai-money-making.html"
+              }
+          ];
+          $('#categoriesData > div').each(function() {
+              categories.push({
+                  id: $(this).data('id'),
+                  name: $(this).data('name'),
+                  url: $(this).data('url')
+              });
+          });
+          return categories;
+      }
+
+      // 渲染分类标签
+      function renderCategories() {
+          const categories = loadCategoriesData();
+          const container = document.getElementById('categoriesList');
+          container.innerHTML = '';
+          
+          categories.forEach(category => {
+              container.innerHTML += `
+                  <a href="${category.url}" class="category-tag" 
+                    data-id="${category.id}">
+                      ${category.name}
+                  </a>
+              `;
+          });
+      }
+
+      // 页面加载时初始化
+      $(document).ready(function() {
+          renderCategories();
       });
     </script>
     <!-- Google tag (gtag.js) -->
