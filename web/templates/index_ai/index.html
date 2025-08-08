@@ -665,12 +665,14 @@
                 </li>
               </ul>
             </div>
+            <!-- header 搜索框 -->
             <form
               class="form-inline"
               role="search"
               action="https://google.com/search"
               method="get"
               target="_blank"
+              style="display:none;"
             >
               <div class="form-group">
                 <input
@@ -19907,9 +19909,11 @@
               <div class="right-sidebar-section">
                   <!-- 推荐内容... -->
                   <!-- 特征推荐 -->
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="recommend-title">Featured</div>
-                        <i class="fas fa-sync-alt refresh-btn" id="featured-refreshBtn" title="Refresh"></i>
+                    <div class="d-flex justify-content-between align-items-center text-right">
+                        <div class="recommend-title text-md-right text-right">Featured
+
+                          <i class="fas fa-sync-alt refresh-btn" id="featured-refreshBtn" title="Refresh"></i>
+                        </div>
                     </div>
                     
                     <div id="featured-recommendList">
@@ -20121,21 +20125,6 @@
     { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
     { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
     { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
     { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
     { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" }
     ]' />
@@ -20232,11 +20221,11 @@
     ></script>
     <script type="text/javascript" id="appjs-js-after">
       /* <![CDATA[ */
-      $(document).ready(function () {
-        if ($("#search-text")[0]) {
-          $("#search-text").focus();
-        }
-      });
+      // $(document).ready(function () {
+      //   if ($("#search-text")[0]) {
+      //     $("#search-text").focus();
+      //   }
+      // });
       /* ]]> */
     </script>
     <script type="text/javascript">
@@ -20253,13 +20242,13 @@
 
     <!-- 自定义代码 -->
     <script>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?55906d9c57011d694d405f963a90648b";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
+      // var _hmt = _hmt || [];
+      // (function () {
+      //   var hm = document.createElement("script");
+      //   hm.src = "https://hm.baidu.com/hm.js?55906d9c57011d694d405f963a90648b";
+      //   var s = document.getElementsByTagName("script")[0];
+      //   s.parentNode.insertBefore(hm, s);
+      // })();
     </script>
     <script>
       // 全局收藏管理对象
@@ -20325,7 +20314,7 @@
                           <i class="fas fa-times"></i>
                       </div>
                       <img src="${item.icon}" class="fav-thumbnail" alt="${item.name}" 
-                           onerror="this.src='https://via.placeholder.com/40'">
+                           __onerror="this.src='https://via.placeholder.com/40'">
                       <span class="fav-name">${item.name}</span>
                   </div>
               `);
@@ -20449,12 +20438,21 @@
       }
 
       // 初始化加载
-      document.addEventListener('DOMContentLoaded', () => {
-        renderFeaturedRecommendations();
+      $(document).ready(function() {
+          renderFeaturedRecommendations();
           
-        // 点击刷新按钮换一批
-        document.getElementById('featured-refreshBtn').addEventListener('click', refreshFeaturedRecommendations);
+          // 点击刷新按钮换一批
+          $('#featured-refreshBtn').off('click').on('click', function() {
+              refreshFeaturedRecommendations();
+          });
       });
+      // document.addEventListener('DOMContentLoaded', () => {
+      //   renderFeaturedRecommendations();
+          
+      //   // 点击刷新按钮换一批
+      //   document.getElementById('featured-refreshBtn').removeEventListener('click', refreshFeaturedRecommendations);
+      //   document.getElementById('featured-refreshBtn').addEventListener('click', refreshFeaturedRecommendations);
+      // });
 
       // 暴露刷新方法供其他部分调用
       function refreshFeaturedRecommendations() {
@@ -20524,12 +20522,21 @@
       }
 
       // 初始化加载
-      document.addEventListener('DOMContentLoaded', () => {
+      $(document).ready(function() {
           renderRecommendations();
           
           // 点击刷新按钮换一批
-          document.getElementById('randomly-refreshBtn').addEventListener('click', refreshRandomlyRecommendations);
+          $('#randomly-refreshBtn').off('click').on('click', function() {
+              refreshRandomlyRecommendations();
+          });
       });
+      // document.addEventListener('DOMContentLoaded', () => {
+      //     renderRecommendations();
+          
+      //     // 点击刷新按钮换一批
+      //     document.getElementById('randomly-refreshBtn').removeEventListener('click', refreshRandomlyRecommendations);
+      //     document.getElementById('randomly-refreshBtn').addEventListener('click', refreshRandomlyRecommendations);
+      // });
 
       // 暴露刷新方法供其他部分调用
       function refreshRandomlyRecommendations() {
@@ -20671,32 +20678,24 @@
 
     <!-- 搜索js -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const engineOptions = document.querySelectorAll('.engine-option');
-          const searchInput = document.querySelector('.search-input');
-          const searchButton = document.querySelector('.search-button');
-          const keywords = document.querySelectorAll('.keyword');
-          let currentEngine = 'google';
-          
-          // Engine selection
-          engineOptions.forEach(option => {
-              option.addEventListener('click', function() {
-                  // Remove active class from all options
-                  engineOptions.forEach(opt => opt.classList.remove('active'));
-                  
-                  // Add active class to clicked option
-                  this.classList.add('active');
-                  currentEngine = this.dataset.engine;
-              });
+      $(document).ready(function() {
+          // 初始化搜索引擎选项
+          $('.engine-option').first().addClass('active');
+          $('.engine-option').on('click', function() {
+              $('.engine-option').removeClass('active');
+              $(this).addClass('active');
           });
-          
-          // Search function
+
+          // 搜索按钮点击事件
           function performSearch() {
-              const query = searchInput.value.trim();
-              if (!query) return;
-              
+              const query = $('.search-input').val().trim();
+              if (!query) {
+                  // alert('请输入搜索内容');
+                  return;
+              }
               let searchUrl;
-              switch(currentEngine) {
+              const activeEngine = $('.engine-option.active').data('engine');
+              switch (activeEngine) {
                   case 'google':
                       searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
                       break;
@@ -20709,43 +20708,93 @@
                   default:
                       searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&sitesearch=ai-tools-online.com`;
               }
-              
               window.open(searchUrl, '_blank');
           }
+          $('.search-button').on('click', function() {
+            performSearch();
+          });
           
           // Button click event
-          searchButton.addEventListener('click', performSearch);
-          
-          // Enter key event
-          searchInput.addEventListener('keypress', function(e) {
+          // searchButton.addEventListener('click', performSearch);
+          $('.search-input').on('keypress', function(e) {
               if (e.key === 'Enter') {
                   performSearch();
               }
           });
-          // Keyword click events
-          keywords.forEach(keyword => {
-              keyword.addEventListener('click', function() {
-                  const query = this.dataset.query;
-                  searchInput.value = query; // Fill the search box
-                  performSearch(query);
-              });
+          
+          // Enter key event
+          // searchInput.addEventListener('keypress', function(e) {
+          //     if (e.key === 'Enter') {
+          //         performSearch();
+          //     }
+          // });
+          // 关键词点击事件
+          $('.keyword').on('click', function() {
+              const query = $(this).data('query');
+              $('.search-input').val(query);
+              $('.search-button').trigger('click');
           });
       });
-    </script>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KV0VT5CMJ6"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-KV0VT5CMJ6");
+      // document.addEventListener('DOMContentLoaded', function() {
+      //     const engineOptions = document.querySelectorAll('.engine-option');
+      //     const searchInput = document.querySelector('.search-input');
+      //     const searchButton = document.querySelector('.search-button');
+      //     const keywords = document.querySelectorAll('.keyword');
+      //     let currentEngine = 'google';
+          
+      //     // Engine selection
+      //     engineOptions.forEach(option => {
+      //         option.addEventListener('click', function() {
+      //             // Remove active class from all options
+      //             engineOptions.forEach(opt => opt.classList.remove('active'));
+                  
+      //             // Add active class to clicked option
+      //             this.classList.add('active');
+      //             currentEngine = this.dataset.engine;
+      //         });
+      //     });
+          
+      //     // Search function
+      //     function performSearch() {
+      //         const query = searchInput.value.trim();
+      //         if (!query) return;
+              
+      //         let searchUrl;
+      //         switch(currentEngine) {
+      //             case 'google':
+      //                 searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+      //                 break;
+      //             case 'chatgpt':
+      //                 searchUrl = `https://chat.openai.com/new?q=${encodeURIComponent(query)}`;
+      //                 break;
+      //             case 'grok':
+      //                 searchUrl = `https://grok.com/?q=${encodeURIComponent(query)}`;
+      //                 break;
+      //             default:
+      //                 searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&sitesearch=ai-tools-online.com`;
+      //         }
+              
+      //         window.open(searchUrl, '_blank');
+      //     }
+          
+      //     // Button click event
+      //     searchButton.addEventListener('click', performSearch);
+          
+      //     // Enter key event
+      //     searchInput.addEventListener('keypress', function(e) {
+      //         if (e.key === 'Enter') {
+      //             performSearch();
+      //         }
+      //     });
+      //     // Keyword click events
+      //     keywords.forEach(keyword => {
+      //         keyword.addEventListener('click', function() {
+      //             const query = this.dataset.query;
+      //             searchInput.value = query; // Fill the search box
+      //             performSearch(query);
+      //         });
+      //     });
+      // });
     </script>
     <!-- end 自定义代码 -->
   </body>
