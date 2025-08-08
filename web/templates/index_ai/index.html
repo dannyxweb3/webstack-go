@@ -19909,11 +19909,9 @@
               <div class="right-sidebar-section">
                   <!-- 推荐内容... -->
                   <!-- 特征推荐 -->
-                    <div class="d-flex justify-content-between align-items-center text-right">
-                        <div class="recommend-title text-md-right text-right">Featured
-
-                          <i class="fas fa-sync-alt refresh-btn" id="featured-refreshBtn" title="Refresh"></i>
-                        </div>
+                    <div class="recommend-title d-flex align-items-center">
+                      <span class="mx-auto">Featured</span>
+                      <i class="fas fa-sync-alt refresh-btn ms-auto ms-3 me-3" id="featured-refreshBtn" title="Refresh"></i>
                     </div>
                     
                     <div id="featured-recommendList">
@@ -19923,7 +19921,7 @@
               
               <!-- 新增近期新闻板块 -->
               <div class="right-sidebar-section">
-                  <div class="right-sitebar-section-title">AI News</div>
+                  <div class="right-sitebar-section-title text-center">AI News</div>
                   <div id="newsList">
                       <!-- 动态生成新闻项 -->
                   </div>
@@ -19931,7 +19929,7 @@
 
               <!-- 新增热门分类板块 -->
               <div class="right-sidebar-section categories-section">
-                <div class="section-title">Popular Categories</div>
+                <div class="right-sitebar-section-title text-center">Popular Categories</div>
                 <div class="categories-container" id="categoriesList">
                     <!-- 动态生成分类标签 -->
                 </div>
@@ -19940,10 +19938,10 @@
               <div class="right-sidebar-section">
                 <!-- 推荐内容... -->
                 <!-- 随机推荐 -->
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="recommend-title">Randomly Recommended</div>
-                    <i class="fas fa-sync-alt refresh-btn" id="randomly-refreshBtn" title="Refresh"></i>
-                </div>
+                    <div class="recommend-title d-flex align-items-center">
+                      <span class="mx-auto">Randomly Recommended</span>
+                      <i class="fas fa-sync-alt refresh-btn ms-auto" id="randomly-refreshBtn" title="Refresh"></i>
+                    </div>
                 
                 <div id="randomly-recommendList">
                     <!-- 动态生成推荐项 -->
@@ -20446,13 +20444,6 @@
               refreshFeaturedRecommendations();
           });
       });
-      // document.addEventListener('DOMContentLoaded', () => {
-      //   renderFeaturedRecommendations();
-          
-      //   // 点击刷新按钮换一批
-      //   document.getElementById('featured-refreshBtn').removeEventListener('click', refreshFeaturedRecommendations);
-      //   document.getElementById('featured-refreshBtn').addEventListener('click', refreshFeaturedRecommendations);
-      // });
 
       // 暴露刷新方法供其他部分调用
       function refreshFeaturedRecommendations() {
@@ -20530,13 +20521,6 @@
               refreshRandomlyRecommendations();
           });
       });
-      // document.addEventListener('DOMContentLoaded', () => {
-      //     renderRecommendations();
-          
-      //     // 点击刷新按钮换一批
-      //     document.getElementById('randomly-refreshBtn').removeEventListener('click', refreshRandomlyRecommendations);
-      //     document.getElementById('randomly-refreshBtn').addEventListener('click', refreshRandomlyRecommendations);
-      // });
 
       // 暴露刷新方法供其他部分调用
       function refreshRandomlyRecommendations() {
@@ -20715,7 +20699,6 @@
           });
           
           // Button click event
-          // searchButton.addEventListener('click', performSearch);
           $('.search-input').on('keypress', function(e) {
               if (e.key === 'Enter') {
                   performSearch();
@@ -20723,78 +20706,12 @@
           });
           
           // Enter key event
-          // searchInput.addEventListener('keypress', function(e) {
-          //     if (e.key === 'Enter') {
-          //         performSearch();
-          //     }
-          // });
-          // 关键词点击事件
           $('.keyword').on('click', function() {
               const query = $(this).data('query');
               $('.search-input').val(query);
               $('.search-button').trigger('click');
           });
       });
-      // document.addEventListener('DOMContentLoaded', function() {
-      //     const engineOptions = document.querySelectorAll('.engine-option');
-      //     const searchInput = document.querySelector('.search-input');
-      //     const searchButton = document.querySelector('.search-button');
-      //     const keywords = document.querySelectorAll('.keyword');
-      //     let currentEngine = 'google';
-          
-      //     // Engine selection
-      //     engineOptions.forEach(option => {
-      //         option.addEventListener('click', function() {
-      //             // Remove active class from all options
-      //             engineOptions.forEach(opt => opt.classList.remove('active'));
-                  
-      //             // Add active class to clicked option
-      //             this.classList.add('active');
-      //             currentEngine = this.dataset.engine;
-      //         });
-      //     });
-          
-      //     // Search function
-      //     function performSearch() {
-      //         const query = searchInput.value.trim();
-      //         if (!query) return;
-              
-      //         let searchUrl;
-      //         switch(currentEngine) {
-      //             case 'google':
-      //                 searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
-      //                 break;
-      //             case 'chatgpt':
-      //                 searchUrl = `https://chat.openai.com/new?q=${encodeURIComponent(query)}`;
-      //                 break;
-      //             case 'grok':
-      //                 searchUrl = `https://grok.com/?q=${encodeURIComponent(query)}`;
-      //                 break;
-      //             default:
-      //                 searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}&sitesearch=ai-tools-online.com`;
-      //         }
-              
-      //         window.open(searchUrl, '_blank');
-      //     }
-          
-      //     // Button click event
-      //     searchButton.addEventListener('click', performSearch);
-          
-      //     // Enter key event
-      //     searchInput.addEventListener('keypress', function(e) {
-      //         if (e.key === 'Enter') {
-      //             performSearch();
-      //         }
-      //     });
-      //     // Keyword click events
-      //     keywords.forEach(keyword => {
-      //         keyword.addEventListener('click', function() {
-      //             const query = this.dataset.query;
-      //             searchInput.value = query; // Fill the search box
-      //             performSearch(query);
-      //         });
-      //     });
-      // });
     </script>
     <!-- end 自定义代码 -->
   </body>
