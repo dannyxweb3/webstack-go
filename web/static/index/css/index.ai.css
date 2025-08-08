@@ -475,10 +475,14 @@ div.card-app.card {
     margin: 0 auto;
     padding: 15px;
     /* background: #f8f9fa; */
-    /* background: rgba(248, 248, 248, 0.5); */
+    background: rgba(254, 254, 254, 0.3);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     margin-bottom: 20px;
+}
+
+.io-black-mode .right-sidebar-section {
+    background: rgba(25, 25, 25, 0.3);
 }
 
 .recommend-title {
