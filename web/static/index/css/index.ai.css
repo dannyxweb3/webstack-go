@@ -449,3 +449,170 @@ div.card-app.card {
 }
 
 #recommendations { display: none; }  /* 隐藏推荐列表 */
+
+/* 右侧推荐栏目容器 */
+.right-sidebar-section {
+    width: 94%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 15px;
+    /* background: #f8f9fa; */
+    background: rgba(248, 248, 248, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.recommend-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    color: #343a40;
+}
+
+/* 单个推荐项 */
+.recommend-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    background: white;
+}
+
+.recommend-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 第一行：Logo + 名称 */
+.recommend-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.recommend-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    border: 1px solid #eee;
+}
+
+.recommend-name {
+    font-weight: bold;
+    font-size: 15px;
+    color: #212529;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 第二行：简介 */
+.recommend-desc {
+    font-size: 13px;
+    color: #6c757d;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;  /* 限制2行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 刷新按钮 */
+.refresh-btn {
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.refresh-btn:hover {
+    color: #007bff;
+    transform: rotate(180deg);
+}
+
+
+/* 通用右侧栏样式 */
+.right-sidebar {
+    width: 95%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 15px;
+    /* background: #f8f9fa; */
+    background: rgba(248, 248, 248, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+/* 
+.sidebar-section {
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+} */
+
+.right-sitebar-section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    color: #343a40;
+}
+
+/* 新闻项样式 */
+.news-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed #e9ecef;
+    transition: all 0.2s;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item:hover {
+    background: rgba(0,0,0,0.02);
+}
+
+.news-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+
+.news-logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.news-title {
+    font-size: 14px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;  /* 限制2行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #212529;
+}
+
+.news-meta {
+    font-size: 12px;
+    color: #6c757d;
+    text-align: right;
+    margin-top: 3px;
+}
+
+/* 隐藏的数据源 */
+#newsData { display: none; }
