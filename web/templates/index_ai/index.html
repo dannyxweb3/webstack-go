@@ -400,7 +400,7 @@
                   class="navbar-brand d-md-none m-0"
                   title="AI Tools Online"
                 >
-                  <img
+                  <!-- <img
                     src="wp/wp-content/uploads/2023/03/ai-bot-logo-black.png"
                     class="logo-light"
                     alt="AI Tools Online"
@@ -411,7 +411,7 @@
                     class="logo-dark d-none"
                     alt="AI Tools Online"
                     height="30"
-                  />
+                  /> -->
                 </a>
               </div>
               <div class="collapse navbar-collapse order-2 order-md-1">
@@ -541,7 +541,7 @@
                   >
                     <a target="_blank" rel="noopener" href="ai-app-store.html">
                       <i class="fab fa-app-store-ios icon-fw icon-lg"></i>
-                      <span>AI应用集</span></a
+                      <span>AI Applications</span></a
                     >
                   </li>
                   <li
@@ -554,7 +554,7 @@
                       href="daily-ai-news/index.html"
                     >
                       <i class="iconfont icon-chart-pc icon-fw icon-lg"></i>
-                      <span>每日AI资讯</span></a
+                      <span>Daily AI News</span></a
                     >
                   </li>
                   <li
@@ -565,7 +565,7 @@
                       target="_blank"
                       rel="noopener"
                       href="the-latest-ai-projects.html"
-                      >最新AI项目</a
+                      >Newest AI Products</a
                     >
                     <ul class="sub-menu">
                       <li
@@ -594,7 +594,7 @@
                     class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-54944"
                   >
                     <a target="_blank" rel="noopener" href="ai-tutorials.html"
-                      >AI教程资源</a
+                      >AI Tutorials</a
                     >
                     <ul class="sub-menu">
                       <li
@@ -645,7 +645,7 @@
                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-54114"
                   >
                     <a target="_blank" rel="noopener" href="about-us.html"
-                      >关于我们</a
+                      >About Us</a
                     >
                   </li>
                 </ul>
@@ -707,7 +707,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#"
-                  >English <i class="fa fa-check"></i>
+                  > English <i class="fa fa-check"></i>
                 </a>
                 <a class="dropdown-item" href="#">French</a>
                 <a class="dropdown-item" href="#">Spanish</a>
@@ -742,56 +742,35 @@
           </div>
         </div>
 
-        <div class="row mb-4">
-            <!-- my pined tools  列出用户置顶的工具只展示圆形logo和名称 -->
-            <div class="col-md-8 mx-auto">
-              <div class="card p-3">
-                <h2 class="text-center mb-3">My Pinned Tools</h2>
-                <p class="text-muted text-center mb-3">
-                  These AI tools are handpicked for you based on your interests.
-                </p>
-                <div class="row">
-                  <div class="col-6 col-sm-4 col-md-3 mb-3">
-                    <a href="sites/4189.html" target="_blank" class="card no-c text-center"
-                      data-toggle="tooltip" data-placement="bottom" title="豆包 - 字节跳动推出的免费AI智能助手"
-                    >
-                      <div class="url-img rounded-circle mx-auto mb-2">
-                        <img
-                          class="lazy unfancybox"
-                          src="/wp/wp-content/uploads/2023/08/doubao-icon.png"
-                          height="auto"
-                          width="auto"
-                          alt="豆包"
-                        />
-                      </div>
-                      <div class="url-info">
-                        <strong>豆包</strong>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="col-6 col-sm-4 col-md-3 mb-3">
-                    <a href="sites/9195.html" target="_blank" class="card no-c text-center"
-                      data-toggle="tooltip" data-placement="bottom" title="绘蛙 - AI电商营销工具，免费生成商品图"
-                    >
-                      <div class="url-img rounded-circle mx-auto mb-2">
-                        <img
-                          class="lazy unfancybox"
-                          src="/wp/wp-content/uploads/2024/03/ihuiwa-icon.png"
-                          height="auto"
-                          width="auto"
-                          alt="绘蛙"
-                        />
-                      </div>
-                      <div class="url-info">
-                        <strong>绘蛙</strong>
-                      </div>
-                    </a>
-                  </div>
-                  <!-- Add more pinned tools as needed -->
-                </div>
-            </div>
+
+        <div class="d-flex slider-menu-father mb-4">
+          <div class="slider_menu mini_tab" sliderTab="sliderTab">
+            <ul
+              class="nav nav-pills tab-auto-scrollbar menu overflow-x-auto"
+              role="tablist"
+            >
+              <li class="pagenumber nav-item">
+                <a
+                  class="nav-link ajax-home-hot-list active load"
+                  data-toggle="pill"
+                  href="index.html#ct-tab-sites-views0"
+                  data-action="load_hot_post"
+                  data-datas='{"data":{"title":"热门工具","type":"sites","order":"views","num":"12","mini":""}}'
+                  ><i class="fas fa-thumbtack mr-2"></i>My Pinned Tools</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
+
+        <div class="tab-content row mb-4">
+          <!-- my pined tools  列出用户置顶的工具只展示圆形logo和名称 -->
+            <div class="fav-container" id="favoritesContainer">
+            </div>
+        </div>
+
+
+
         <div class="d-flex slider-menu-father mb-4">
           <div class="slider_menu mini_tab" sliderTab="sliderTab">
             <ul
@@ -20018,6 +19997,44 @@
         </a>
       </div>
     </footer>
+
+    <!-- 添加收藏表单弹窗 -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">添加收藏</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+                      <span>&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <form id="addForm">
+                      <div class="form-group">
+                          <label>网站名称</label>
+                          <input type="text" class="form-control" id="siteName" required>
+                      </div>
+                      <div class="form-group">
+                          <label>网站URL</label>
+                          <input type="url" class="form-control" id="siteUrl" required>
+                      </div>
+                      <div class="form-group">
+                          <label>图标URL</label>
+                          <input type="url" class="form-control" id="iconUrl" required>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-primary" id="confirmAdd">确定</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <input type="hidden" id="recommendations" value='[{ "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
+    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" }]' />
+
     <script
       type="text/javascript"
       src="wp/wp-content/themes/onenav/js/swiper-bundle.min.js?ver=4.0331"
@@ -20139,6 +20156,131 @@
         s.parentNode.insertBefore(hm, s);
       })();
     </script>
+    <script>
+      // 全局收藏管理对象
+      const favoriteManager = {
+          STORAGE_KEY: 'userFavorites',
+          
+          // 初始化收藏列表
+          init: function() {
+              let favorites = this.loadFromStorage();
+              
+              // 如果本地存储为空，从隐藏元素加载推荐
+              if (favorites.length === 0) {
+                  favorites = this.loadRecommendations();
+                  this.saveToStorage(favorites);
+              }
+              
+              return favorites;
+          },
+          
+          // 从本地存储加载
+          loadFromStorage: function() {
+              const stored = localStorage.getItem(this.STORAGE_KEY);
+              return stored ? JSON.parse(stored) : [];
+          },
+          
+          // 从隐藏元素加载推荐
+          loadRecommendations: function() {
+              const items = $('#recommendations').val();
+              
+              return items ? JSON.parse(items) : [];
+          },
+          
+          // 保存到本地存储
+          saveToStorage: function(favorites) {
+              localStorage.setItem(this.STORAGE_KEY, JSON.stringify(favorites));
+          },
+          
+          // 添加收藏项（全局可调用）
+          addFavorite: function(item) {
+              const favorites = this.loadFromStorage();
+              favorites.push(item);
+              this.saveToStorage(favorites);
+              renderFavorites(favorites);
+          },
+          
+          // 删除收藏项
+          removeFavorite: function(index) {
+              const favorites = this.loadFromStorage();
+              favorites.splice(index, 1);
+              this.saveToStorage(favorites);
+              renderFavorites(favorites);
+          }
+      };
+
+      // 渲染收藏列表
+      function renderFavorites(favorites) {
+          $('#favoritesContainer').empty();
+          
+          favorites.forEach((item, index) => {
+              $('#favoritesContainer').append(`
+                  <div class="fav-item" data-url="${item.url}">
+                      <div class="delete-btn" data-index="${index}">
+                          <i class="fas fa-times"></i>
+                      </div>
+                      <img src="${item.icon}" class="fav-thumbnail" alt="${item.name}" 
+                           onerror="this.src='https://via.placeholder.com/40'">
+                      <span class="fav-name">${item.name}</span>
+                  </div>
+              `);
+          });
+          
+          // 添加按钮
+          $('#favoritesContainer').append(`
+              <div class="add-btn" id="addButton">
+                  <i class="fas fa-plus add-icon"></i>
+                  <span class="fav-name">Add</span>
+              </div>
+          `);
+      }
+
+      $(document).ready(function() {
+          // 初始化并渲染
+          const favorites = favoriteManager.init();
+          renderFavorites(favorites);
+
+          // 删除项事件
+          $(document).on('click', '.delete-btn', function(e) {
+              e.stopPropagation();
+              favoriteManager.removeFavorite($(this).data('index'));
+          });
+
+          // 添加表单提交
+          $('#confirmAdd').click(function() {
+              const newItem = {
+                  name: $('#siteName').val().trim(),
+                  url: $('#siteUrl').val().trim(),
+                  icon: $('#iconUrl').val().trim()
+              };
+              
+              if (newItem.name && newItem.url && newItem.icon) {
+                  favoriteManager.addFavorite(newItem);
+                  $('#addForm')[0].reset();
+                  $('#addModal').modal('hide');
+              } else {
+                  alert('请填写完整信息！');
+              }
+          });
+          
+          // 点击跳转
+          $(document).on('click', '.fav-item', function() {
+              window.open($(this).data('url'), '_blank');
+          });
+      });
+
+      // 全局添加函数（供其他页面调用）
+      function addFavoriteItem(item) {
+          favoriteManager.addFavorite(item);
+      }
+
+      // 打开添加表单
+      $(document).on('click', '#addButton', function() {
+          $('#addModal').modal('show');
+      });
+
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script
       async
