@@ -7,7 +7,7 @@ body:before {
     width: 100%;
     height: 550px;
     /* background-image: url(wp/wp-content/uploads/2023/07/blury-shape-bg-light.png); */
-    background-image: linear-gradient(180deg, #ffffff03, #fff 85%),
+    background-image: linear-gradient(180deg, #ffffff03, #f9f9f9 85%),
     radial-gradient(ellipse at top left, #ffe48480, transparent 50%),
     radial-gradient(ellipse at top right, #24f93280, transparent 50%),
     radial-gradient(ellipse at center right, #712cf980, transparent 50%),
@@ -383,6 +383,15 @@ div.card-app.card {
 .fav-item:hover {
     background: #e9ecef;
 }
+
+.io-black-mode .fav-item {
+    background: #343a40;
+    color: #dee2e6;
+}
+.io-black-mode .fav-item:hover {
+    background: #495057;
+}
+
 .fav-thumbnail {
     width: 32px;
     height: 32px;
@@ -392,7 +401,7 @@ div.card-app.card {
 }
 .fav-name {
     font-size: 12px;
-    margin-top: 5px;
+    margin-top: 1px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -437,6 +446,15 @@ div.card-app.card {
     border-color: #495057;
     color: #212529;
 }
+.io-black-mode .fav-item {
+    background: #343a40;
+    color: #dee2e6;
+}
+.io-black-mode .add-btn:hover {
+    border-color: #adb5bd;
+    color: #dee2e6;
+}
+
 .add-icon {
     font-size: 24px;
     /* margin-bottom: 5px; */
@@ -457,7 +475,7 @@ div.card-app.card {
     margin: 0 auto;
     padding: 15px;
     /* background: #f8f9fa; */
-    background: rgba(248, 248, 248, 0.5);
+    /* background: rgba(248, 248, 248, 0.5); */
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     margin-bottom: 20px;
@@ -469,7 +487,7 @@ div.card-app.card {
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #dee2e6;
-    color: #343a40;
+    /* color: #343a40; */
 
     /* position: absolute;
     left: 50%;
@@ -485,6 +503,12 @@ div.card-app.card {
     border-radius: 6px;
     transition: all 0.2s;
     background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.io-black-mode .recommend-item {
+    background: #343a40;
+    color: #dee2e6;
 }
 
 .recommend-item:hover {
@@ -511,7 +535,7 @@ div.card-app.card {
 .recommend-name {
     font-weight: bold;
     font-size: 15px;
-    color: #212529;
+    /* color: #212529; */
     flex-grow: 1;
     white-space: nowrap;
     overflow: hidden;
@@ -521,7 +545,7 @@ div.card-app.card {
 /* 第二行：简介 */
 .recommend-desc {
     font-size: 13px;
-    color: #6c757d;
+    /* color: #6c757d; */
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;  /* 限制2行 */
@@ -543,6 +567,9 @@ div.card-app.card {
     transform: rotate(180deg);
 }
 
+.io-black-mode .refresh-btn:hover {
+    color: #dee2e6;
+}
 
 /* 通用右侧栏样式 */
 .right-sidebar {
@@ -551,7 +578,7 @@ div.card-app.card {
     margin: 0 auto;
     padding: 15px;
     /* background: #f8f9fa; */
-    background: rgba(248, 248, 248, 0.5);
+    background: rgba(248, 248, 248, 0.2);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
@@ -570,7 +597,7 @@ div.card-app.card {
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #dee2e6;
-    color: #343a40;
+    /* color: #343a40; */
 }
 
 /* 新闻项样式 */
@@ -578,6 +605,13 @@ div.card-app.card {
     padding: 10px 0;
     border-bottom: 1px dashed #e9ecef;
     transition: all 0.2s;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.io-black-mode .news-item {
+    background: #343a40;
+    color: #dee2e6;
 }
 
 .news-item:last-child {
@@ -586,6 +620,10 @@ div.card-app.card {
 
 .news-item:hover {
     background: rgba(0,0,0,0.8);
+}
+
+.io-black-mode .news-item:hover {
+    background: rgba(255,255,255,0.1);
 }
 
 .news-header {
@@ -610,7 +648,7 @@ div.card-app.card {
     -webkit-line-clamp: 2;  /* 限制2行 */
     -webkit-box-orient: vertical;
     overflow: hidden;
-    color: #212529;
+    /* color: #212529; */
 }
 
 
@@ -626,11 +664,16 @@ div.card-app.card {
 
 /* 热门分类容器 */
 .categories-section {
-    background: #f8f9fa;
+    /* background: #f8f9fa; */
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 15px;
     margin-bottom: 20px;
+}
+
+.io-black-mode .categories-section {
+    background: #343a40;
+    color: #dee2e6;
 }
 
 /* 分类标签样式 */
@@ -654,11 +697,24 @@ div.card-app.card {
     text-decoration: none;
 }
 
+.io-black-mode .category-tag {
+    background: #495057;
+    color: #dee2e6;
+    border-color: #535557;
+}
+
 .category-tag:hover {
     border-color: #adb5bd;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transform: translateY(-1px);
     color: #212529;
+}
+.io-black-mode .category-tag:hover {
+    border-color: #495057;
+    box-shadow: 0 2px 8px rgba(255,255,255,0.1);
+    transform: translateY(-1px);
+    color: #dee2e6;
+    border-color: #adb5bd;
 }
 
 /* 隐藏的数据源 */
@@ -685,11 +741,21 @@ div.card-app.card {
     transition: all 0.2s;
 }
 
+.io-black-mode .engine-option {
+    color: #dee2e6;
+}
+
 .engine-option.active {
     font-weight: bold;
     color: #000;
     border-bottom: 2px solid #000;
 }
+
+.io-black-mode .engine-option.active {
+    color: #dee2e6;
+    border-bottom: 2px solid #dee2e6;
+}
+
 .search-box {
     display: flex;
     border: 1px solid #ddd;
@@ -697,6 +763,10 @@ div.card-app.card {
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-bottom: 15px;
+}
+
+.io-black-mode .search-box {
+    border: 1px solid #495057;
 }
 
 .search-input {
@@ -707,16 +777,31 @@ div.card-app.card {
     font-size: 16px;
 }
 
+.io-black-mode .search-input {
+    background: #343a40;
+    color: #dee2e6;
+}
+
 .search-button {
-    background: #f8f9fa;
+    /* background: #f8f9fa; */
     border: none;
     padding: 0 20px;
     cursor: pointer;
     color: #555;
 }
 
+.io-black-mode .search-button {
+    background: #495057;
+    color: #dee2e6;
+}
+
 .search-button:hover {
     background: #f0f0f0;
+}
+
+.io-black-mode .search-button:hover {
+    background: #343a40;
+    color: #dee2e6;
 }
 
 .popular-keywords {
@@ -729,7 +814,7 @@ div.card-app.card {
 .keyword {
     display: inline-block;
     padding: 5px 12px;
-    background: #f5def7;
+    /* background: #f5def7; */
     border-radius: 16px;
     color: #4b5563;
     cursor: pointer;
@@ -740,4 +825,9 @@ div.card-app.card {
 .keyword:hover {
     background: #e5e7eb;
     color: #111827;
+}
+
+.io-black-mode .keyword:hover {
+    background: #495057;
+    color: #dee2e6;
 }
