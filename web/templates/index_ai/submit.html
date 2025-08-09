@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="viggo"/>
+    <title>{{ .ConfigSite.SiteTitle }}</title>
+    <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
+    <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
+
+    <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
+    <link rel="stylesheet" href="/assets/static/index/css/fonts/linecons/css/linecons.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/fonts/fontawesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-core.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-components.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/xenon-skins.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/nav.css"/>
+    <link rel="stylesheet" href="/assets/static/index/css/hclonely.css"/>
+    <script src="assets/static/index/js/jquery-1.11.1.min.js"></script>
+    <style>
+        .submit-header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+            border-radius: 0 0 20px 20px;
+        }
+        .submit-form {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 30px;
+            background: white;
+        }
+        .form-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #2575fc;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .tag-input {
+            display: inline-block;
+            width: auto;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        .tag-badge {
+            font-size: 14px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            padding: 5px 10px;
+        }
+        .preview-card {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .preview-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin: 0 auto 15px;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body class="page-body boxed-container">
+<nav class="navbar horizontal-menu navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="navbar-brand">
+            <a href="/" class="logo">
+                <img src="assets/static/index/images/ai/logo_dark@2x.png" style="max-width: 200px; max-height: 85px;" alt="" class="hidden-xs"/>
+                <img src="assets/static/index/images/ai/logo@2x.png" style="max-width: 200px; max-height: 85px;" alt="" class="visible-xs"/>
+            </a>
+        </div>
+    </div>
+</nav>
+<div class="page-container">
+    <div class="main-content" style="">
+
+    <!-- 页眉 -->
+    
+    <!-- 提交表单 -->
+    <div class="container">
+        <div class="submit-form">
+            <div class="text-center">
+                <h1><i class="fas fa-plus-circle mr-3"></i>提交网址</h1>
+                <p class="lead">推荐优质网站，共建导航社区</p>
+            </div>
+            <form id="websiteSubmitForm">
+                <!-- 基本信息 -->
+                <div class="form-section">
+                    <h4><i class="fas fa-info-circle form-icon"></i>基本信息</h4>
+                    <div class="form-group">
+                        <label for="websiteName">网站名称 *</label>
+                        <input type="text" class="form-control" id="websiteName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="websiteUrl">网站地址 (URL) *</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">https://</span>
+                            </div>
+                            <input type="url" class="form-control" id="websiteUrl" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="websiteLogo">网站Logo URL</label>
+                        <input type="url" class="form-control" id="websiteLogo">
+                        <small class="form-text text-muted">建议尺寸：120×120像素，透明背景PNG格式最佳</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="websiteDesc">网站简介 *</label>
+                        <textarea class="form-control" id="websiteDesc" rows="3" required></textarea>
+                        <small class="form-text text-muted">50-200字，简要描述网站的主要功能和特色</small>
+                    </div>
+                </div>
+
+                <!-- 分类信息 -->
+                <div class="form-section">
+                    <h4><i class="fas fa-tags form-icon"></i>分类信息</h4>
+                    <div class="form-group">
+                        <label>网站类型 *</label>
+                        <select class="form-control" id="websiteCategory" required>
+                            <option value="">-- 请选择 --</option>
+                            <option value="tool">工具类</option>
+                            <option value="design">设计资源</option>
+                            <option value="develop">开发技术</option>
+                            <option value="productivity">效率办公</option>
+                            <option value="ai">人工智能</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>标签</label>
+                        <div class="mb-2">
+                            <input type="text" class="form-control tag-input" id="tagInput" placeholder="输入标签后按回车">
+                            <small class="form-text text-muted">添加3-5个关键词标签，帮助用户更好地找到这个网站</small>
+                        </div>
+                        <div id="tagContainer">
+                            <!-- 动态生成的标签会显示在这里 -->
+                            <span class="badge badge-primary tag-badge">开发者工具 <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>
+                            <span class="badge badge-primary tag-badge">代码托管 <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 社交媒体 -->
+                <div class="form-section">
+                    <h4><i class="fas fa-share-alt form-icon"></i>社交媒体</h4>
+                    <div class="form-group">
+                        <label for="twitterUrl">Twitter</label>
+                        <input type="url" class="form-control" id="twitterUrl" placeholder="https://twitter.com/用户名">
+                    </div>
+                    <div class="form-group">
+                        <label for="githubUrl">GitHub</label>
+                        <input type="url" class="form-control" id="githubUrl" placeholder="https://github.com/用户名">
+                    </div>
+                </div>
+
+                <!-- 预览 -->
+                <div class="form-section">
+                    <h4><i class="fas fa-eye form-icon"></i>预览效果</h4>
+                    <div class="preview-card">
+                        <img src="https://via.placeholder.com/120?text=LOGO" class="preview-logo" id="logoPreview">
+                        <h5 id="namePreview">网站名称</h5>
+                        <p class="text-muted" id="descPreview">网站简介将显示在这里</p>
+                        <div id="tagsPreview">
+                            <span class="badge badge-secondary">示例标签</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 提交按钮 -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-paper-plane mr-2"></i>提交审核
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>© 2023 网址导航站. 保留所有权利.</p>
+            <div class="mt-2">
+                <a href="#" class="text-white mx-2">关于我们</a>
+                <a href="#" class="text-white mx-2">使用条款</a>
+                <a href="#" class="text-white mx-2">隐私政策</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery + Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // 标签输入功能
+            $('#tagInput').keypress(function(e) {
+                if (e.which === 13) { // 回车键
+                    e.preventDefault();
+                    const tagText = $(this).val().trim();
+                    if (tagText) {
+                        $('#tagContainer').append(
+                            `<span class="badge badge-primary tag-badge">${tagText} <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>`
+                        );
+                        $(this).val('');
+                        updatePreview();
+                    }
+                }
+            });
+
+            // 实时预览
+            $('#websiteName, #websiteDesc, #websiteLogo').on('input', updatePreview);
+            $('#websiteCategory').change(updatePreview);
+
+            // 表单提交
+            $('#websiteSubmitForm').submit(function(e) {
+                e.preventDefault();
+                
+                // 收集表单数据
+                const formData = {
+                    name: $('#websiteName').val(),
+                    url: $('#websiteUrl').val(),
+                    logo: $('#websiteLogo').val(),
+                    description: $('#websiteDesc').val(),
+                    category: $('#websiteCategory').val(),
+                    tags: [],
+                    twitter: $('#twitterUrl').val(),
+                    github: $('#githubUrl').val()
+                };
+
+                // 收集标签
+                $('#tagContainer .tag-badge').each(function() {
+                    const tagText = $(this).clone().children().remove().end().text().trim();
+                    formData.tags.push(tagText);
+                });
+
+                // 这里应该是AJAX提交到后端
+                console.log('提交数据:', formData);
+                
+                // 显示成功提示
+                alert('提交成功！我们的团队将尽快审核您的网站。');
+                this.reset();
+                $('#tagContainer').empty();
+                updatePreview();
+            });
+        });
+
+        // 移除标签
+        function removeTag(element) {
+            $(element).parent().remove();
+            updatePreview();
+        }
+
+        // 更新预览
+        function updatePreview() {
+            $('#namePreview').text($('#websiteName').val() || '网站名称');
+            $('#descPreview').text($('#websiteDesc').val() || '网站简介将显示在这里');
+            
+            if ($('#websiteLogo').val()) {
+                $('#logoPreview').attr('src', $('#websiteLogo').val());
+            } else {
+                $('#logoPreview').attr('src', 'https://via.placeholder.com/120?text=LOGO');
+            }
+            
+            // 更新标签预览
+            const tagsPreview = $('#tagsPreview');
+            tagsPreview.empty();
+            $('#tagContainer .tag-badge').each(function() {
+                const tagText = $(this).clone().children().remove().end().text().trim();
+                tagsPreview.append(`<span class="badge badge-secondary mr-1">${tagText}</span>`);
+            });
+            
+            if (tagsPreview.children().length === 0) {
+                tagsPreview.html('<span class="badge badge-secondary">示例标签</span>');
+            }
+        }
+    </script>
+</body>
+</html>

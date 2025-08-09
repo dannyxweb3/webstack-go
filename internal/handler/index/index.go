@@ -35,3 +35,25 @@ func (h *Handler) Tool(ctx *gin.Context) {
 
 	ctx.HTML(http.StatusOK, "tool.html", resp)
 }
+func (h *Handler) Submit(ctx *gin.Context) {
+	resp, err := h.indexService.Index(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "submit.html")
+
+	ctx.HTML(http.StatusOK, "submit.html", resp)
+}
+func (h *Handler) TermOfUse(ctx *gin.Context) {
+	resp, err := h.indexService.Index(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "termofuse.html")
+
+	ctx.HTML(http.StatusOK, "termofuse.html", resp)
+}
