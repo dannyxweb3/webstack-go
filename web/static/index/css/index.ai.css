@@ -867,7 +867,17 @@ div.card-app.card {
   border: none;
   color: purple;
   padding: 2px 5px;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1;
+  cursor: pointer;
 }
 .site-card:hover .btn-top {
-  display: inline-block;
+  opacity: 1;
+  /* display: inline-block; */
+}
+
+.site-name:hover {
+    color: #5961f9;
 }

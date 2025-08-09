@@ -836,9 +836,9 @@
 
                 <!-- 单个网站项目 -->
                 <div class="col-md-3 mb-4">
-                  <div class="site-card position-relative" data-toggle="tooltip" data-placement="top" title="这是完整的网站介绍内容，鼠标悬停气泡会显示全部文字">
+                  <div class="site-card position-relative">
                     <!-- 置顶按钮 -->
-                    <button class="btn btn-sm btn-top position-absolute" style="top:5px;left:5px;display:none;">
+                    <button class="btn btn-sm btn-top position-absolute" style="top:5px;left:5px;">
                       <i class="fas fa-thumbtack"></i>
                     </button>
 
@@ -848,19 +848,19 @@
                     <!-- 内容 -->
                     <div class="d-flex align-items-center mb-2">
                       <img src="https://via.placeholder.com/32" class="rounded-circle mr-2" width="32" height="32" alt="Logo">
-                      <span class="site-name font-weight-bold text-dark text-sm">工具名称</span>
+                      <span class="site-name font-weight-bold text-md">工具名称</span>
                     </div>
 
-                    <div class="site-desc text-muted text-xs">
+                    <div class="site-desc text-muted text-xs" data-toggle="tooltip" data-placement="bottom" title="这是完整的网站介绍内容，鼠标悬停气泡会显示全部文字">
                       这是网站工具的简短介绍，最多显示两行内容，超出部分隐藏。...
                     </div>
                   </div>
                 </div>
                 <!-- 单个网站项目 -->
                 <div class="col-md-3 mb-4">
-                  <div class="site-card position-relative" data-toggle="tooltip" data-placement="top" title="这是完整的网站介绍内容，鼠标悬停气泡会显示全部文字">
+                  <div class="site-card position-relative" >
                     <!-- 置顶按钮 -->
-                    <button class="btn btn-sm btn-top position-absolute" style="top:5px;left:5px;display:none;">
+                    <button class="btn btn-sm btn-top position-absolute" style="top:5px;left:5px;">
                       <i class="fas fa-thumbtack"></i>
                     </button>
 
@@ -869,12 +869,17 @@
 
                     <!-- 内容 -->
                     <div class="d-flex align-items-center mb-2">
-                      <img src="https://via.placeholder.com/32" class="rounded-circle mr-2" width="32" height="32" alt="Logo">
-                      <span class="site-name font-weight-bold text-dark text-md">工具名称</span>
+                      <a href="tool.html?a=1" target="_blank" class="d-flex align-items-center">
+                        <img src="https://via.placeholder.com/32" class="rounded-circle mr-2" width="32" height="32" alt="Logo">
+                        <span class="site-name font-weight-bold text-md">工具名称</span>
+                      </a>
                     </div>
 
-                    <div class="site-desc text-muted text-xs">
-                      这是网站工具的简短介绍，最多显示两行内容，超出部分隐藏。...
+
+                    <div class="site-desc text-muted text-xs" data-toggle="tooltip" data-placement="bottom" title="这是完整的网站介绍内容，鼠标悬停气泡会显示全部文字">
+                      <a href="tool.html?a=1" target="_blank" class="text-decoration-none text-muted">
+                        这是网站工具的简短介绍，最多显示两行内容，超出部分隐藏。...
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -20792,9 +20797,9 @@
         });
       
         // 点击卡片跳转
-        $('.site-card').on('click', function(){
-          window.open('https://example.com', '_blank');
-        });
+        // $('.site-name').on('click', function(){
+        //   window.open('https://example.com', '_blank');
+        // });
       });
       </script>
     <!-- end 自定义代码 -->

@@ -24,3 +24,14 @@ func (h *Handler) Index(ctx *gin.Context) {
 
 	ctx.HTML(http.StatusOK, "index.html", resp)
 }
+func (h *Handler) Tool(ctx *gin.Context) {
+	resp, err := h.indexService.Index(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "tool.html")
+
+	ctx.HTML(http.StatusOK, "tool.html", resp)
+}
