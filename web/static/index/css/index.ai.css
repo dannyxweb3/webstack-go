@@ -743,6 +743,7 @@ div.card-app.card {
     color: #555;
     padding-bottom: 3px;
     transition: all 0.2s;
+    border-bottom: 2px solid transparent;
 }
 
 .io-black-mode .engine-option {
@@ -751,8 +752,8 @@ div.card-app.card {
 
 .engine-option.active {
     font-weight: bold;
-    color: #000;
-    border-bottom: 2px solid #000;
+    color: #5961f9;
+    border-bottom: 2px solid #5961f9;
 }
 
 .io-black-mode .engine-option.active {
@@ -834,4 +835,8 @@ div.card-app.card {
 .io-black-mode .keyword:hover {
     background: #495057;
     color: #dee2e6;
+}
+
+.text-purple {
+    color: #5961f9;
 }
