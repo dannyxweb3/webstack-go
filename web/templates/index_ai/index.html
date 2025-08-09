@@ -830,6 +830,57 @@
                 </ul>
               </div>
             </div>
+
+            <div class="tab-content">
+              <div class="row">
+
+                <!-- 单个网站项目 -->
+                <div class="col-md-3 mb-4">
+                  <div class="site-card position-relative" data-toggle="tooltip" data-placement="top" title="这是完整的网站介绍内容，鼠标悬停气泡会显示全部文字">
+                    <!-- 置顶按钮 -->
+                    <button class="btn btn-sm btn-top position-absolute" style="top:5px;left:5px;display:none;">
+                      <i class="fas fa-thumbtack"></i>
+                    </button>
+
+                    <!-- FREE 标签 -->
+                    <span class="badge badge-success position-absolute" style="top:5px;right:5px;">FREE</span>
+
+                    <!-- 内容 -->
+                    <div class="d-flex align-items-center mb-2">
+                      <img src="https://via.placeholder.com/32" class="rounded-circle mr-2" width="32" height="32" alt="Logo">
+                      <span class="site-name font-weight-bold text-dark text-sm">工具名称</span>
+                    </div>
+
+                    <div class="site-desc text-muted text-xs">
+                      这是网站工具的简短介绍，最多显示两行内容，超出部分隐藏。...
+                    </div>
+                  </div>
+                </div>
+                <!-- 单个网站项目 -->
+                <div class="col-md-3 mb-4">
+                  <div class="site-card position-relative" data-toggle="tooltip" data-placement="top" title="这是完整的网站介绍内容，鼠标悬停气泡会显示全部文字">
+                    <!-- 置顶按钮 -->
+                    <button class="btn btn-sm btn-top position-absolute" style="top:5px;left:5px;display:none;">
+                      <i class="fas fa-thumbtack"></i>
+                    </button>
+
+                    <!-- FREE 标签 -->
+                    <span class="badge badge-success position-absolute" style="top:5px;right:5px;">FREE</span>
+
+                    <!-- 内容 -->
+                    <div class="d-flex align-items-center mb-2">
+                      <img src="https://via.placeholder.com/32" class="rounded-circle mr-2" width="32" height="32" alt="Logo">
+                      <span class="site-name font-weight-bold text-dark text-md">工具名称</span>
+                    </div>
+
+                    <div class="site-desc text-muted text-xs">
+                      这是网站工具的简短介绍，最多显示两行内容，超出部分隐藏。...
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="tab-content">
               <div id="ct-tab-sites-views0" class="tab-pane active">
                 <div class="row ajax-list-body position-relative">
@@ -20727,6 +20778,25 @@
           });
       });
     </script>
+    <script>
+      $(function(){
+        // 启用 Bootstrap 气泡提示
+        $('[data-toggle="tooltip"]').tooltip();
+      
+        // 置顶按钮点击事件（你可以在这里加自己的逻辑）
+        $('.btn-top').on('click', function(e){
+          e.stopPropagation();
+          let siteName = $(this).closest('.site-card').find('.site-name').text();
+          alert('置顶功能触发：' + siteName);
+          // 这里可以调用你的其他功能
+        });
+      
+        // 点击卡片跳转
+        $('.site-card').on('click', function(){
+          window.open('https://example.com', '_blank');
+        });
+      });
+      </script>
     <!-- end 自定义代码 -->
   </body>
 </html>

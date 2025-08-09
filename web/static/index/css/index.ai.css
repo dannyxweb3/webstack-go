@@ -840,3 +840,34 @@ div.card-app.card {
 .text-purple {
     color: #5961f9;
 }
+
+/* 网址卡片 */
+.site-card {
+  border: 1px solid rgba(128, 0, 128, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  transition: background-color 0.2s ease;
+  height: 100%;
+  cursor: pointer;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.site-card:hover {
+  /* background-color: rgba(128, 0, 128, 0.05); */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.site-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 限制 2 行 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.btn-top {
+  background: rgba(128, 0, 128, 0.1);
+  border: none;
+  color: purple;
+  padding: 2px 5px;
+}
+.site-card:hover .btn-top {
+  display: inline-block;
+}
