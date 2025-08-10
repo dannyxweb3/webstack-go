@@ -967,12 +967,6 @@
         
         <!-- 3. 联系我们 + 社交媒体 -->
         <div class="col-md-3 mb-3">
-          <h6 class="text-dark font-weight-bold">About</h6>
-          <ul class="list-unstyled">
-            <li><a href="/about.html" class="text-muted">About Us</a></li>
-            <li><a href="/submit.html" class="text-muted">Submit Tool</a></li>
-            <li><a href="/disclaimer.html" class="text-muted">Disclaimer</a></li>
-          </ul>
           <h6 class="text-dark font-weight-bold">Contact</h6>
           <p class="text-muted mb-2">Email: contact@ai-tools-online.com</p>
           <div>
@@ -983,11 +977,14 @@
           </div>
         </div>
   
-        <!-- 4. 多语言 + 夜间模式 -->
+        <!-- 4. About -->
         <div class="col-md-2 mb-3">
-          <h6 class="text-dark font-weight-bold">Preferences</h6>
-          <button id="lang-toggle" class="btn btn-sm btn-outline-secondary mb-2"><i class="fa fa-globe"></i> Language</button>
-          <button id="dark-mode-toggle" class="btn btn-sm btn-outline-secondary"><i class="fa fa-moon"></i> Dark Mode</button>
+          <h6 class="text-dark font-weight-bold">About</h6>
+          <ul class="list-unstyled">
+            <li><a href="/about.html" class="text-muted">About Us</a></li>
+            <li><a href="/submit.html" class="text-muted">Submit Tool</a></li>
+            <li><a href="/disclaimer.html" class="text-muted">Disclaimer</a></li>
+          </ul>
         </div>
   
       </div>
@@ -1550,35 +1547,8 @@
         // });
       });
       </script>
-      <script>
-        $(function(){
-          // 多语言切换
-          $('#lang-toggle').on('click', function(){
-            alert('多语言切换功能触发'); 
-            // TODO: 在这里写你的语言切换逻辑
-          });
         
-          // 夜间模式切换
-          $('#dark-mode-toggle').on('click', function(){
-            $('body').toggleClass('dark-mode');
-          });
-        });
-        </script>
-        
-        <style>
-        /* 夜间模式样式 */
-        body.dark-mode {
-          background-color: #121212;
-          color: #e0e0e0;
-        }
-        body.dark-mode .footer {
-          background-color: #1e1e1e;
-          border-top: 1px solid #333;
-        }
-        body.dark-mode a {
-          color: #bbb;
-        }
-        </style>
+
             <!-- end 自定义代码 -->
   </body>
 </html>
