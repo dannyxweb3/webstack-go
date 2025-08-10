@@ -44,13 +44,9 @@ body {
 }
 
 .navbar {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.navbar a {
-    color: #282a2d;
-}
-
 /* 菜单 hover 变蓝紫色 */
 .navbar-nav .nav-link:hover {
 color: #6a5acd !important; /* 蓝紫色 (SlateBlue) */
@@ -78,4 +74,12 @@ box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 柔和阴影 */
         display: block;
         margin-top: 0;
     }
+}
+
+a {
+    color: #282a2d;
+}
+
+a:hover {
+    color: #6a5acd; /* 蓝紫色 (SlateBlue) */
 }
