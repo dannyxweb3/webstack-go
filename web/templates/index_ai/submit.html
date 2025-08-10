@@ -1,141 +1,143 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="author" content="viggo"/>
-    <title>{{ .ConfigSite.SiteTitle }}</title>
-    <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
-    <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="viggo"/>
+  <title>Submit Tool - {{ .ConfigSite.SiteTitle }}</title>
+  <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
+  <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
 
-    <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
+  <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- <script src="assets/static/index/js/jquery-1.11.1.min.js"></script> -->
-    <style>
-        /* 导航区 */
-/* 让 fixed-top 不遮挡内容 */
-body {
-    /* 根据导航栏高度调整 */
-  padding-top: 76px; 
-}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- <script src="assets/static/index/js/jquery-1.11.1.min.js"></script> -->
+  <style>
+    /* 导航区 */
+    /* 让 fixed-top 不遮挡内容 */
+    body {
+      /* 根据导航栏高度调整 */
+      padding-top: 76px; 
+    }
 
-body:before {
-    content: "";
-    position: absolute;
-    top: 0 !important;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 550px;
-    /* background-image: url(wp/wp-content/uploads/2023/07/blury-shape-bg-light.png); */
-    background-image: linear-gradient(180deg, #ffffff03, #fdfcfd 85%),
-    radial-gradient(ellipse at top left, #ffe48480, transparent 50%),
-    radial-gradient(ellipse at top right, #24f93280, transparent 50%),
-    radial-gradient(ellipse at center right, #712cf980, transparent 50%),
-    radial-gradient(ellipse at center left, #d6338480, transparent 50%);
-    background-size: cover;
-    z-index: -1;
-  }
+    body:before {
+        content: "";
+        position: absolute;
+        top: 0 !important;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 550px;
+        /* background-image: url(wp/wp-content/uploads/2023/07/blury-shape-bg-light.png); */
+        background-image: linear-gradient(180deg, #ffffff03, #fdfcfd 85%),
+        radial-gradient(ellipse at top left, #ffe48480, transparent 50%),
+        radial-gradient(ellipse at top right, #24f93280, transparent 50%),
+        radial-gradient(ellipse at center right, #712cf980, transparent 50%),
+        radial-gradient(ellipse at center left, #d6338480, transparent 50%);
+        background-size: cover;
+        z-index: -1;
+    }
 
-.io-black-mode body:before {
-	/* background-image: url(wp/wp-content/uploads/2024/01/blury-shape-bg-dark.png); */
-    background-image: linear-gradient(180deg, #21252903, #212529 85%),
-    radial-gradient(ellipse at top left, #ffe48480, transparent 50%),
-    radial-gradient(ellipse at top right, #24f93280, transparent 50%),
-    radial-gradient(ellipse at center right, #712cf980, transparent 50%),
-    radial-gradient(ellipse at center left, #d6338480, transparent 50%);
-}
+    .io-black-mode body:before {
+        /* background-image: url(wp/wp-content/uploads/2024/01/blury-shape-bg-dark.png); */
+        background-image: linear-gradient(180deg, #21252903, #212529 85%),
+        radial-gradient(ellipse at top left, #ffe48480, transparent 50%),
+        radial-gradient(ellipse at top right, #24f93280, transparent 50%),
+        radial-gradient(ellipse at center right, #712cf980, transparent 50%),
+        radial-gradient(ellipse at center left, #d6338480, transparent 50%);
+    }
 
-body {
-    background: #fdfcfd ;
-}
+    body {
+        background: #fdfcfd ;
+    }
 
-.bg-light-pink {
-    background: #fdfcfd;
-}
-.bg-light-blue {
-    background: #fafaff;
-}
+    .bg-light-pink {
+        background: #fdfcfd;
+    }
+    .bg-light-blue {
+        background: #fafaff;
+    }
 
-.navbar {
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.navbar a {
-    color: #282a2d;
-}
+    .navbar {
+        background: white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .navbar a {
+        color: #282a2d;
+    }
 
-/* 菜单 hover 变蓝紫色 */
-.navbar-nav .nav-link:hover {
-  color: #6a5acd !important; /* 蓝紫色 (SlateBlue) */
-}
+    /* 菜单 hover 变蓝紫色 */
+    .navbar-nav .nav-link:hover {
+    color: #6a5acd !important; /* 蓝紫色 (SlateBlue) */
+    }
 
-/* 下拉菜单项 hover 变蓝紫色 */
-.navbar .dropdown-menu .dropdown-item:hover {
-  color: #6a5acd !important;
-  background-color: #f9f9f9 ;
-  box-shadow: #f0f0f0 0px 4px 8px -2px, rgba(0, 0, 0, 0.1) 0px 2px 4px -1px;
-  border-radius: 0.6rem;
-}
-/* 下拉菜单加阴影，去掉边框 */
-.navbar .dropdown-menu {
-  border-radius: 0.6rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 柔和阴影 */
-}
-.navbar .dropdown-item {
-    padding: 0.5rem 1rem; /* 增加内边距 */
-}
+    /* 下拉菜单项 hover 变蓝紫色 */
+    .navbar .dropdown-menu .dropdown-item:hover {
+    color: #6a5acd !important;
+    background-color: #f9f9f9 ;
+    box-shadow: #f0f0f0 0px 4px 8px -2px, rgba(0, 0, 0, 0.1) 0px 2px 4px -1px;
+    border-radius: 0.6rem;
+    }
+    /* 下拉菜单加阴影，去掉边框 */
+    .navbar .dropdown-menu {
+    border-radius: 0.6rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* 柔和阴影 */
+    }
+    .navbar .dropdown-item {
+        padding: 0.5rem 1rem; /* 增加内边距 */
+    }
 
-/* 调整 PC 端 hover 下拉效果 */
-@media (min-width: 992px) {
-  .navbar .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0;
-  }
-}
-
-        /* 提交相关 */
-        .submit-header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            padding: 60px 0;
-            margin-bottom: 40px;
-            border-radius: 0 0 20px 20px;
+    /* 调整 PC 端 hover 下拉效果 */
+    @media (min-width: 992px) {
+        .navbar .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
         }
-        .submit-form {
-            max-width: 800px;
-            margin: 0 auto 60px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            padding: 30px;
-            background: white;
-        }
-        .form-icon {
-            font-size: 24px;
-            margin-right: 10px;
-            color: #2575fc;
-        }
-        .form-section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        .tag-input {
-            display: inline-block;
-            width: auto;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-        .tag-badge {
-            font-size: 14px;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            padding: 5px 10px;
-        }
-    </style>
+    }
+  </style>
+
+  <style>
+    /* 提交相关 */
+    .submit-header {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+        border-radius: 0 0 20px 20px;
+    }
+    .submit-form {
+        max-width: 800px;
+        margin: 0 auto 60px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 30px;
+        background: white;
+    }
+    .form-icon {
+        font-size: 24px;
+        margin-right: 10px;
+        color: #2575fc;
+    }
+    .form-section {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+    .tag-input {
+        display: inline-block;
+        width: auto;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+    .tag-badge {
+        font-size: 14px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+    }
+  </style>
 </head>
 
 <body class="">
@@ -212,38 +214,35 @@ body {
     <!-- 3. 右侧功能 -->
 
     <form
-    class="form-inline my-2 my-lg-0 mr-1"
-    role="search"
-    action="https://google.com/search"
-    method="get"
-    target="_blank"
-   
-  >
-    <div class="form-group">
-      <input
-        name="q"
-        class="form-control mr-sm-2"
-        type="text"
-        placeholder="Search..."
-      />
-      <input
-        type="hidden"
-        name="sitesearch"
-        value="ai-tools-online.com"
-      />
-    </div>
-    <button
-      class="btn mb-lg-0 mb-3"
-      type="submit"
-      style="background: none; margin-left: -3rem"
+      class="form-inline my-2 my-lg-0 mr-1"
+      role="search"
+      action="https://google.com/search"
+      method="get"
+      target="_blank"
+    
     >
-      <i class="fa fa-search"></i>
-    </button>
-  </form>
+      <div class="form-group">
+        <input
+          name="q"
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search..."
+        />
+        <input
+          type="hidden"
+          name="sitesearch"
+          value="ai-tools-online.com"
+        />
+      </div>
+      <button
+        class="btn mb-lg-0 mb-3"
+        type="submit"
+        style="background: none; margin-left: -3rem"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
 
-  <!-- <button id="lang-toggle" class="btn btn-outline-primary btn-sm">
-        🌐 多语言
-    </button> -->
     <div class="btn-group">
         <a
           class="btn dropdown-toggle"
@@ -272,14 +271,13 @@ body {
         </div>
       </div>
 
-</div>
-</div>
+    </div>
+  </div>
 </nav>
 
 <div class="page-container mt-5">
     <div class="main-content" style="">
 
-    
     <!-- 提交表单 -->
     <div class="container">
         <div class="submit-form">
@@ -368,7 +366,7 @@ body {
         </div>
     </div>
     </div>
-</div>
+  </div>
 
   <!-- 页脚 -->
   <footer class="footer mt-5 pt-4 bg-light-blue border-top">
@@ -435,79 +433,79 @@ body {
     </div>
   </footer>
 
-    <!-- jQuery + Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>    
-    <script>
-        $(document).ready(function() {
-            // 滚动时固定导航栏并改变样式
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) {
-                    $('#mainNavbar').addClass('fixed-top');
-                } else {
-                    $('#mainNavbar').removeClass('fixed-top');
-                }
-            });
-            
-            // 搜索功能示例
-            $('.search-input').keypress(function(e) {
-                if (e.which === 13) { // 回车键
-                    alert('搜索: ' + $(this).val());
-                    // 实际应用中这里应该是跳转到搜索页面或AJAX请求
-                }
-            });
+  <!-- jQuery + Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>    
+  <script>
+      $(document).ready(function() {
+          // 滚动时固定导航栏并改变样式
+          $(window).scroll(function() {
+              if ($(this).scrollTop() > 50) {
+                  $('#mainNavbar').addClass('fixed-top');
+              } else {
+                  $('#mainNavbar').removeClass('fixed-top');
+              }
+          });
+          
+          // 搜索功能示例
+          $('.search-input').keypress(function(e) {
+              if (e.which === 13) { // 回车键
+                  alert('搜索: ' + $(this).val());
+                  // 实际应用中这里应该是跳转到搜索页面或AJAX请求
+              }
+          });
 
-            // 标签输入功能
-            $('#tagInput').keypress(function(e) {
-                if (e.which === 13) { // 回车键
-                    e.preventDefault();
-                    const tagText = $(this).val().trim();
-                    if (tagText) {
-                        $('#tagContainer').append(
-                            `<span class="badge badge-primary tag-badge">${tagText} <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>`
-                        );
-                        $(this).val('');
-                    }
-                }
-            });
+          // 标签输入功能
+          $('#tagInput').keypress(function(e) {
+              if (e.which === 13) { // 回车键
+                  e.preventDefault();
+                  const tagText = $(this).val().trim();
+                  if (tagText) {
+                      $('#tagContainer').append(
+                          `<span class="badge badge-primary tag-badge">${tagText} <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>`
+                      );
+                      $(this).val('');
+                  }
+              }
+          });
 
-            // 表单提交
-            $('#websiteSubmitForm').submit(function(e) {
-                e.preventDefault();
-                
-                // 收集表单数据
-                const formData = {
-                    name: $('#websiteName').val(),
-                    url: $('#websiteUrl').val(),
-                    logo: $('#websiteLogo').val(),
-                    description: $('#websiteDesc').val(),
-                    category: $('#websiteCategory').val(),
-                    tags: [],
-                    twitter: $('#twitterUrl').val(),
-                    github: $('#githubUrl').val()
-                };
+          // 表单提交
+          $('#websiteSubmitForm').submit(function(e) {
+              e.preventDefault();
+              
+              // 收集表单数据
+              const formData = {
+                  name: $('#websiteName').val(),
+                  url: $('#websiteUrl').val(),
+                  logo: $('#websiteLogo').val(),
+                  description: $('#websiteDesc').val(),
+                  category: $('#websiteCategory').val(),
+                  tags: [],
+                  twitter: $('#twitterUrl').val(),
+                  github: $('#githubUrl').val()
+              };
 
-                // 收集标签
-                $('#tagContainer .tag-badge').each(function() {
-                    const tagText = $(this).clone().children().remove().end().text().trim();
-                    formData.tags.push(tagText);
-                });
+              // 收集标签
+              $('#tagContainer .tag-badge').each(function() {
+                  const tagText = $(this).clone().children().remove().end().text().trim();
+                  formData.tags.push(tagText);
+              });
 
-                // 这里应该是AJAX提交到后端
-                console.log('提交数据:', formData);
-                
-                // 显示成功提示
-                alert('提交成功！我们的团队将尽快审核您的网站。');
-                this.reset();
-                $('#tagContainer').empty();
-            });
-        });
+              // 这里应该是AJAX提交到后端
+              console.log('提交数据:', formData);
+              
+              // 显示成功提示
+              alert('提交成功！我们的团队将尽快审核您的网站。');
+              this.reset();
+              $('#tagContainer').empty();
+          });
+      });
 
-        // 移除标签
-        function removeTag(element) {
-            $(element).parent().remove();
-        }
+      // 移除标签
+      function removeTag(element) {
+          $(element).parent().remove();
+      }
 
-    </script>
+  </script>
 </body>
 </html>
