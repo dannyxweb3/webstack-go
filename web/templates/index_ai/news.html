@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="viggo"/>
+  <title>AI News - {{ .ConfigSite.SiteTitle }}</title>
+  <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
+  <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
+
+  <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <link rel="stylesheet" href="/assets/static/index/css/base.css">
+  <link rel="stylesheet" href="/assets/static/index/css/news.css">
+  <link rel="stylesheet" href="/assets/static/index/css/rightside.css">
+</head>
+
+<body class="">
+<!-- 固定顶部导航栏 -->
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+  <div class="container">
+    
+    <!-- 1. Logo -->
+    <a class="d-flex align-items-center" href="/">
+        <img src="/assets/static/index/images/ai/logo-lt.png" alt="Logo" style="max-width: 200px; max-height: 60px;" >
+        <!-- <span>AI Tools Online</span> -->
+    </a>
+
+    <!-- 移动端折叠按钮 -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+        <span class="navbar-toggler-icon"><i class="fa fa-bars fa-lg"></i></span>
+    </button>
+
+    <!-- 2. 菜单区域 -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav mr-auto">
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">All AI Tools</a>
+        </li>
+        <!-- 2.1 所有分类 -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="categoriesMenu" data-toggle="dropdown">
+            Categories
+        </a>
+        <div class="dropdown-menu px-2">
+            <a class="dropdown-item" href="/categories">所有分类</a>
+            <a class="dropdown-item" href="#">图像生成（Image Generation）</a>
+            <a class="dropdown-item" href="#">文本生成（Text Generation）</a>
+            <a class="dropdown-item" href="#">数据分析（Data Analysis）</a>
+            <a class="dropdown-item" href="#">语音与音频（Speech & Audio）</a>
+            <a class="dropdown-item" href="#">开发者工具（Developer Tools）</a>
+            <a class="dropdown-item" href="#">其他工具</a>
+        </div>
+        </li>
+
+        <!-- 2.2 推荐 -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="recommendMenu" data-toggle="dropdown">
+            Featured
+        </a>
+        <div class="dropdown-menu px-2">
+            <a class="dropdown-item" href="#">赞助的AI工具</a>
+            <a class="dropdown-item" href="#">最新AI工具</a>
+            <a class="dropdown-item" href="#">免费AI工具</a>
+            <a class="dropdown-item" href="#">最流行的AI工具</a>
+        </div>
+        </li>
+
+        <!-- 2.3 资源 -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="resourcesMenu" data-toggle="dropdown">
+            Explore Resources
+        </a>
+        <div class="dropdown-menu px-2">
+            <a class="dropdown-item" href="#">AI教程</a>
+            <a class="dropdown-item" href="#">AI新闻</a>
+            <a class="dropdown-item" href="#">AI社区和论坛</a>
+        </div>
+        </li>
+
+        <!-- 2.4 关于我们 -->
+        <li class="nav-item">
+        <a class="nav-link" href="/about.html">About</a>
+        </li>
+    </ul>
+
+    <!-- 3. 右侧功能 -->
+
+    <form
+      class="form-inline my-2 my-lg-0 mr-1"
+      role="search"
+      action="https://google.com/search"
+      method="get"
+      target="_blank"
+    
+    >
+      <div class="form-group">
+        <input
+          name="q"
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search..."
+        />
+        <input
+          type="hidden"
+          name="sitesearch"
+          value="ai-tools-online.com"
+        />
+      </div>
+      <button
+        class="btn mb-lg-0 mb-3"
+        type="submit"
+        style="background: none; margin-left: -3rem"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+
+    <div class="btn-group">
+        <a
+          class="btn dropdown-toggle"
+          href="#"
+          type="button"
+          data-toggle="dropdown"
+          aria-expanded="false"
+          style="min-width: 55px"
+        >
+          <i class="fa fa-globe"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#"
+            > English <i class="fa fa-check"></i>
+          </a>
+          <a class="dropdown-item" href="#">French</a>
+          <a class="dropdown-item" href="#">Spanish</a>
+          <a class="dropdown-item" href="#">Deutsch</a>
+          <a class="dropdown-item" href="#">Densk</a>
+          <a class="dropdown-item" href="#">Nederlands</a>
+          <a class="dropdown-item" href="#">Italian</a>
+          <a class="dropdown-item" href="#">Korean</a>
+          <a class="dropdown-item" href="#">Japanese</a>
+          <a class="dropdown-item" href="#">Chinese Simplified</a>
+          <a class="dropdown-item" href="#">Chinese Traditional</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+
+<!-- 主要内容 -->
+<div class="main-content mt-5">
+  
+
+  <div class="container-fluid" style="max-width: 1900px;">
+      <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-12">
+          <!-- 左侧空占位 -->
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <div class="page-header">
+            <div>
+                <h1><i class="fas fa-newspaper mr-2"></i>AI最新资讯</h1>
+                <p class="text-muted">了解人工智能领域的最新动态和发展趋势</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+          <!-- 右侧广告 -->
+          <div class="ad-placeholder">
+            <i class="fas fa-ad"></i> 广告位招租
+            <div class="small">联系: ads@ainav.com</div>
+        </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <!-- 主要区域 -->
+        <div class="col-lg-1 col-md-1 col-sm-12">
+          <!-- 左侧广告 -->
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <!-- 中间内容区 -->
+              <!-- 新闻筛选 -->
+              <div class="news-filter fade-in">
+                <div class="d-flex flex-wrap">
+                    <div class="filter-item active">全部</div>
+                    <div class="filter-item">行业动态</div>
+                    <div class="filter-item">技术突破</div>
+                    <div class="filter-item">产品发布</div>
+                    <div class="filter-item">政策法规</div>
+                    <div class="filter-item">学术研究</div>
+                </div>
+            </div>
+            
+            <!-- 新闻列表 -->
+            <div class="news-list">
+                <!-- 新闻1 -->
+                <div class="news-card fade-in">
+                    <div class="news-content">
+                        <div class="news-meta-page">
+                            <span><i class="far fa-calendar-alt mr-1"></i>2023-06-15</span>
+                            <span class="ml-3"><i class="far fa-eye mr-1"></i>1,245</span>
+                            <span class="ml-3"><i class="far fa-comments mr-1"></i>23</span>
+                        </div>
+                        <h3 class="news-title-text">OpenAI发布GPT-4 Turbo，性能提升价格降低</h3>
+                        <p class="news-summary">OpenAI在首届开发者大会上宣布推出GPT-4 Turbo模型，该模型具有更长的上下文窗口(128k)，知识更新至2023年4月，API调用成本降低3倍。新模型在复杂任务处理上有显著提升，同时响应速度更快。OpenAI还宣布将推出自定义GPT商店，允许开发者创建和分享定制化的GPT模型。</p>
+                        <div class="mb-3">
+                            <span class="news-tag">产品发布</span>
+                            <span class="news-tag">大模型</span>
+                            <span class="news-tag">OpenAI</span>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary">阅读全文 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="news-image-container">
+                        <img src="https://via.placeholder.com/600x400?text=GPT-4+Turbo" alt="GPT-4 Turbo" class="news-image">
+                    </div>
+                </div>
+                
+                <!-- 新闻2 -->
+                <div class="news-card fade-in">
+                    <div class="news-content">
+                        <div class="news-meta-page">
+                            <span><i class="far fa-calendar-alt mr-1"></i>2023-06-10</span>
+                            <span class="ml-3"><i class="far fa-eye mr-1"></i>982</span>
+                            <span class="ml-3"><i class="far fa-comments mr-1"></i>15</span>
+                        </div>
+                        <h3 class="news-title-text">谷歌DeepMind推出Gemini多模态模型，性能超越GPT-4</h3>
+                        <p class="news-summary">谷歌DeepMind团队发布了新一代多模态AI模型Gemini，在多项基准测试中表现优于GPT-4。该模型原生支持文本、图像、音频和视频的多模态理解与生成，特别在复杂推理和跨模态任务上展现出强大能力。Gemini将分为三个版本：Nano、Pro和Ultra，分别针对不同应用场景。</p>
+                        <div class="mb-3">
+                            <span class="news-tag">技术突破</span>
+                            <span class="news-tag">多模态</span>
+                            <span class="news-tag">谷歌</span>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary">阅读全文 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="news-image-container">
+                        <img src="https://via.placeholder.com/600x400?text=Gemini+AI" alt="Gemini AI" class="news-image">
+                    </div>
+                </div>
+                
+                <!-- 新闻3 -->
+                <div class="news-card fade-in">
+                    <div class="news-content">
+                        <div class="news-meta-page">
+                            <span><i class="far fa-calendar-alt mr-1"></i>2023-06-05</span>
+                            <span class="ml-3"><i class="far fa-eye mr-1"></i>1,532</span>
+                            <span class="ml-3"><i class="far fa-comments mr-1"></i>42</span>
+                        </div>
+                        <h3 class="news-title-text">欧盟通过全球首个全面AI监管法案《AI法案》</h3>
+                        <p class="news-summary">欧洲议会以压倒性多数通过了《人工智能法案》，这是全球首个全面监管AI的法律框架。法案根据风险等级对AI系统进行分类管理，禁止某些高风险应用，如社会评分系统和实时生物识别监控。法案还要求生成式AI系统如ChatGPT必须披露AI生成内容，并防止生成非法内容。</p>
+                        <div class="mb-3">
+                            <span class="news-tag">政策法规</span>
+                            <span class="news-tag">欧盟</span>
+                            <span class="news-tag">AI伦理</span>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary">阅读全文 <i class="fas fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="news-image-container">
+                        <img src="https://via.placeholder.com/600x400?text=EU+AI+Act" alt="EU AI Act" class="news-image">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 分页 -->
+            <nav aria-label="新闻分页" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                            <i class="fas fa-angle-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- 3.4 底部广告栏 -->
+            <div class="ad-bar">
+              <h5>学习资源推荐</h5>
+              <p>Git/GitHub 从入门到精通 - 限时优惠 8 折</p>
+              <a href="#" class="btn btn-success">立即购买</a>
+          </div>
+
+        </div>
+        <!-- 右侧区域 -->
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <!-- 右侧推荐栏目 -->
+            <!-- 右侧栏容器 -->
+              <!-- 随机推荐板块（之前代码） -->
+              <div class="right-sidebar-section">
+                  <!-- 推荐内容... -->
+                  <!-- 特征推荐 -->
+                    <div class="recommend-title d-flex align-items-center">
+                      <span class="mx-auto">Featured</span>
+                      <i class="fas fa-sync-alt refresh-btn ms-auto ms-3 me-3" id="featured-refreshBtn" title="Refresh"></i>
+                    </div>
+                    
+                    <div id="featured-recommendList">
+                        <!-- 动态生成推荐项 -->
+                    </div>
+              </div>
+              
+              <!-- 新增近期新闻板块 -->
+              <div class="right-sidebar-section">
+                  <div class="right-sitebar-section-title text-center">AI News</div>
+                  <div id="newsList">
+                      <!-- 动态生成新闻项 -->
+                  </div>
+              </div>
+
+              <!-- 新增热门分类板块 -->
+              <div class="right-sidebar-section categories-section">
+                <div class="right-sitebar-section-title text-center">Popular Categories</div>
+                <div class="categories-container" id="categoriesList">
+                  <!-- 动态生成分类标签 -->
+                </div>
+              </div>
+
+              <div class="right-sidebar-section">
+                <!-- 推荐内容... -->
+                <!-- 随机推荐 -->
+                <div class="recommend-title d-flex align-items-center">
+                  <span class="mx-auto">Randomly Recommended</span>
+                  <i class="fas fa-sync-alt refresh-btn ms-auto" id="randomly-refreshBtn" title="Refresh"></i>
+                </div>
+                
+                <div id="randomly-recommendList">
+                  <!-- 动态生成推荐项 -->
+                </div>
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  <!-- main-content end -->
+
+  <!-- 页脚 -->
+  <footer class="footer mt-5 pt-4 bg-light-blue border-top">
+    <div class="container">
+      <div class="row">
+  
+        <!-- 1. Logo + 网站介绍 -->
+        <div class="col-md-4 mb-3">
+          <div class="d-flex align-items-center mb-2">
+            <a href="/" class="logo text-decoration-none">
+                <img src="/assets/static/index/images/ai/logo-square.png" alt="网站Logo" width="40" height="40" class="mr-2">
+                <span class="h5 mb-0">AI Tools Online</span>
+            </a>
+          </div>
+          <p class="text-muted">
+            <!-- 全球最佳 AI 工具导航，帮你快速找到最适合的 AI 助手和应用。 -->
+            A guide to the world's best AI tools online, helping you quickly find the most suitable AI assistants and applications.
+          </p>
+        </div>
+  
+        <!-- 2. 页面链接 -->
+        <div class="col-md-3 mb-3">
+          <h6 class="text-dark font-weight-bold">Resources</h6>
+          <ul class="list-unstyled">
+            <li><a href="/about.html" class="text-muted">Featured AI Tools</a></li>
+            <li><a href="/about.html" class="text-muted">Newest AI Tools</a></li>
+            <li><a href="/about.html" class="text-muted">All AI Categories</a></li>
+            <li><a href="/submit.html" class="text-muted">Free AI Tools</a></li>
+            <li><a href="/disclaimer.html" class="text-muted">Most Popular AI Tools</a></li>
+            <li><a href="/disclaimer.html" class="text-muted">AI Communities</a></li>
+          </ul>
+        </div>
+        
+        <!-- 3. 联系我们 + 社交媒体 -->
+        <div class="col-md-3 mb-3">
+          <h6 class="text-dark font-weight-bold">Contact</h6>
+          <p class="text-muted mb-2">Email: contact@ai-tools-online.com</p>
+          <div>
+            <a href="https://twitter.com/" target="_blank" class="text-muted mr-2"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="https://facebook.com/" target="_blank" class="text-muted mr-2"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="https://github.com/" target="_blank" class="text-muted mr-2"><i class="fab fa-github fa-lg"></i></a>
+            <a href="https://linkedin.com/" target="_blank" class="text-muted"><i class="fab fa-linkedin fa-lg"></i></a>
+          </div>
+        </div>
+  
+        <!-- 4. About -->
+        <div class="col-md-2 mb-3">
+          <h6 class="text-dark font-weight-bold">About</h6>
+          <ul class="list-unstyled">
+            <li><a href="/about.html" class="text-muted">About Us</a></li>
+            <li><a href="/submit.html" class="text-muted">Submit Tool</a></li>
+            <li><a href="/disclaimer.html" class="text-muted">Disclaimer</a></li>
+          </ul>
+        </div>
+  
+      </div>
+  
+      <!-- 底部版权 -->
+      <div class="row">
+        <div class="col-12 text-center mt-3">
+          <p class="text-muted">&copy; 2025 AI Tools Online. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery + Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>    
+
+    <input type="hidden" id="recommendations" value='[
+    { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
+    { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
+    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
+    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
+    { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
+    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" }
+    ]' />
+
+    <!-- 自定义代码 -->
+    <script>
+        $(document).ready(function() {
+            // 新闻筛选功能
+            $('.filter-item').click(function() {
+                $('.filter-item').removeClass('active');
+                $(this).addClass('active');
+                // 这里可以添加筛选逻辑
+            });
+            
+            // 平滑滚动
+            $('a[href^="#"]').on('click', function(event) {
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top - 20
+                }, 500);
+            });
+            
+            // 初始化动画
+            setTimeout(function() {
+                $('.fade-in').each(function(i) {
+                    $(this).delay(i * 100).queue(function() {
+                        $(this).addClass('show').dequeue();
+                    });
+                });
+            }, 300);
+        });
+    </script>
+
+    <!-- 推荐数据源（可替换为API请求） -->
+    <script>
+      // 示例数据（实际可从后端API获取） // 只推荐3，4个
+      const featuredRecommendations = [
+          {
+              name: "GitHub",
+              logo: "https://github.githubassets.com/favicons/favicon.png",
+              desc: "全球最大的代码托管平台，开发者必备工具。",
+              url: "https://github.com"
+          },
+          {
+              name: "Stack Overflow",
+              logo: "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico",
+              desc: "程序员问答社区，解决各种技术难题。",
+              url: "https://stackoverflow.com"
+          },
+          {
+              name: "Vue.js",
+              logo: "https://vuejs.org/images/logo.png",
+              desc: "渐进式JavaScript框架，易学易用。",
+              url: "https://vuejs.org"
+          },
+          {
+              name: "MDN Web Docs",
+              logo: "https://developer.mozilla.org/favicon-48x48.png",
+              desc: "最权威的Web开发文档，涵盖HTML/CSS/JS。",
+              url: "https://developer.mozilla.org"
+          },
+          {
+              name: "Dribbble",
+              logo: "https://cdn.dribbble.com/assets/favicon-b38525134603b9513174ec887944bde1a869eb6cd414f4d640ee48ab2a15a26b.ico",
+              desc: "设计师灵感社区，展示创意作品。",
+              url: "https://dribbble.com"
+          }
+      ];
+
+      // 随机选择N个推荐项
+      function getFeaturedRecommendations(count = 3) {
+          const shuffled = [...featuredRecommendations].sort(() => 0.5 - Math.random());
+          return shuffled.slice(0, count);
+      }
+
+      // 渲染推荐列表
+      function renderFeaturedRecommendations() {
+          const recommendations = getFeaturedRecommendations();
+          const container = document.getElementById('featured-recommendList');
+          container.innerHTML = '';
+          
+          recommendations.forEach(item => {
+              container.innerHTML += `
+                  <a href="${item.url}" target="_blank" class="recommend-item">
+                      <div class="recommend-header">
+                          <img src="${item.logo}" class="recommend-logo" alt="${item.name}" 
+                               __onerror="this.src='https://via.placeholder.com/32'">
+                          <div class="recommend-name">${item.name}</div>
+                      </div>
+                      <div class="recommend-desc">${item.desc}</div>
+                  </a>
+              `;
+          });
+      }
+
+      // 初始化加载
+      $(document).ready(function() {
+          renderFeaturedRecommendations();
+          
+          // 点击刷新按钮换一批
+          $('#featured-refreshBtn').off('click').on('click', function() {
+              refreshFeaturedRecommendations();
+          });
+      });
+
+      // 暴露刷新方法供其他部分调用
+      function refreshFeaturedRecommendations() {
+        renderFeaturedRecommendations();
+      }
+    </script>
+    <!-- 推荐数据源（可替换为API请求） -->
+    <script>
+      // 示例数据（实际可从后端API获取）
+      const randomlyRecommendations = [
+          {
+              name: "GitHub",
+              logo: "https://github.githubassets.com/favicons/favicon.png",
+              desc: "全球最大的代码托管平台，开发者必备工具。",
+              url: "https://github.com"
+          },
+          {
+              name: "Stack Overflow",
+              logo: "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico",
+              desc: "程序员问答社区，解决各种技术难题。",
+              url: "https://stackoverflow.com"
+          },
+          {
+              name: "Vue.js",
+              logo: "https://vuejs.org/images/logo.png",
+              desc: "渐进式JavaScript框架，易学易用。",
+              url: "https://vuejs.org"
+          },
+          {
+              name: "MDN Web Docs",
+              logo: "https://developer.mozilla.org/favicon-48x48.png",
+              desc: "最权威的Web开发文档，涵盖HTML/CSS/JS。",
+              url: "https://developer.mozilla.org"
+          },
+          {
+              name: "Dribbble",
+              logo: "https://cdn.dribbble.com/assets/favicon-b38525134603b9513174ec887944bde1a869eb6cd414f4d640ee48ab2a15a26b.ico",
+              desc: "设计师灵感社区，展示创意作品。",
+              url: "https://dribbble.com"
+          }
+      ];
+
+      // 随机选择N个推荐项
+      function getRandomRecommendations(count = 10) {
+          const shuffled = [...randomlyRecommendations].sort(() => 0.5 - Math.random());
+          return shuffled.slice(0, count);
+      }
+
+      // 渲染推荐列表
+      function renderRecommendations() {
+          const recommendations = getRandomRecommendations();
+          const container = document.getElementById('randomly-recommendList');
+          container.innerHTML = '';
+          
+          recommendations.forEach(item => {
+              container.innerHTML += `
+                  <a href="${item.url}" target="_blank" class="recommend-item">
+                      <div class="recommend-header">
+                          <img src="${item.logo}" class="recommend-logo" alt="${item.name}" 
+                               __onerror="this.src='https://via.placeholder.com/32'">
+                          <div class="recommend-name">${item.name}</div>
+                      </div>
+                      <div class="recommend-desc">${item.desc}</div>
+                  </a>
+              `;
+          });
+      }
+
+      // 初始化加载
+      $(document).ready(function() {
+          renderRecommendations();
+          
+          // 点击刷新按钮换一批
+          $('#randomly-refreshBtn').off('click').on('click', function() {
+              refreshRandomlyRecommendations();
+          });
+      });
+
+      // 暴露刷新方法供其他部分调用
+      function refreshRandomlyRecommendations() {
+          renderRecommendations();
+      }
+    </script>
+
+    <script>
+      // 从隐藏元素加载新闻数据
+      function loadNewsData() {
+          const newsItems = [
+              {
+                  time: "2025-01-01 10:00",
+                  title: "AI技术在医疗领域的应用获得了众多高校机构的采纳和关注，已经成为研究热点。",
+                  logo: "/favicon.ico",
+                  source: "Tech News"
+              },
+              {
+                  time: "2025-01-02 12:30",
+                  title: "新一代AI模型发布",
+                  logo: "/favicon.ico",
+                  source: "AI Daily"
+              },
+              {
+                  time: "2025-01-03 15:45",
+                  title: "AI助力自动驾驶技术进步",
+                  logo: "/favicon.ico",
+                  source: "Auto Tech"
+              }
+          ];
+          $('#newsData > div').each(function() {
+              newsItems.push({
+                  time: $(this).data('time'),
+                  title: $(this).data('title'),
+                  logo: $(this).data('logo'),
+                  source: $(this).data('source')
+              });
+          });
+          return newsItems;
+      }
+
+      // 渲染新闻列表
+      function renderNewsList() {
+          const newsData = loadNewsData();
+          const container = document.getElementById('newsList');
+          container.innerHTML = '';
+          
+          newsData.forEach(item => {
+              container.innerHTML += `
+                  <a href="#" class="news-item" target="_blank">
+                      <div class="news-header">
+                          <img src="${item.logo}" class="news-logo" alt="${item.source}"
+                              __onerror="this.src='https://via.placeholder.com/24'">
+                          <div class="news-title">${item.title}</div>
+                      </div>
+                      <div class="news-meta">
+                          <span>${item.time}</span> · 
+                          <span>${item.source}</span>
+                      </div>
+                  </a>
+              `;
+          });
+      }
+
+      // 页面加载时初始化
+      $(document).ready(function() {
+          renderNewsList();
+          
+          // 点击新闻项跳转（示例，实际需绑定正确URL）
+          $(document).on('click', '.news-item', function(e) {
+              e.preventDefault();
+              alert('实际项目中这里会跳转到新闻详情页');
+              // window.open(newsUrl, '_blank');
+          });
+      });
+    </script>
+
+    <script>
+      // 从隐藏元素加载分类数据
+      function loadCategoriesData() {
+          const categories = [
+              {
+                  id: 1,
+                  name: "AI工具",
+                  url: "sites/ai-tools.html"
+              },
+              {
+                  id: 2,
+                  name: "AI学习",
+                  url: "sites/ai-learning.html"
+              },
+              {
+                  id: 3,
+                  name: "AI应用",
+                  url: "sites/ai-applications.html"
+              },
+              {
+                  id: 4,
+                  name: "AI开发",
+                  url: "sites/ai-development.html"
+              },
+              {
+                  id: 5,
+                  name: "AI赚钱",
+                  url: "sites/ai-money-making.html"
+              }
+          ];
+          $('#categoriesData > div').each(function() {
+              categories.push({
+                  id: $(this).data('id'),
+                  name: $(this).data('name'),
+                  url: $(this).data('url')
+              });
+          });
+          return categories;
+      }
+
+      // 渲染分类标签
+      function renderCategories() {
+          const categories = loadCategoriesData();
+          const container = document.getElementById('categoriesList');
+          container.innerHTML = '';
+          
+          categories.forEach(category => {
+              container.innerHTML += `
+                  <a href="${category.url}" class="category-tag" 
+                    data-id="${category.id}">
+                      ${category.name}
+                  </a>
+              `;
+          });
+      }
+
+      // 页面加载时初始化
+      $(document).ready(function() {
+          renderCategories();
+      });
+    </script>
+
+    <script>
+      $(function(){
+        // 启用 Bootstrap 气泡提示
+        $('[data-toggle="tooltip"]').tooltip();
+      
+        // 置顶按钮点击事件（你可以在这里加自己的逻辑）
+        $('.btn-top').on('click', function(e){
+          e.stopPropagation();
+          let siteName = $(this).closest('.site-card').find('.site-name').text();
+          alert('置顶功能触发：' + siteName);
+          // 这里可以调用你的其他功能
+        });
+      
+        // 点击卡片跳转
+        // $('.site-name').on('click', function(){
+        //   window.open('https://example.com', '_blank');
+        // });
+      });
+      </script>
+
+      <!-- end 自定义代码 -->
+  </body>
+</html>
