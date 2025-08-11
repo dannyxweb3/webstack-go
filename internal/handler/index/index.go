@@ -79,3 +79,14 @@ func (h *Handler) News(ctx *gin.Context) {
 
 	ctx.HTML(http.StatusOK, "news.html", resp)
 }
+func (h *Handler) Community(ctx *gin.Context) {
+	resp, err := h.indexService.Index(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "community.html") // todo
+
+	ctx.HTML(http.StatusOK, "community.html", resp)
+}
