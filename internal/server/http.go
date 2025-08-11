@@ -80,8 +80,15 @@ func NewHTTPServer(
 	s.GET("/", indexHandler.Index)
 	s.GET("/index.html", indexHandler.Index)
 	s.GET("/tool.html", indexHandler.Tool)
+	s.GET("/tool", indexHandler.Tool)
 	s.GET("/submit.html", indexHandler.Submit)
+	s.GET("/submit", indexHandler.Submit)
 	s.GET("/disclaimer.html", indexHandler.Disclaimer)
+	s.GET("/disclaimer", indexHandler.Disclaimer)
+	s.GET("/categories.html", indexHandler.Categories)
+	s.GET("/categories", indexHandler.Categories)
+	s.GET("/news.html", indexHandler.News)
+	s.GET("/news", indexHandler.News)
 	// About HTML
 	// s.GET("/about", func(ctx *gin.Context) {
 	// 	ctx.HTML(http.StatusOK, "about.html", nil)

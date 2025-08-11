@@ -57,3 +57,25 @@ func (h *Handler) Disclaimer(ctx *gin.Context) {
 
 	ctx.HTML(http.StatusOK, "disclaimer.html", resp)
 }
+func (h *Handler) Categories(ctx *gin.Context) {
+	resp, err := h.indexService.Index(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "categories.html")
+
+	ctx.HTML(http.StatusOK, "categories.html", resp)
+}
+func (h *Handler) News(ctx *gin.Context) {
+	resp, err := h.indexService.Index(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "news.html")
+
+	ctx.HTML(http.StatusOK, "news.html", resp)
+}
