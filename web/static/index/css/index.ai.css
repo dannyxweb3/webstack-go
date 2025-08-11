@@ -115,7 +115,7 @@
     width: 99%;
     max-width: 400px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 10px;
     /* background: #f8f9fa; */
     background: rgba(254, 254, 254, 0.3);
     border-radius: 8px;
@@ -470,8 +470,7 @@
 }
 
 .keyword:hover {
-    background: #e5e7eb;
-    color: #111827;
+    color: #007bff;
 }
 
 .io-black-mode .keyword:hover {
