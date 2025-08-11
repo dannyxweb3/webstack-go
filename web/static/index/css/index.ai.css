@@ -525,7 +525,7 @@
     color: #5961f9;
 }
 
-
+/* 页面中分类 */
 .category-title {
     font-size: 18px !important;
     font-weight: bold;
@@ -533,6 +533,7 @@
     background: #6e48aa;
     box-shadow: 0 2px 4px rgba(79, 16, 75, 0.5);
 }
+
 
 /* 左侧分类导航 */
 .category-sidebar {
@@ -552,15 +553,70 @@
     transition: all 0.3s ease;
 }
 
+.category-sidebar-title {
+    font-size: 1rem;
+}
+
 .category-sidebar.active {
     transform: translateX(0);
     opacity: 1;
 }
 
+/* 折叠状态样式 */
+.category-sidebar.collapsed {
+    width: 60px;
+    overflow: hidden;
+    cursor: pointer; /* 添加手型光标 */
+
+}
+
+.category-sidebar.collapsed .sidebar-content {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.category-sidebar.collapsed .toggle-sidebar {
+    left: 15px;
+}
+
+.category-sidebar.collapsed .toggle-sidebar i {
+    /* transform: rotate(180deg); */
+    display: none;
+}
+.category-sidebar.collapsed .category-sidebar-title {
+    /* transform: rotate(180deg); */
+    display: none;
+}
+
+/* 折叠时显示更大的点击区域 */
+.category-sidebar.collapsed h4 {
+    padding: 15px;
+    margin: -15px;
+    width: calc(100% + 30px);
+}
+
+.sidebar-content {
+    transition: opacity 0.3s 0.1s;
+}
+
 .category-sidebar h4 {
+    position: relative;
     padding-bottom: 10px;
     border-bottom: 2px solid #6e48aa;
     color: #343a40;
+    padding-right: 30px; /* 为切换按钮留空间 */
+}
+
+.toggle-sidebar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toggle-sidebar i {
+    transition: transform 0.3s;
 }
 
 .category-list {
@@ -579,6 +635,7 @@
     text-decoration: none;
     border-radius: 4px;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 .category-link:hover,
@@ -587,6 +644,21 @@
     color: white;
 }
 
+/* 主内容区域 */
+.main-content {
+    padding: 20px;
+}
+
+.category-section {
+    padding: 80px 0 40px;
+    margin-bottom: 40px;
+}
+
+.category-section h2 {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
 
 /* 响应式调整 */
 @media (max-width: 992px) {
@@ -594,6 +666,24 @@
         padding-left: 0;
     }
     .category-sidebar {
-        width: 200px;
+        width: 250px;
+    }
+    
+    /* 移动端默认折叠 */
+    body.collapsed {
+        padding-left: 60px;
+    }
+    
+    .category-sidebar.collapsed {
+        width: 60px;
+    }
+    
+    .category-sidebar.collapsed h4 {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    
+    .category-sidebar.collapsed h4 span {
+        display: none;
     }
 }

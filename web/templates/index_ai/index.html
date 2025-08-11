@@ -248,9 +248,17 @@
           <div class="col-md-2 col-sm-12">
             <!-- 左侧固定分类导航 -->
             <!-- 左侧分类导航 -->
-            <div class="category-sidebar" id="categorySidebar">
-              <h4><i class="fas fa-list-ul mr-2"></i>所有分类</h4>
-              <ul class="category-list">
+            <div class="category-sidebar collapsed" id="categorySidebar">
+              <h4>
+                <i class="fas fa-list-ul mr-2"></i>
+                <span class="category-sidebar-title">All Categories</span>
+                <span class="toggle-sidebar">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+              </h4>
+              <div class="sidebar-content">
+
+                <ul class="category-list">
                   <li class="category-item"><a href="#image-generation" class="category-link">图像生成</a></li>
                   <li class="category-item"><a href="#text-generation" class="category-link">文本生成</a></li>
                   <li class="category-item"><a href="#data-analysis" class="category-link">数据分析</a></li>
@@ -264,6 +272,7 @@
                   <li class="category-item"><a href="#healthcare" class="category-link">医疗健康</a></li>
                   <li class="category-item"><a href="#other" class="category-link">其他工具</a></li>
               </ul>
+            </div>
           </div>
           </div>
           <div class="col-md-8 col-sm-12">
@@ -282,7 +291,7 @@
             <div class="d-flex my-3">
               <span class="badge badge-pill category-title mr-auto"><i class="fa fa-fire mr-2"></i> Popular Tools</span>
               <a class="ms-auto ms-3 me-3" href="#">
-                <span class="" style="font-size: 0.75rem;"> See All In This Category &gt;</span>
+                <span class="" style="font-size: 0.75rem;"> View All In This Category &gt;</span>
               </a>
             </div>
 
@@ -1220,40 +1229,111 @@
       });
       </script>
     <script>
-      // 侧边栏滚动显示/隐藏
-      $(document).ready(function() {
+    // 侧边栏滚动显示/隐藏
+    $(document).ready(function() {
           // 滚动时显示/隐藏侧边栏
-          $(window).scroll(function() {
-              if ($(this).scrollTop() > 400) {
-                  $('#categorySidebar').addClass('active');
-              } else {
-                  $('#categorySidebar').removeClass('active');
-              }
-              
-              // 高亮当前可见的分类 
-              // 需要对对应的分类内容增加 category-section 属性
-              $('.category-section').each(function() {
-                  const sectionTop = $(this).offset().top;
-                  const sectionHeight = $(this).outerHeight();
-                  const scrollPosition = $(window).scrollTop() + 100;
-                  
-                  if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                      const sectionId = $(this).attr('id');
-                      $('.category-link').removeClass('active');
-                      $('.category-link[href="#' + sectionId + '"]').addClass('active');
-                  }
-              });
-          });
+      // 检测是否是移动设备
+      function isMobile() {
+          return window.innerWidth <= 992;
+      }
+      
+      // 初始化侧边栏状态
+      if (isMobile()) {
+          $('#categorySidebar').addClass('collapsed');
+          // .find('h4 i') // 切换图标
+          // .removeClass('fa-list-ul')
+          // .addClass('fa-bars');;
+          $('body').addClass('collapsed');
+          console.log('移动端，侧边栏初始化为折叠状态');
+      }
+      
+      // 切换侧边栏折叠状态
+      // 修改toggle逻辑
+      $(document).on('click', '.toggle-sidebar, .category-sidebar.collapsed', function(e) {
+          // 阻止事件冒泡（如果点击的是toggle按钮）
+          if ($(e.target).hasClass('toggle-sidebar')) {
+              e.stopPropagation();
+          }
           
-          // 平滑滚动到锚点
-          $('.category-link').click(function(e) {
-              e.preventDefault();
-              const target = $(this).attr('href');
-              $('html, body').animate({
-                  scrollTop: $(target).offset().top - 80
-              }, 500);
-          });
+          $('#categorySidebar').toggleClass('collapsed');
+          $('body').toggleClass('collapsed');
+          console.log('侧边栏切换状态:', $('#categorySidebar').hasClass('collapsed') ? '折叠' : '展开');
+          
+          // 确保侧边栏在展开时可见
+          if (!$('#categorySidebar').hasClass('collapsed') && $(window).scrollTop() > 500) {
+              $('#categorySidebar').addClass('active');
+              console.log('侧边栏已展开并显示');
+          }
       });
+      // 滚动时显示/隐藏侧边栏
+      $(window).scroll(function() {
+          if ($(this).scrollTop() > 500) {
+              $('#categorySidebar').addClass('active');
+              console.log('滚动超过500px，侧边栏显示');
+          } else {
+              // 在移动端且侧边栏展开时才隐藏
+              if (!isMobile() || !$('#categorySidebar').hasClass('collapsed')) {
+                  $('#categorySidebar').removeClass('active');
+                  console.log('滚动回到顶部，侧边栏隐藏');
+              }
+          }
+          
+          // 高亮当前可见的分类
+          $('.category-section').each(function() {
+              const sectionTop = $(this).offset().top;
+              const sectionHeight = $(this).outerHeight();
+              const scrollPosition = $(window).scrollTop() + 100;
+              
+              if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                  const sectionId = $(this).attr('id');
+                  $('.category-link').removeClass('active');
+                  $('.category-link[href="#' + sectionId + '"]').addClass('active');
+              }
+          });
+      }).scroll(); // 触发一次以初始化状态
+      
+      // 替换原来的平滑滚动代码
+      $('.category-link').click(function(e) {
+          e.preventDefault();
+          const targetId = $(this).attr('href');
+          
+          // 确保目标存在
+          if (!targetId || !$(targetId).length) return;
+          
+          try {
+              const targetElement = $(targetId);
+              const offset = targetElement.offset();
+              
+              if (offset && typeof offset.top !== 'undefined') {
+                  $('html, body').stop().animate({
+                      scrollTop: offset.top - 80
+                  }, 500);
+                  
+                  // 移动端点击后自动折叠
+                  if (isMobile()) {
+                      $('#categorySidebar').addClass('collapsed');
+                      $('body').addClass('collapsed');
+                  }
+              }
+          } catch (error) {
+              console.error('滚动出错:', error);
+              // 降级方案：直接跳转
+              window.location.href = targetId;
+          }
+      });      
+      // 响应式调整
+      $(window).resize(function() {
+          if (isMobile()) {
+              if (!$('#categorySidebar').hasClass('collapsed')) {
+                  $('#categorySidebar').addClass('collapsed');
+                  $('body').addClass('collapsed');
+              }
+          } else {
+              $('#categorySidebar').removeClass('collapsed');
+              $('body').removeClass('collapsed');
+          }
+      });
+    });
   </script>
     <script>
       $(document).ready(function() {
