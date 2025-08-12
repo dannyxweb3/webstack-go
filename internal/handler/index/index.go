@@ -68,6 +68,17 @@ func (h *Handler) Categories(ctx *gin.Context) {
 
 	ctx.HTML(http.StatusOK, "categories.html", resp)
 }
+func (h *Handler) CategoryDetail(ctx *gin.Context) {
+	resp, err := h.indexService.Index(ctx)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "category_detail.html")
+
+	ctx.HTML(http.StatusOK, "category_detail.html", resp)
+}
 func (h *Handler) News(ctx *gin.Context) {
 	resp, err := h.indexService.Index(ctx)
 	if err != nil {
