@@ -156,7 +156,7 @@
 
     <!-- 侧边导航栏 -->
     <div class="category-sidebar" id="categorySidebar">
-      <div class="sidebar-header">
+      <div class="sidebar-header" style="display:none;">
           <h4><i class="fas fa-robot"></i> AI工具导航</h4>
           <div class="sidebar-toggle" id="sidebarToggle">
               <i class="fas fa-times"></i>
@@ -246,17 +246,28 @@
               <div class="row">
                   <div class="col-md-6">
                       <div class="tool-card">
-                          <div class="d-flex justify-content-between">
-                              <h5>MidJourney</h5>
-                              <span class="badge badge-primary">热门</span>
+                        <div class="row">
+                          <div class="col-8">
+
+                            <div class="d-flex justify-content-between">
+                                <h5>MidJourney</h5>
+                                <span class="badge badge-primary">热门</span>
+                            </div>
+                            <p class="text-muted">通过文字描述生成艺术图像的AI工具</p>
+                            <p class="text-muted">MidJourney 是专业的AI
+                              图像生成工具，用户可以通过输入文字描述来生成高质量的艺术图像。它支持多种风格和主题，适合艺术创作、设计灵感等场景。
+                            </p>
+                            <div class="mb-2">
+                                <span class="tool-tag">AI绘画</span>
+                                <span class="tool-tag">艺术创作</span>
+                                <span class="tool-tag">Discord</span>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary">查看详情</a>
                           </div>
-                          <p class="text-muted">通过文字描述生成艺术图像的AI工具</p>
-                          <div class="mb-2">
-                              <span class="tool-tag">AI绘画</span>
-                              <span class="tool-tag">艺术创作</span>
-                              <span class="tool-tag">Discord</span>
+                          <div class="col-4 text-right">
+                            <img src="/assets/static/index/images/ai/midjourney.png" alt="MidJourney Preview" class="img-fluid" style="max-height: 50px;">
                           </div>
-                          <a href="#" class="btn btn-sm btn-outline-primary">查看详情</a>
+                        </div>
                       </div>
                   </div>
                   <div class="col-md-6">
