@@ -13,18 +13,20 @@ const TableNameStSite = "st_site"
 // StSite mapped from table <st_site>
 type StSite struct {
 	ID          int        `gorm:"column:id;type:INTEGER;primaryKey" json:"id"`
-	CategoryID  int        `gorm:"column:category_id;type:int(11)" json:"category_id"`
-	Title       string     `gorm:"column:title;type:varchar(50)" json:"title"`
-	Icon        string     `gorm:"column:icon;type:text" json:"icon"`
-	Description string     `gorm:"column:description;type:varchar(500)" json:"description"`
-	URL         string     `gorm:"column:url;type:varchar(255);not null" json:"url"`
-	ImgPreview  string     `gorm:"column:img_preview;type:varchar(255);not null" json:"img_preview"`
+	CategoryID  int        `gorm:"column:category_id;type:int(11);defaut:0;not null" json:"category_id"`
+	Title       string     `gorm:"column:title;type:varchar(50);default:'';not null" json:"title"`
+	Icon        string     `gorm:"column:icon;type:text;not null" json:"icon"`
+	Description string     `gorm:"column:description;type:text;not null" json:"description"`
+	URL         string     `gorm:"column:url;type:varchar(255);default:'';not null" json:"url"`
+	ImgPreview  string     `gorm:"column:img_preview;type:varchar(255);default:'';not null" json:"img_preview"`
 	IsUsed      bool       `gorm:"column:is_used;type:bool;default:false" json:"is_used"`
+	Status      int8       `gorm:"column:status;type:tinyint;not null;default:0" json:"status"`
 	CreatedAt   *time.Time `gorm:"column:created_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"created_at"`
 	UpdatedAt   *time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"updated_at"`
 	DeletedAt   *time.Time `gorm:"column:deleted_at;type:datetime" json:"deleted_at"`
-	Sort        int        `gorm:"column:sort;type:int(11)" json:"sort"`
-	IconCss     string     `gorm:"column:icon_css;type:varchar(255);not null" json:"icon_css"`
+	Sort        int        `gorm:"column:sort;type:int(11);default:0;not null" json:"sort"`
+	IconCss     string     `gorm:"column:icon_css;type:varchar(255);default:'';not null" json:"icon_css"`
+	Tags string 
 }
 
 // TableName StSite's table name
