@@ -8,7 +8,7 @@
 body {
     padding-left: 280px;
     transition: padding-left 0.3s ease;
-    background-color: #f5f7fa;
+    /* background-color: #f5f7fa; */
 }
 
 /* 侧边栏样式 */
@@ -86,7 +86,8 @@ body {
 
 /* 分类卡片 */
 .category-card {
-    background: white;
+    /* background: white; */
+    background-color: #fafaff;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
