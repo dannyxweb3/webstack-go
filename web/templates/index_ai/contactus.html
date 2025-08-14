@@ -1,456 +1,468 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="author" content="viggo"/>
-    <title>{{ .ConfigSite.SiteTitle }}</title>
-    <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
-    <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="author" content="viggo"/>
+  <title>{{ .ConfigSite.SiteTitle }}</title>
+  <meta name="keywords" content="{{ .ConfigSite.SiteKeyword }}"/>
+  <meta name="description" content="{{ .ConfigSite.SiteDesc }}"/>
 
-    <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
-    <link rel="stylesheet" href="/assets/static/index/css/fonts/linecons/css/linecons.css"/>
-    <link rel="stylesheet" href="/assets/static/index/css/fonts/fontawesome/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="/assets/static/index/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/assets/static/index/css/xenon-core.css"/>
-    <link rel="stylesheet" href="/assets/static/index/css/xenon-components.css"/>
-    <link rel="stylesheet" href="/assets/static/index/css/xenon-skins.css"/>
-    <link rel="stylesheet" href="/assets/static/index/css/nav.css"/>
-    <link rel="stylesheet" href="/assets/static/index/css/hclonely.css"/>
-    <script src="assets/static/index/js/jquery-1.11.1.min.js"></script>
+  <link rel="shortcut icon" href="/assets/static/index/images/ai/favicon.ico"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <link rel="stylesheet" href="/assets/static/index/css/base.css">
+  <style>
+    :root {
+        --primary-color: #6e48aa;
+        --secondary-color: #9d50bb;
+        --dark-color: #343a40;
+        --light-color: #f8f9fa;
+    }
+    
+    body {
+        /* background-color: #f5f7fa; */
+    }
+    
+    .main-content {
+        padding: 60px 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .page-header {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    
+    .page-header h1 {
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    
+    .page-header p {
+        color: #6c757d;
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .contact-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        padding: 30px;
+        margin-bottom: 30px;
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .contact-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+    }
+    
+    .contact-title {
+        color: var(--dark-color);
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    
+    .contact-desc {
+        color: #6c757d;
+        margin-bottom: 20px;
+    }
+    
+    .contact-email {
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        word-break: break-all;
+    }
+    
+    .social-media {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+    
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--light-color);
+        color: var(--dark-color);
+        margin: 0 10px 15px;
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+        background: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        transform: translateY(-3px);
+    }
+    
+    .contact-form {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        padding: 30px;
+    }
+    
+    .form-title {
+        color: var(--dark-color);
+        font-weight: 600;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+    
+    .map-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        height: 100%;
+    }
+    
+    .map-container iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+        border: none;
+    }
+    
+    @media (max-width: 768px) {
+        .main-content {
+            padding: 40px 15px;
+        }
+        
+        .page-header h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
 </head>
 
-<body class="page-body boxed-container">
-<nav class="navbar horizontal-menu navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="navbar-brand">
-            <a href="/" class="logo">
-                <img src="assets/static/index/images/ai/logo_dark@2x.png" style="max-width: 200px; max-height: 85px;" alt="" class="hidden-xs"/>
-                <img src="assets/static/index/images/ai/logo@2x.png" style="max-width:200px; max-height: 85px;" alt="" class="visible-xs"/>
-            </a>
-        </div>
-        <div class="navbar-mobile-clear"></div>
-        <a href="https://github.com/dannyxweb3/webstack-go" target="_blank">
-            <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" alt="Fork me on GitHub"/>
+<body class="">
+<!-- 固定顶部导航栏 -->
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+  <div class="container">
+    
+    <!-- 1. Logo -->
+    <a class="d-flex align-items-center" href="/">
+        <img src="/assets/static/index/images/ai/logo-lt.png" alt="Logo" style="max-width: 200px; max-height: 60px;" >
+        <!-- <span>AI Tools Online</span> -->
+    </a>
+
+    <!-- 移动端折叠按钮 -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+        <span class="navbar-toggler-icon"><i class="fa fa-bars fa-lg"></i></span>
+    </button>
+
+    <!-- 2. 菜单区域 -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav mr-auto">
+        
+        <li class="nav-item">
+            <a class="nav-link" href="/">All AI Tools</a>
+        </li>
+        <!-- 2.1 所有分类 -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="categoriesMenu" data-toggle="dropdown">
+            Categories
         </a>
+        <div class="dropdown-menu px-2">
+            <a class="dropdown-item" href="#">所有分类</a>
+            <a class="dropdown-item" href="#">图像生成（Image Generation）</a>
+            <a class="dropdown-item" href="#">文本生成（Text Generation）</a>
+            <a class="dropdown-item" href="#">数据分析（Data Analysis）</a>
+            <a class="dropdown-item" href="#">语音与音频（Speech & Audio）</a>
+            <a class="dropdown-item" href="#">开发者工具（Developer Tools）</a>
+            <a class="dropdown-item" href="#">其他工具</a>
+        </div>
+        </li>
+
+        <!-- 2.2 推荐 -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="recommendMenu" data-toggle="dropdown">
+            Featured
+        </a>
+        <div class="dropdown-menu px-2">
+            <a class="dropdown-item" href="#">赞助的AI工具</a>
+            <a class="dropdown-item" href="#">最新AI工具</a>
+            <a class="dropdown-item" href="#">免费AI工具</a>
+            <a class="dropdown-item" href="#">最流行的AI工具</a>
+        </div>
+        </li>
+
+        <!-- 2.3 资源 -->
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="resourcesMenu" data-toggle="dropdown">
+            Explore Resources
+        </a>
+        <div class="dropdown-menu px-2">
+            <a class="dropdown-item" href="#">AI教程</a>
+            <a class="dropdown-item" href="#">AI新闻</a>
+            <a class="dropdown-item" href="#">AI社区和论坛</a>
+        </div>
+        </li>
+
+        <!-- 2.4 关于我们 -->
+        <li class="nav-item">
+        <a class="nav-link" href="/about.html">About</a>
+        </li>
+    </ul>
+
+    <!-- 3. 右侧功能 -->
+
+    <form
+      class="form-inline my-2 my-lg-0 mr-1"
+      role="search"
+      action="https://google.com/search"
+      method="get"
+      target="_blank"
+    
+    >
+      <div class="form-group">
+        <input
+          name="q"
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search..."
+        />
+        <input
+          type="hidden"
+          name="sitesearch"
+          value="ai-tools-online.com"
+        />
+      </div>
+      <button
+        class="btn mb-lg-0 mb-3"
+        type="submit"
+        style="background: none; margin-left: -3rem"
+      >
+        <i class="fa fa-search"></i>
+      </button>
+    </form>
+
+    <div class="btn-group">
+        <a
+          class="btn dropdown-toggle"
+          href="#"
+          type="button"
+          data-toggle="dropdown"
+          aria-expanded="false"
+          style="min-width: 55px"
+        >
+          <i class="fa fa-globe"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#"
+            > English <i class="fa fa-check"></i>
+          </a>
+          <a class="dropdown-item" href="#">French</a>
+          <a class="dropdown-item" href="#">Spanish</a>
+          <a class="dropdown-item" href="#">Deutsch</a>
+          <a class="dropdown-item" href="#">Densk</a>
+          <a class="dropdown-item" href="#">Nederlands</a>
+          <a class="dropdown-item" href="#">Italian</a>
+          <a class="dropdown-item" href="#">Korean</a>
+          <a class="dropdown-item" href="#">Japanese</a>
+          <a class="dropdown-item" href="#">Chinese Simplified</a>
+          <a class="dropdown-item" href="#">Chinese Traditional</a>
+        </div>
+      </div>
+
     </div>
+  </div>
 </nav>
-<script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
-<div class="page-container">
-    <div class="main-content td-linl-items" style="">
 
-        <div class="row">&nbsp;</div>
-        <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                    <h3>Contact Us</h3>
-                    <!--  -->
-                    <p><string>Webmaster Email:</string> admin@mydomain.com </p>
-                    <h3>Application for inclusion</h3>
-                    <p><strong>Inclusion process:</strong></p>
-                    <p>1. After your application, the system will spit out an exclusive independent URL. Please be sure to use the URL given by the system</p>
-                    <p>2. After the link is uploaded, please wait for the webmaster to review. If you do not see the site display after 24 hours, you can contact me by the email above.</p>
-                    <p>3. The system is tested daily. If the IP is less than 30, it will be unlinked. After the link is full, it will be put on the shelf</p>
-                    <p>4. The order of this site is adjusted from time to time, and it is sorted according to the traffic level</p>
-                    <p>※It is recommended that the webmaster can place our site in a conspicuous position</p>
-                    <p>5. If you encounter any problems, you can send MAIL to admin@mydomain.com for feedback! </p>
-                    <p>※ Picture sites, novel sites, after application, just notify the site owner to change the category. </p>
-                    
-                    <p><strong>Inclusion standards: (No further notice will be given if there is any violation)</strong></p>
-                    <p>1. Non-square images, suspected minors, and bestiality-related images are not accepted. If there is any violation, the image will be replaced</p>
-                    <p>2. Minors, bestiality sites, and related sensitive words are not accepted</p>
-                    <p>3. This site mainly includes free sites. Please put free content when submitting the URL</p>
-                    <p>※ If you violate the 2nd and 3rd points, you will be directly blacklisted and will never be included※</p>                </div>
-                <div class="col-sm-6">
+<!-- 主内容区域 -->
+<div class="main-content">
+  <div class="page-header">
+      <h1><i class="fas fa-envelope mr-2"></i>Contact Us</h1>
+      <p>We'd love to hear from you! Whether you have a question about our AI tools directory, partnership opportunities, or just want to say hello, reach out to us through any of the channels below.</p>
+  </div>
+  
+  <div class="row mb-5">
+      <!-- 通用资讯 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+          <div class="contact-card text-center">
+              <div class="contact-icon">
+                  <i class="fas fa-info-circle"></i>
+              </div>
+              <h3 class="contact-title">General Inquiries</h3>
+              <p class="contact-desc">For general questions, feedback, or support regarding our AI tools directory.</p>
+              <a href="mailto:contact@ai-tools-online.com" class="contact-email">contact@ai-tools-online.com</a>
+          </div>
+      </div>
+      
+      <!-- 广告与商务合作 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+          <div class="contact-card text-center">
+              <div class="contact-icon">
+                  <i class="fas fa-handshake"></i>
+              </div>
+              <h3 class="contact-title">Advertising & Partnerships</h3>
+              <p class="contact-desc">For advertising opportunities, sponsorships, or business collaborations.</p>
+              <a href="mailto:ads@ai-tools-online.com" class="contact-email">ads@ai-tools-online.com</a>
+          </div>
+      </div>
+      
+      <!-- 社交媒体 -->
+      <div class="col-lg-4 col-md-6 mb-4">
+          <div class="contact-card text-center">
+              <div class="contact-icon">
+                  <i class="fas fa-share-alt"></i>
+              </div>
+              <h3 class="contact-title">Connect With Us</h3>
+              <p class="contact-desc">Follow us on social media to stay updated with the latest AI tools and news.</p>
+              
+              <div class="social-media">
+                  <a href="#" class="social-link" title="Twitter"><i class="fab fa-twitter"></i></a>
+                  <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                  <a href="#" class="social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                  <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                  <a href="#" class="social-link" title="Discord"><i class="fab fa-discord"></i></a>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <div class="row" style="display:none;">
+      <!-- 联系表单 -->
+      <div class="col-lg-6 mb-4">
+          <div class="contact-form">
+              <h3 class="form-title"><i class="fas fa-paper-plane mr-2"></i>Send Us a Message</h3>
+              <form>
+                  <div class="form-group">
+                      <label for="name">Your Name</label>
+                      <input type="text" class="form-control" id="name" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="email">Email Address</label>
+                      <input type="email" class="form-control" id="email" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="subject">Subject</label>
+                      <select class="form-control" id="subject">
+                          <option>General Inquiry</option>
+                          <option>Advertising & Partnership</option>
+                          <option>Technical Support</option>
+                          <option>Feedback</option>
+                          <option>Other</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="message">Message</label>
+                      <textarea class="form-control" id="message" rows="5" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+              </form>
+          </div>
+      </div>
+   </div>
+  </div>
 
-                    <form action="/addyoursite" method="post" class="form1" id="form1" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="">
-                            
-                            <!-- <div class="mdui-divider mdui-m-b-2 mdui-hidden-sm-up"></div> -->
-                            <div class="" style="border-bottom: 2px #F1F2F9 solid;">
-                                <h3> Submit your Website</h3>
-                            </div>
-                            <div class="">
-                                <div class="form-group">
-                                    <label for="name" style="font-size: 18px; color: #ff4081!important;">
-                                        Website Name <small style="font-size: 80%; color: #000000!important;">(No more than 30 characters)</small></label>
-                                    <input type="text" class="form-control" id="site_name" name="title" value="" placeholder="请输入您的网站名称">
-                                    <div id="name_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;">No more than 30 characters</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="url" style="font-size: 18px; color: #ff4081!important;">
-                                        Website URL <small style="font-size: 80%; color: #000000!important;">Must start with http:// or https:// ）One domain can be submitted once.</small></label>
-                                    <input type="text" class="form-control" id="site_url" name="url" value="" placeholder="http://">
-                                    <div id="url_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="icon" style="font-size: 18px; color: #ff4081!important;">
-                                        Website Icon <small style="font-size: 80%; color: #000000!important;">Only URL accepted</small></label>
-                                    <input type="text" class="form-control" id="site_icon" name="icon" value="">
-                                    <div id="icon_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
-                                        Website type： <small style="font-size: 80%; color: #000000!important;">(Illegal information will be put into the blacklist)</small></label>
-                                    <select class="form-control" name="category" id="category_id">
-                                        <option value="">Select your website type:</option>
-                                        <option value="3">Video</option>
-                                        <option value="28">Navigator</option>
-                                    </select>
-                                    <div id="category_id_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
-                                        Description <small style="font-size: 80%; color: #000000!important;">(No more than 20 words)</small></label>
-                                    <input type="text" class="form-control" id="site_description" name="description" value="" placeholder="Please input your website description">
-                                    <div id="description_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
-                                        Contact <small style="font-size: 80%; color: #000000!important;">(Only Email and Telegram accepted)</small></label>
-                                    <input type="text" class="form-control" id="site_email" name="contact" value="" placeholder="Please input your contact email">
-                                    <div id="email_msg" class="form-text text-danger " style="font-size: 110%;font-weight: bold;"></div>
-                                    <input type="text" class="form-control" id="site_telegram_acc" name="telegram_acc" value="" placeholder="Please input your contact Telegram">
-                                    <div id="telegram_acc_msg" class="form-text text-danger hidden" style="font-size: 110%;font-weight: bold;"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1" style="font-size: 18px; color: #ff4081!important;">
-                                        Message To Us <small style="font-size: 80%; color: #000000!important;"></small></label>
-                                    <input type="text" class="form-control" id="site_webmaster" name="msg" value="" placeholder="Please input the message to us">
-                                </div>
-                                <div class="form-group">
-                                    <!-- <div class="g-recaptcha" data-sitekey="6LcbJlUcAAAAAJ0SNE-FB6Mn1sG-tNUtbZVC_CWx"><div style="width: 304px; height: 78px;"><div><iframe title="reCAPTCHA" width="304" height="78" role="presentation" name="a-qa5cza4hixyt" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox allow-storage-access-by-user-activation" src="https://www.google.com/recaptcha/api2/anchor?ar=2&amp;k=6LcbJlUcAAAAAJ0SNE-FB6Mn1sG-tNUtbZVC_CWx&amp;co=aHR0cHM6Ly94eC1tYXAuY29tOjQ0Mw..&amp;hl=en&amp;v=3jpV4E_UA9gZWYy11LtggjoU&amp;size=normal&amp;anchor-ms=20000&amp;execute-ms=15000&amp;cb=2pvqjzlljchh"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div> -->
-                                    <input type="hidden" name="token">
+  <!-- 页脚 -->
+  <footer class="footer mt-5 pt-4 bg-light-blue border-top">
+    <div class="container">
+      <div class="row">
+  
+        <!-- 1. Logo + 网站介绍 -->
+        <div class="col-md-4 mb-3">
+          <div class="d-flex align-items-center mb-2">
+            <a href="/" class="logo text-decoration-none">
+                <img src="/assets/static/index/images/ai/logo-square.png" alt="网站Logo" width="40" height="40" class="mr-2">
+                <span class="h5 mb-0">AI Tools Online</span>
+            </a>
+          </div>
+          <p class="text-muted">
+            <!-- 全球最佳 AI 工具导航，帮你快速找到最适合的 AI 助手和应用。 -->
+            A guide to the world's best AI tools online, helping you quickly find the most suitable AI assistants and applications.
+          </p>
+        </div>
+  
+        <!-- 2. 页面链接 -->
+        <div class="col-md-3 mb-3">
+          <h6 class="text-dark font-weight-bold">Resources</h6>
+          <ul class="list-unstyled">
+            <li><a href="/about.html" class="text-muted">Featured AI Tools</a></li>
+            <li><a href="/about.html" class="text-muted">Newest AI Tools</a></li>
+            <li><a href="/about.html" class="text-muted">All AI Categories</a></li>
+            <li><a href="/submit.html" class="text-muted">Free AI Tools</a></li>
+            <li><a href="/disclaimer.html" class="text-muted">Most Popular AI Tools</a></li>
+            <li><a href="/disclaimer.html" class="text-muted">AI Communities</a></li>
+          </ul>
+        </div>
+        
+        <!-- 3. 联系我们 + 社交媒体 -->
+        <div class="col-md-3 mb-3">
+          <h6 class="text-dark font-weight-bold">Contact</h6>
+          <ul class="list-unstyled">
+            <li><a href="/contactus.html" class="text-muted">Contact Us</a></li>
+            <li><span class="text-muted mb-2">Email: contact@ai-tools-online.com</span></li>
+            <li><span class="text-muted mb-2">Ads: ads@ai-tools-online.com</span></li>
+          </ul>
 
-                                    <a id="submit" style="text-decoration: none;width: 100%;background-color: #445566;" class="btn btn-primary">Submit</a>
-                                </div>
-                                <div class="form-group">
-                                    <span class="text-danger" id="form_result"></span>
-                                    <div style="font-size: 18px; color: #ff4081!important;">After the application is completed, please link to our website as soon as possible and click once for self-service inclusion! ! ! If you do not click, it will not be included</div>
-                                </div>
-                            </div>
-                    </form>
-                </div>
-            </div>
+          
+          <div>
+            <a href="https://twitter.com/" target="_blank" class="text-muted mr-2"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="https://facebook.com/" target="_blank" class="text-muted mr-2"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="https://github.com/" target="_blank" class="text-muted mr-2"><i class="fab fa-github fa-lg"></i></a>
+            <a href="https://linkedin.com/" target="_blank" class="text-muted"><i class="fab fa-linkedin fa-lg"></i></a>
+          </div>
         </div>
+  
+        <!-- 4. About -->
+        <div class="col-md-2 mb-3">
+          <h6 class="text-dark font-weight-bold">About</h6>
+          <ul class="list-unstyled">
+            <li><a href="/about.html" class="text-muted">About Us</a></li>
+            <li><a href="/submit.html" class="text-muted">Submit Tool</a></li>
+            <li><a href="/disclaimer.html" class="text-muted">Disclaimer</a></li>
+          </ul>
         </div>
+  
+      </div>
+  
+      <!-- 底部版权 -->
+      <div class="row">
+        <div class="col-12 text-center mt-3">
+          <p class="text-muted">&copy; 2025 AI Tools Online. All Rights Reserved.</p>
         </div>
-        </div>
+      </div>
     </div>
+  </footer>
+
+  <!-- jQuery + Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>    
 
 
-</div>
-<!-- Bottom Scripts -->
-<script src="assets/static/index/js/bootstrap.min.js"></script>
-<script src="assets/static/index/js/TweenMax.min.js"></script>
-<script src="assets/static/index/js/resizeable.js"></script>
-<!-- JavaScripts initializations and stuff -->
-<script type="text/javascript" src="/assets/static/admin/js/httpclient.js"></script>
-<script type="text/javascript" src="/assets/static/plugin/bootstrap-markdown-editor/js/marked.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#form1').on('submit', function(e) {
-            e.preventDefault(); // 阻止表单默认提交（避免页面跳转）
-                // 发送 AJAX 请求
-            $.ajax({
-                url: $(this).attr('action') || window.location.href, // 表单的 action 属性，或当前页面 URL
-                type: $(this).attr('method') || 'POST', // 表单的 method 属性，默认 POST
-                data: $(this).serialize(), // 序列化表单数据
-                success: function(response) {
-                    // 成功后，将后端返回的 msg 显示在 #form_result 中
-                    $('#form_result').text(response.msg); // 假设后端返回 JSON: { "msg": "操作成功" }
-                },
-                error: function(xhr, status, error) {
-                    // 错误处理
-                    $('#form_result').text('请求失败: ' + error);
-                }
-            });
-        });
-        return;
-        AjaxForm(
-            "GET",
-            "/api/about",
-            "",
-            function () {},
-            function (data) {
-                // 将字符串解析为 HTML 文档
-                const parser = new DOMParser();
-                const site_doc = parser.parseFromString(marked(data.about_site), 'text/html');
-                const website = document.getElementById('website');
-                website.innerHTML = '';
-                website.appendChild(site_doc.body)
-
-                const about = document.getElementById('about');
-                const author_doc = parser.parseFromString(marked(data.about_author), 'text/html');
-                about.innerHTML = '';
-                about.appendChild(author_doc.body)
-
-            },
-            function (response) {
-                AjaxError(response);
-            }
-        )
-
-
-    })
-</script>
-
-<script>
-
-    var submitFlag = true ;
-    $('#site_url').blur( function() {
-        console.log( 'mouse out') ;
-        let urlVal = $(this).val();
-        checkUrl( urlVal) ;
-    }) ;
-
-    $('#site_description').blur( function() {
-        console.log( 'mouse out') ;
-        let textVal = $(this).val();
-        checkDescription( textVal) ;
-    }) ;
-
-    $('#site_name').blur( function() {
-        console.log( 'mouse out') ;
-        let nameVal = $(this).val();
-        checkName( nameVal) ;
-    }) ;
-
-    $('#site_email').blur( function() {
-        console.log( 'mouse out') ;
-        let emailVal = $(this).val();
-        checkEmail( emailVal) ;
-    }) ;
-
-    $('#submit').click( function () {
-        // $('.form1').submit() ;
-        $('input[type=text]').each( function () {
-            let inp_name = $(this).attr('name') ;
-            let colVal = $(this).val() ;
-            let urlVal = $('#site_url').val();
-            let textVal = $('#site_description').val();
-            let nameVal = $('#site_name').val();
-            let emailVal = $('#site_email').val();
-            var msgObj = $('#'+inp_name+'_msg') ;
-            switch ( inp_name) {
-                case "name" :
-                    checkName( nameVal)
-                    break ;
-                case "description" :
-                    checkDescription( textVal) ;
-                    break ;
-                case "code" :
-                    if ( colVal.length == 0) {
-                        submitFlag = false ;
-                        msgObj.removeClass('hidden') ;
-                        msgObj.html('認証碼未填寫') ;
-                    } else {
-                        msgObj.addClass('hidden') ;
-                    }
-                    break ;
-                case "url" :
-                    checkUrl( urlVal) ;
-                    break ;
-                case "email" : 
-                    checkEmail( emailVal) ;
-                    break ;
-            }
-        }) ;
-
-
-        // if  ($('input[name=telegram_acc]').val().length == 0) {
-        //     submitFlag = false ;
-        //     $('#telegram_acc_msg').html('连系飞机号未填写') ;
-        //     $('#telegram_acc_msg').removeClass('hidden') ;
-
-        // } else if ( $('input[name=telegram_acc]').val().length != 0) {
-        //     $('#telegram_acc_msg').addClass('hidden') ;
-        // }
-
-        $('input[type=file]').each( function () {
-            let re = /\.(jpg|gif)$/i;  //允許的圖片副檔名
-            let inp_name = $(this).attr('name') ;
-            let colVal = $(this).val() ;
-            var msgObj = $('#'+inp_name+'_msg') ;
-            if ( colVal.length === 0) {
-                submitFlag = false;
-                msgObj.html('网站Icon未上传');
-                msgObj.removeClass('hidden');
-            } else if ( !re.test(colVal)) {
-                submitFlag = false;
-                msgObj.html('只允许上传JPG或GIF影像档');
-                msgObj.removeClass('hidden');
-            } else {
-                msgObj.addClass('hidden') ;
-            }
-        }) ;
-        let colVal = $('#category_id').val() ;
-        var msgObj = $('#category_id_msg') ;
-        if ( colVal == '') {
-            submitFlag = false ;
-            msgObj.html('网站类别未选择') ;
-            msgObj.removeClass('hidden') ;
-        } else {
-            msgObj.addClass('hidden') ;
-        }
-
-        console.log( submitFlag) ;
-        if ( submitFlag){
-            console.log(".form1.submit()") ;
-            $('.form1').submit() ;
-        }
-        return submitFlag ;
-    });
-
-    function checkUrl( urlVal, ) {
-        re = /^(http|https):\/\/([\w.]+\/?)\S/g;
-        found = urlVal.match(re);
-        if ( found === null) {
-            submitFlag = false;
-            $('#url_msg').html('请确认网站网址是否正确');
-            $('#url_msg').removeClass('hidden');
-        } else if ( urlVal.length == 0) {
-            submitFlag = false;
-            $('#url_msg').html('未填写网站网址');
-            $('#url_msg').removeClass('hidden');
-        } else {
-            $('#url_msg').addClass('hidden');
-            // $.ajax({
-            //     url: '/addmysite',
-            //     type: 'post',
-            //     data: {
-            //         "_token": "CBJDtJChEdplb0grsx3S2ufEUoIhflGmeSq6BkZR",
-            //         checkUrl: urlVal,
-            //     },
-            //     success: function (data) {
-            //         // data2=JSON.parse(data);
-            //         if (data.code == '0') {
-            //             submitFlag = true;
-            //             $('#url_msg').addClass('hidden');
-            //             // msgObj.addClass('hidden') ;
-            //         } else {
-            //             submitFlag = false;
-            //             $('#url_msg').html(data.message);
-            //             $('#url_msg').removeClass('hidden');
-            //             // msgObj.html(data.message);
-            //             // msgObj.removeClass('hidden');
-            //         }
-            //     }
-            // });
-        }
-    }
-
-    function checkDescription( textVal) {
-        if (strlen( textVal) > 20 ) {
-            submitFlag = false ;
-            $('#description_msg').html('网站叙述長度過長 (20个中文字符以内)') ;
-            $('#description_msg').removeClass('hidden') ;
-        } else if ( textVal.length == 0) {
-            submitFlag = false ;
-            $('#description_msg').html('网站叙述未填写') ;
-            $('#description_msg').removeClass('hidden') ;
-        } else {
-            console.log(textVal);
-            $('#description_msg').addClass('hidden');
-            // $.ajax({
-            //     url: '/adoptDescription',
-            //     type: 'post',
-            //     data: {
-            //         "_token": "CBJDtJChEdplb0grsx3S2ufEUoIhflGmeSq6BkZR",
-            //         checkDescription: textVal,
-            //     },
-
-            //     success: function (data) {
-            //         // data2=JSON.parse(data);
-            //         if (data.code == '0') {
-            //             submitFlag = true;
-            //             $('#description_msg').addClass('hidden');
-            //             // msgObj.addClass('hidden') ;
-            //         } else {
-            //             submitFlag = false;
-            //             $('#description_msg').html(data.message);
-            //             $('#description_msg').removeClass('hidden');
-            //             // msgObj.html(data.message);
-            //             // msgObj.removeClass('hidden');
-            //         }
-            //     }
-            // });
-        }
-    }
-
-    function checkName( nameVal) {
-        if ( strlen( nameVal) > 16 ) {
-            submitFlag = false ;
-            $('#name_msg').html('网站名称長度過長 (8个中文字符以内)') ;
-            $('#name_msg').removeClass('hidden') ;
-        } else if ( nameVal.length == 0) {
-            submitFlag = false ;
-            $('#name_msg').html('网站名称未填寫') ;
-            $('#name_msg').removeClass('hidden') ;
-        } else {
-            $('#name_msg').addClass('hidden');
-            console.log(nameVal);
-            // $.ajax({
-            //     url: '/adoptName',
-            //     type: 'post',
-            //     data: {
-            //         "_token": "CBJDtJChEdplb0grsx3S2ufEUoIhflGmeSq6BkZR",
-            //         checkName: nameVal,
-            //     },
-
-            //     success: function (data) {
-            //         // data2=JSON.parse(data);
-            //         if (data.code == '0') {
-            //             submitFlag = true;
-            //             $('#name_msg').addClass('hidden');
-            //             // msgObj.addClass('hidden') ;
-            //         } else {
-            //             submitFlag = false;
-            //             $('#name_msg').html(data.message);
-            //             $('#name_msg').removeClass('hidden');
-            //             // msgObj.html(data.message);
-            //             // msgObj.removeClass('hidden');
-            //         }
-            //     }
-            // });
-        }
-    }
-
-    function checkEmail( emailVal, ) {
-        if (emailVal.length == 0 ) {
-            submitFlag = false ;
-            $('#email_msg').html('连系电子邮件未填写') ;
-            $('#email_msg').removeClass('hidden');
-        } else if (emailVal.length > 1){
-            console.log('長度大於1');
-            if (/^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(emailVal)) {
-                submitFlag = true;
-                document.querySelector('#email_msg').classList.add('hidden');
-            } else {
-                submitFlag = false;
-                document.querySelector('#email_msg').innerHTML = '连系电子邮件格式错误';
-                document.querySelector('#email_msg').classList.remove('hidden');
-            }
-        }
-    }
-
-    function strlen(str) {
-        var s = 0;
-        for(var i = 0; i < str.length; i++) {
-            if(str.charAt(i).match(/[u0391-uFFE5]/)) {
-                s += 2;
-            } else {
-                s++;
-            }
-        }
-        return s;
-    }
-</script>
-<textarea tabindex="-1" style="position: absolute; top: -999px; left: 0px; right: auto; bottom: auto; border: 0px; padding: 0px; box-sizing: content-box; word-wrap: break-word; overflow: hidden; transition: none; height: 0px !important; min-height: 0px !important; font-family: Arimo, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 18.5714px; width: 53px;" class="autosizejs" id="autosizejs"></textarea>
 </body>
 </html>
