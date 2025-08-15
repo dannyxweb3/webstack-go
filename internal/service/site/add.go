@@ -60,6 +60,47 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 		if req.CategoryID != 0 {
 			existItem.CategoryID = req.CategoryID
 		}
+		if req.ImgRemote != "" {
+			existItem.ImgRemote = req.ImgRemote
+		}
+		if req.IconRemote != "" {
+			existItem.IconRemote = req.IconRemote
+		}
+		if req.DescS != "" {
+			existItem.DescS = req.DescS
+		}
+		if req.Slug != "" {
+			existItem.Slug = req.Slug
+		}
+		if req.IntroBasic != "" {
+			existItem.IntroBasic = req.IntroBasic
+		}
+		if req.IntroUse != "" {
+			existItem.IntroUse = req.IntroUse
+		}
+		if req.IntroFeatures != "" {
+			existItem.IntroFeatures = req.IntroFeatures
+		}
+		if req.PriceDesc != "" {
+			existItem.PriceDesc = req.PriceDesc
+		}
+		if req.Similar != "" {
+			existItem.Similar = req.Similar
+		}
+		if req.Social != "" {
+			existItem.Social = req.Social
+		}
+		if req.MarkRate != "" {
+			existItem.MarkRate = req.MarkRate
+		}
+		if req.PriceType != 0 {
+			existItem.PriceType = req.PriceType
+		}
+		if req.Tags != "" {
+			existItem.Tags = req.Tags
+		}
+		existItem.IsUsed = true
+		existItem.Sort = 0 // 新增的默认排序为0
 		_, err := s.siteRepository.WithContext(ctx).Update(existItem, s.siteRepository.WhereByURL(req.Url), s.siteRepository.WhereByID(existItem.ID))
 		id = existItem.ID
 		if err != nil {
@@ -70,15 +111,29 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 	} else {
 
 		newItem, err := s.siteRepository.WithContext(ctx).Create(&model.StSite{
-			Title:       condition.Ternary(req.Title != "", req.Title, req.Url),
-			Icon:        req.Icon,
-			Description: req.Description,
-			URL:         req.Url,
-			ImgPreview:  req.ImgPreview,
-			IconCss:     req.IconCss,
-			CategoryID:  req.CategoryID,
-			IsUsed:      req.IsUsed,
-			Sort:        0,
+			Title:         condition.Ternary(req.Title != "", req.Title, req.Url),
+			Icon:          req.Icon,
+			Description:   req.Description,
+			URL:           req.Url,
+			ImgPreview:    req.ImgPreview,
+			IconCss:       req.IconCss,
+			CategoryID:    req.CategoryID,
+			IsUsed:        true,
+			Sort:          0,
+			Slug:          req.Slug,
+			IntroBasic:    req.IntroBasic,
+			IntroUse:      req.IntroUse,
+			IntroFeatures: req.IntroFeatures,
+			PriceDesc:     req.PriceDesc,
+			Similar:       req.Similar,
+			Social:        req.Social,
+			MarkRate:      req.MarkRate,
+			PriceType:     req.PriceType,
+			ViewCount:     0,
+			IconRemote:    req.IconRemote,
+			ImgRemote:     req.ImgRemote,
+			DescS:         req.DescS,
+			Tags:          req.Tags,
 		})
 		if err != nil {
 			s.Logger.Logger.Info("add by new failed", zap.Error(err))

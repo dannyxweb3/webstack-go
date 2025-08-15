@@ -39,6 +39,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 				ID:        existItem.ID,
 				ParentID:  existItem.ParentID,
 				Sort:      existItem.Sort,
+				Slug:      existItem.Slug,
 				Title:     existItem.Title,
 				Icon:      existItem.Icon,
 				IconCss:   existItem.IconCss,
@@ -61,6 +62,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 				Level:    req.Level,
 				IsUsed:   req.IsUsed,
 				Sort:     req.Sort,
+				Slug:     req.Slug,
 			})
 		if err != nil {
 			return nil, err
@@ -78,6 +80,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 			IsUsed:    category.IsUsed,
 			Level:     category.Level,
 			Desc:      category.Desc,
+			Slug:      category.Slug,
 		}}, nil
 	}
 
