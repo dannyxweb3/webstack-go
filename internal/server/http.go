@@ -79,6 +79,10 @@ func NewHTTPServer(
 	// Index HTML
 	s.GET("/", indexHandler.Index)
 	s.GET("/index.html", indexHandler.Index)
+
+	// /tools/<main-category>/<category>/<tool-slug>
+	// /tools/<main-category>/   ← 一级分类列表
+	// /tools/<main-category>/<category>/  ← 二级分类列表
 	s.GET("/tool.html", indexHandler.Tool)
 	s.GET("/tool", indexHandler.Tool)
 	s.GET("/submit.html", indexHandler.Submit)
