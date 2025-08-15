@@ -12,19 +12,34 @@ import (
 )
 
 type Site struct {
-	Id          int    `json:"id"`               // ID
-	Icon        string `json:"icon"`             // 网站 logo
-	Title       string `json:"title"`            // 名称简介
-	Url         string `json:"url"`              // 链接
-	Category    string `json:"category"`         // 分类
-	CategoryId  int    `json:"category_id"`      // 分类id
-	Description string `json:"description"`      // 描述
-	IsUsed      bool   `json:"is_used"`          // 是否启用
-	Sort        int    `json:"sort" form:"sort"` // 排序
-	CreatedAt   string `json:"created_at"`       // 创建时间
-	UpdatedAt   string `json:"updated_at"`       // 更新时间
-	ImgPreview  string `json:"img_preview"`
-	IconCss     string `json:"icon_css"`
+	Id            int    `json:"id"`                             // ID
+	Icon          string `json:"icon" form:"icon"`               // 网站 logo
+	Slug          string `json:"slug" form:"slug"`               //
+	Title         string `json:"title" form:"title"`             // 名称简介
+	Url           string `json:"url" form:"url"`                 // 链接
+	Category      string `json:"category" form:"category"`       // 分类
+	CategoryID    int    `json:"category_id" form:"category_id"` // 分类id
+	Description   string `json:"description" form:"description"` // 描述
+	DescS         string `json:"desc_s" form:"desc_s"`           // 描述
+	IsUsed        bool   `json:"is_used"`                        // 是否启用
+	Status        int8   `json:"status"`                         // 是否启用
+	Sort          int    `json:"sort" form:"sort"`               // 排序
+	CreatedAt     string `json:"created_at"`                     // 创建时间
+	UpdatedAt     string `json:"updated_at"`                     // 更新时间
+	ImgPreview    string `json:"img_preview" form:"img_preview"`
+	ImgRemote     string `json:"img_remote" form:"img_remote"`
+	IconCss       string `json:"icon_css" form:"icon_css"`
+	IconRemote    string `json:"icon_remote" form:"icon_remote"`
+	Tags          string `json:"tags" form:"tags"`
+	PriceType     int8   `json:"price_type" form:"price_type"`
+	ViewCount     int    `json:"view_count" form:"view_count"`
+	IntroBasic    string `json:"intro_basic" form:"intro_basic"`       // 基础介绍
+	IntroUse      string `json:"intro_use" form:"intro_use"`           // 使用介绍
+	IntroFeatures string `json:"intro_features" form:"intro_features"` // 特性介绍
+	PriceDesc     string `json:"price_desc" form:"price_desc"`         // 价格描述
+	Similar       string `json:"similar" form:"similar"`               // 相似网站
+	Social        string `json:"social" form:"social"`                 // 社交信息
+	MarkRate      string `json:"mark_rate" form:"mark_rate"`           // 评分
 }
 
 type (
@@ -75,15 +90,16 @@ type (
 
 type (
 	SiteAddReq struct {
-		CategoryID  int    `form:"category_id"` // 类别ID
-		Category    string `form:"category"`    // 类别
-		Url         string `form:"url"`         // 网址地址
-		IsUsed      bool   `form:"is_used"`     // 是否启用
-		Title       string `form:"title"`
-		Icon        string `form:"icon"`
-		Description string `form:"description"`
-		ImgPreview  string `form:"img_preview"`
-		IconCss     string `form:"icon_css"`
+		// CategoryID  int    `form:"category_id"` // 类别ID
+		// Category    string `form:"category"`    // 类别
+		// Url         string `form:"url"`         // 网址地址
+		// IsUsed      bool   `form:"is_used"`     // 是否启用
+		// Title       string `form:"title"`
+		// Icon        string `form:"icon"`
+		// Description string `form:"description"`
+		// ImgPreview  string `form:"img_preview"`
+		// IconCss     string `form:"icon_css"`
+		Site
 
 		// FailSwitch bool   `form:"fail_switch"` // 失败开关
 	}

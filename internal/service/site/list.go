@@ -44,7 +44,7 @@ func (s *service) List(ctx context.Context, req *v1.SiteListReq) (resp *v1.SiteL
 			Title:       siteCategory.StSite.Title,
 			Url:         siteCategory.StSite.URL,
 			Category:    siteCategory.StCategory.Title,
-			CategoryId:  siteCategory.StSite.CategoryID,
+			CategoryID:  siteCategory.StSite.CategoryID,
 			Description: siteCategory.StSite.Description,
 			IconCss:     siteCategory.StSite.IconCss,
 			ImgPreview:  siteCategory.StSite.ImgPreview,
