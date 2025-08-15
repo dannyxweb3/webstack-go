@@ -7,6 +7,7 @@ package category
 
 import (
 	"context"
+	"strconv"
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
 	"github.com/ch3nnn/webstack-go/internal/dal/model"
@@ -14,6 +15,30 @@ import (
 )
 
 func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.CategoryCreateResp, error) {
+	if req.Parent != "" {
+		// originCate := req.Parent
+		existCates, _ := s.categoryRepo.WithContext(ctx).FindAll(s.categoryRepo.WhereByTitle(req.Parent))
+		if len(existCates) > 0 && existCates[0].ID > 0 {
+			req.ParentID = existCates[0].ID
+		}
+		s.Logger.Logger.Info("add by category", zap.Any("existCates", existCates))
+		existCates, _ = s.categoryRepo.WithContext(ctx).FindAll(s.categoryRepo.WhereBySlug(req.Parent))
+		if len(existCates) > 0 && existCates[0].ID > 0 {
+			req.ParentID = existCates[0].ID
+		}
+		s.Logger.Logger.Info("add by category", zap.Any("existCates", existCates))
+
+		predictCateId, e := strconv.Atoi(req.Parent)
+		if e == nil && predictCateId > 0 {
+			existCates, _ = s.categoryRepo.WithContext(ctx).FindAll(s.categoryRepo.WhereByID(predictCateId))
+			if len(existCates) > 0 && existCates[0].ID > 0 {
+				req.ParentID = existCates[0].ID
+			}
+		}
+		s.Logger.Logger.Info("add by category", zap.Any("predictCateId", predictCateId))
+
+	}
+
 	// 如果存在则更新
 	// existItem, _ := s.categoryRepo.WithContext(ctx).FindOne(s.categoryRepo.WhereByTitle(req.Title))
 	existItems, _ := s.categoryRepo.WithContext(ctx).FindAll(s.categoryRepo.WhereByTitle(req.Title))
@@ -60,7 +85,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 				IconCss:  req.IconCss,
 				Desc:     req.Desc,
 				Level:    req.Level,
-				IsUsed:   req.IsUsed,
+				IsUsed:   true,
 				Sort:     req.Sort,
 				Slug:     req.Slug,
 			})

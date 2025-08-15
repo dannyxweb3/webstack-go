@@ -20,19 +20,41 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 
 	var id = 0
 	if req.Category != "" {
+		originCate := req.Category
 		existCates, _ := s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByTitle(req.Category))
 		if len(existCates) > 0 && existCates[0].ID > 0 {
 			req.CategoryID = existCates[0].ID
 		}
-		existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByIconCss(req.Category))
+		s.Logger.Logger.Info("add by category", zap.Any("existCates", existCates))
+		existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereBySlug(req.Category))
 		if len(existCates) > 0 && existCates[0].ID > 0 {
 			req.CategoryID = existCates[0].ID
 		}
-		predictCateId, _ := strconv.Atoi(req.Category)
-		if predictCateId > 0 {
+		s.Logger.Logger.Info("add by category", zap.Any("existCates", existCates))
+
+		predictCateId, e := strconv.Atoi(req.Category)
+		if e == nil && predictCateId > 0 {
 			existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByID(predictCateId))
 			if len(existCates) > 0 && existCates[0].ID > 0 {
 				req.CategoryID = existCates[0].ID
+			}
+		}
+		s.Logger.Logger.Info("add by category", zap.Any("predictCateId", predictCateId))
+
+		if req.CreateCategory == 1 && req.CategoryID == 0 {
+			s.Logger.Logger.Info("try to add category", zap.Any("category", req.Category))
+			// 创建分类
+			newCategory, err := s.categoryRepository.WithContext(ctx).Create(&model.StCategory{
+				Title: originCate,
+				Slug:  originCate,
+			})
+			if err != nil {
+				s.Logger.Logger.Info("add by new category failed", zap.Error(err))
+				return &v1.SiteAddResp{}, err
+			}
+			if newCategory != nil {
+				req.CategoryID = newCategory.ID
+				s.Logger.Logger.Info("add by new category", zap.Any("newCategory", newCategory))
 			}
 		}
 	}

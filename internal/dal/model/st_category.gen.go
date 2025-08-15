@@ -15,8 +15,8 @@ type StCategory struct {
 	ID        int        `gorm:"column:id;type:INTEGER;primaryKey" json:"id"`
 	ParentID  int        `gorm:"column:parent_id;type:int(11);not null" json:"parent_id"`
 	Sort      int        `gorm:"column:sort;type:int(11);not null" json:"sort"`
-	Slug      string     `gorm:"column:slug;type:varchar(50);not null" json:"slug"`
-	Title     string     `gorm:"column:title;type:varchar(50);not null" json:"title"`
+	Slug      string     `gorm:"column:slug;type:varchar(255);not null" json:"slug"`
+	Title     string     `gorm:"column:title;type:varchar(255);not null" json:"title"`
 	Icon      string     `gorm:"column:icon;type:varchar(255);not null" json:"icon"`
 	IconCss   string     `gorm:"column:icon_css;type:varchar(255);not null" json:"icon_css"`
 	Desc      string     `gorm:"column:desc;type:varchar(255);not null" json:"desc"`

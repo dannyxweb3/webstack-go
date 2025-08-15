@@ -31,6 +31,7 @@ func newStCategory(db *gorm.DB, opts ...gen.DOOption) stCategory {
 	_stCategory.ID = field.NewInt(tableName, "id")
 	_stCategory.ParentID = field.NewInt(tableName, "parent_id")
 	_stCategory.Sort = field.NewInt(tableName, "sort")
+	_stCategory.Slug = field.NewString(tableName, "slug")
 	_stCategory.Title = field.NewString(tableName, "title")
 	_stCategory.Icon = field.NewString(tableName, "icon")
 	_stCategory.IconCss = field.NewString(tableName, "icon_css")
@@ -53,6 +54,7 @@ type stCategory struct {
 	ParentID  field.Int
 	Sort      field.Int
 	Title     field.String
+	Slug      field.String
 	Icon      field.String
 	IconCss   field.String
 	Level     field.Int32
@@ -80,6 +82,7 @@ func (s *stCategory) updateTableName(table string) *stCategory {
 	s.ParentID = field.NewInt(table, "parent_id")
 	s.Sort = field.NewInt(table, "sort")
 	s.Title = field.NewString(table, "title")
+	s.Slug = field.NewString(table, "slug")
 	s.Icon = field.NewString(table, "icon")
 	s.IconCss = field.NewString(table, "icon_css")
 	s.Level = field.NewInt32(table, "level")
@@ -118,6 +121,7 @@ func (s *stCategory) fillFieldMap() {
 	s.fieldMap["parent_id"] = s.ParentID
 	s.fieldMap["sort"] = s.Sort
 	s.fieldMap["title"] = s.Title
+	s.fieldMap["slug"] = s.Slug
 	s.fieldMap["icon"] = s.Icon
 	s.fieldMap["icon_css"] = s.IconCss
 	s.fieldMap["level"] = s.Level

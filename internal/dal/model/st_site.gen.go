@@ -14,8 +14,8 @@ const TableNameStSite = "st_site"
 type StSite struct {
 	ID          int        `gorm:"column:id;type:INTEGER;primaryKey" json:"id"`
 	CategoryID  int        `gorm:"column:category_id;type:int(11);defaut:0;not null" json:"category_id"`
-	Slug        string     `gorm:"column:slug;type:varchar(50);default:'';not null" json:"slug"`
-	Title       string     `gorm:"column:title;type:varchar(50);default:'';not null" json:"title"`
+	Slug        string     `gorm:"column:slug;type:varchar(255);default:'';not null" json:"slug"`
+	Title       string     `gorm:"column:title;type:varchar(255);default:'';not null" json:"title"`
 	Icon        string     `gorm:"column:icon;type:text;not null" json:"icon"`
 	IconCss     string     `gorm:"column:icon_css;type:varchar(255);default:'';not null" json:"icon_css"`
 	IconRemote  string     `gorm:"column:icon_remote;type:varchar(255);default:'';not null" json:"icon_remote"`

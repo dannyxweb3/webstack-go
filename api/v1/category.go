@@ -11,7 +11,7 @@ type Category struct {
 	ID        int        `json:"id" form:"id"`                 // 主键ID
 	ParentID  int        `json:"parent_id" form:"parent_id"`   // 父级分类ID
 	Sort      int        `json:"sort" form:"sort"`             // 排序
-	Slug      string     `json:"slug" form:"slug"`             // 名称
+	Slug      string     `json:"slug" form:"slug"`             //
 	Title     string     `json:"title" form:"title"`           // 名称
 	Icon      string     `json:"icon" form:"icon"`             // 图标
 	IconCss   string     `json:"icon_css" form:"icon_css"`     // 图标
@@ -21,8 +21,10 @@ type Category struct {
 	IsUsed    bool       `json:"is_used" form:"is_used"`       // 是否启用 1:是 0:否
 	Level     int32      `json:"level" form:"level"`           // 分类等级
 	Link      string     `json:"link" form:"link"`             // 链接地址
-	Count     int        `json:"count" form:"count"`           // 排序
-	FreeCount int        `json:"free_count" form:"free_count"` // 排序
+	Count     int        `json:"count" form:"count"`           //
+	FreeCount int        `json:"free_count" form:"free_count"` //
+
+	Parent string `json:"parent" form:"parent"` // 父类名称
 }
 
 type (

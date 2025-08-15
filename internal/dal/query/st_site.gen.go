@@ -30,6 +30,7 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 	_stSite.ALL = field.NewAsterisk(tableName)
 	_stSite.ID = field.NewInt(tableName, "id")
 	_stSite.CategoryID = field.NewInt(tableName, "category_id")
+	_stSite.Slug = field.NewString(tableName, "slug")
 	_stSite.Title = field.NewString(tableName, "title")
 	_stSite.Icon = field.NewString(tableName, "icon")
 	_stSite.IconCss = field.NewString(tableName, "icon_css")
@@ -54,6 +55,7 @@ type stSite struct {
 	ID          field.Int
 	CategoryID  field.Int
 	Title       field.String
+	Slug       field.String
 	Icon        field.String
 	IconCss     field.String
 	Description field.String
@@ -83,6 +85,7 @@ func (s *stSite) updateTableName(table string) *stSite {
 	s.ID = field.NewInt(table, "id")
 	s.CategoryID = field.NewInt(table, "category_id")
 	s.Title = field.NewString(table, "title")
+	s.Slug = field.NewString(table, "slug")
 	s.Icon = field.NewString(table, "icon")
 	s.IconCss = field.NewString(table, "icon_css")
 	s.Description = field.NewString(table, "description")
@@ -121,6 +124,7 @@ func (s *stSite) fillFieldMap() {
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["category_id"] = s.CategoryID
 	s.fieldMap["title"] = s.Title
+	s.fieldMap["slug"] = s.Slug
 	s.fieldMap["icon"] = s.Icon
 	s.fieldMap["icon_css"] = s.IconCss
 	s.fieldMap["description"] = s.Description
