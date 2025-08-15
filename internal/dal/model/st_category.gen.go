@@ -22,7 +22,7 @@ type StCategory struct {
 	Desc      string     `gorm:"column:desc;type:varchar(255);not null" json:"desc"`
 	Level     int32      `gorm:"column:level;type:integer;not null" json:"level"`
 	IsUsed    bool       `gorm:"column:is_used;type:bool;default:false" json:"is_used"` //@deprecated
-	Status    int        `gorm:"column:status;type:tinyint;default:0;not null" json:"status"`
+	Status    int8       `gorm:"column:status;type:tinyint;default:0;not null" json:"status"`
 	CreatedAt *time.Time `gorm:"column:created_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"created_at"`
 	UpdatedAt *time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"updated_at"`
 	DeletedAt *time.Time `gorm:"column:deleted_at;type:datetime" json:"deleted_at"`

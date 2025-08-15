@@ -14,19 +14,32 @@ const TableNameStSite = "st_site"
 type StSite struct {
 	ID          int        `gorm:"column:id;type:INTEGER;primaryKey" json:"id"`
 	CategoryID  int        `gorm:"column:category_id;type:int(11);defaut:0;not null" json:"category_id"`
+	Slug        string     `gorm:"column:slug;type:varchar(50);default:'';not null" json:"slug"`
 	Title       string     `gorm:"column:title;type:varchar(50);default:'';not null" json:"title"`
 	Icon        string     `gorm:"column:icon;type:text;not null" json:"icon"`
+	IconCss     string     `gorm:"column:icon_css;type:varchar(255);default:'';not null" json:"icon_css"`
+	IconRemote  string     `gorm:"column:icon_remote;type:varchar(255);default:'';not null" json:"icon_remote"`
 	Description string     `gorm:"column:description;type:text;not null" json:"description"`
+	DescS       string     `gorm:"column:desc_s;type:varchar(255);not null" json:"desc_s"`
 	URL         string     `gorm:"column:url;type:varchar(255);default:'';not null" json:"url"`
 	ImgPreview  string     `gorm:"column:img_preview;type:varchar(255);default:'';not null" json:"img_preview"`
+	ImgRemote   string     `gorm:"column:img_remote;type:varchar(255);default:'';not null" json:"img_remote"`
 	IsUsed      bool       `gorm:"column:is_used;type:bool;default:false" json:"is_used"`
 	Status      int8       `gorm:"column:status;type:tinyint;not null;default:0" json:"status"`
 	CreatedAt   *time.Time `gorm:"column:created_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"created_at"`
 	UpdatedAt   *time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"updated_at"`
 	DeletedAt   *time.Time `gorm:"column:deleted_at;type:datetime" json:"deleted_at"`
 	Sort        int        `gorm:"column:sort;type:int(11);default:0;not null" json:"sort"`
-	IconCss     string     `gorm:"column:icon_css;type:varchar(255);default:'';not null" json:"icon_css"`
-	Tags string 
+	Tags        string     `gorm:"column:tags;type:varchar(255);not null" json:"tags"`
+	PriceType   int8       `gorm:"column:price_type;type:tinyint;not null;default:0" json:"price_type"`
+	ViewCount   int        `gorm:"column:view_count;type:int(11);default:0;not null" json:"view_count"`
+	IntroBasic  string     `gorm:"column:intro_basic;type:text;not null" json:"intro_basic"`
+	IntroUse    string     `gorm:"column:intro_use;type:text;not null" json:"intro_use"`
+	IntroFeatures string   `gorm:"column:intro_features;type:text;not null" json:"intro_features"`
+	PriceDesc   string     `gorm:"column:price_desc;type:text;not null" json:"price_desc"`
+	Similar     string     `gorm:"column:similar;type:varchar(255);not null" json:"similar"`
+	Social      string     `gorm:"column:social;type:text;not null" json:"social"`
+	MarkRate    string     `gorm:"column:mark_rate;type:varchar(10);default:'';not null" json:"mark_rate"`
 }
 
 // TableName StSite's table name
