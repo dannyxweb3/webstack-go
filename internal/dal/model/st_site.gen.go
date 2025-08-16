@@ -14,6 +14,7 @@ const TableNameStSite = "st_site"
 type StSite struct {
 	ID          int        `gorm:"column:id;type:INTEGER;primaryKey" json:"id"`
 	CategoryID  int        `gorm:"column:category_id;type:int(11);defaut:0;not null" json:"category_id"`
+	Category    string     `gorm:"column:category;type:varchar(255);default:'';not null" json:"category"`
 	Slug        string     `gorm:"column:slug;type:varchar(255);default:'';not null" json:"slug"`
 	Title       string     `gorm:"column:title;type:varchar(255);default:'';not null" json:"title"`
 	Icon        string     `gorm:"column:icon;type:text;not null" json:"icon"`
@@ -30,7 +31,7 @@ type StSite struct {
 	UpdatedAt   *time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"updated_at"`
 	DeletedAt   *time.Time `gorm:"column:deleted_at;type:datetime" json:"deleted_at"`
 	Sort        int        `gorm:"column:sort;type:int(11);default:0;not null" json:"sort"`
-	Tags        string     `gorm:"column:tags;type:varchar(255);not null" json:"tags"`
+	Tags        string     `gorm:"column:tags;type:text;not null" json:"tags"`
 	PriceType   int8       `gorm:"column:price_type;type:tinyint;not null;default:0" json:"price_type"`
 	ViewCount   int        `gorm:"column:view_count;type:int(11);default:0;not null" json:"view_count"`
 	IntroBasic  string     `gorm:"column:intro_basic;type:text;not null" json:"intro_basic"`

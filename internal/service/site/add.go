@@ -82,6 +82,9 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 		if req.CategoryID != 0 {
 			existItem.CategoryID = req.CategoryID
 		}
+		if req.Category != "" {
+			existItem.Category = req.Category
+		}
 		if req.ImgRemote != "" {
 			existItem.ImgRemote = req.ImgRemote
 		}
@@ -140,6 +143,7 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 			ImgPreview:    req.ImgPreview,
 			IconCss:       req.IconCss,
 			CategoryID:    req.CategoryID,
+			Category:      req.Category,
 			IsUsed:        true,
 			Sort:          0,
 			Slug:          req.Slug,
