@@ -7,23 +7,31 @@
 
 body {
     /* background-color: #f5f7fa; */
-    padding-left: 250px;
+    /* padding-left: 250px; */
     /* margin-top: 80px; */
 }
 
 /* 侧边栏样式 */
 .sidebar {
-    position: fixed;
+    position: sticky; /* 初始为绝对定位 */
+    top: 80px; /* 初始距离顶部300px */
     left: 0;
-    top: 0;
-    width: 240px;
-    height: 100vh;
-    background: white;
+    width: 250px;
+    height: calc(100vh - 70px); /* 高度计算 */
+    /* background: white; */
     border-right: 1px solid #e1e5eb;
     overflow-y: auto;
     z-index: 1000;
     padding: 20px 0;
-    margin-top: 75px;
+    /* 添加平滑过渡效果 */
+    /* transition: top 0.3s ease;  */
+}
+
+/* 当页面滚动时的固定定位样式 */
+.sidebar.fixed {
+    position: fixed;
+    top: 70px; /* 固定在头部导航栏下方 */
+    height: calc(100vh - 70px); /* 重新计算高度 */
 }
 
 .sidebar-header {
@@ -180,10 +188,12 @@ body {
     .sidebar {
         transform: translateX(-100%);
         transition: transform 0.3s ease;
+        display: none;
     }
     
     .sidebar.active {
         transform: translateX(0);
+        display: flex;
     }
     
     .main-content {
