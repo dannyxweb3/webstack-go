@@ -23,6 +23,7 @@ type Category struct {
 	Link      string     `json:"link" form:"link"`             // 链接地址
 	Count     int        `json:"count" form:"count"`           //
 	FreeCount int        `json:"free_count" form:"free_count"` //
+	Status    int8       `json:"status" form:"status"`         //
 
 	Parent string `json:"parent" form:"parent"` // 父类名称
 }

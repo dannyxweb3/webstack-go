@@ -40,6 +40,7 @@ type Site struct {
 	Similar       string `json:"similar" form:"similar"`               // 相似网站
 	Social        string `json:"social" form:"social"`                 // 社交信息
 	MarkRate      string `json:"mark_rate" form:"mark_rate"`           // 评分
+	Featured      int8   `json:"featured" form:"featured"`
 
 	CreateCategory int `json:"create_category" form:"create_category"` // 创建分类ID 如果不存在
 

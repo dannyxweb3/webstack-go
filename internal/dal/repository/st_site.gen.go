@@ -29,6 +29,7 @@ type iWhereStSiteFunc interface {
 	WhereByDescription(description string) func(dao gen.Dao) gen.Dao
 	WhereByURL(url string) func(dao gen.Dao) gen.Dao
 	WhereByIsUsed(isUsed bool) func(dao gen.Dao) gen.Dao
+	WhereByStatus(status int8) func(dao gen.Dao) gen.Dao
 	WhereByCreatedAt(createdAt time.Time) func(dao gen.Dao) gen.Dao
 	WhereByUpdatedAt(updatedAt time.Time) func(dao gen.Dao) gen.Dao
 	WhereByDeletedAt(deletedAt time.Time) func(dao gen.Dao) gen.Dao
@@ -110,6 +111,12 @@ func (s *stSiteDao) WhereByURL(url string) func(dao gen.Dao) gen.Dao {
 func (s *stSiteDao) WhereByIsUsed(isUsed bool) func(dao gen.Dao) gen.Dao {
 	return func(dao gen.Dao) gen.Dao {
 		return dao.Where(query.StSite.IsUsed.Is(isUsed))
+	}
+}
+
+func (s *stSiteDao) WhereByStatus(status int8) func(dao gen.Dao) gen.Dao {
+	return func(dao gen.Dao) gen.Dao {
+		return dao.Where(query.StSite.Status.Eq(status))
 	}
 }
 

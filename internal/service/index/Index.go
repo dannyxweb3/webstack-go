@@ -11,6 +11,7 @@ import (
 	"time"
 
 	"golang.org/x/sync/errgroup"
+	"gorm.io/gen"
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
 	"github.com/ch3nnn/webstack-go/internal/dal/model"
@@ -79,15 +80,16 @@ func categorySites(sites []*model.StSite, treeNodes []*v1.TreeNode) (data []*v1.
 // Index 获取首页数据
 func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	var (
-		g          errgroup.Group
-		sysConfig  *model.SysConfig
-		sites      []*model.StSite
+		g         errgroup.Group
+		sysConfig *model.SysConfig
+		sites     []*model.StSite
+		// 一级分类
 		categories []*model.StCategory
 	)
 
 	// s.Logger.Info("Test Index") // ok
 	g.Go(func() (err error) {
-		categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByIsUsed(true))
+		categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByParentID(0))
 		// s.Logger.Info("Get Categories:", zap.Any("categories", categories), zap.Error(err)) // ok
 		return err
 	})
@@ -121,7 +123,7 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	categoryTree := categoryTree(buildTree(nodes, 0))
 	categorySites := categorySites(sites, categoryTree)
 
-	return &v1.IndexResp{
+	resp := &v1.IndexResp{
 		ConfigSite: &v1.ConfigSite{
 			SiteTitle:   sysConfig.SiteTitle,
 			SiteKeyword: sysConfig.SiteKeyword,
@@ -139,5 +141,37 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		CategoryTree:  categoryTree,
 		CategorySites: categorySites,
 		Ts:            time.Now().Unix(),
-	}, nil
+	}
+
+	// main categories
+	for _, ct := range categories {
+		resp.MainCategories = append(resp.MainCategories, CategoryModelToDto(ct))
+	}
+
+	// favorite tools
+	defaultFavTools := []string{"chatgpt", "grok", "gemini", "claude", "purplexity", "midjourney"}
+	favTools, _ := s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByStatus(1), func(dao gen.Dao) gen.Dao {
+		return dao.Where(query.StSite.Slug.In(defaultFavTools...))
+	})
+	for _, st := range favTools {
+		resp.FavTools = append(resp.FavTools, SiteModelToDto(st))
+	}
+
+	// popular tools
+	popTools, _, _ := s.siteRepo.WithContext(ctx).FindPage(1, 20, query.StSite.Columns(query.StSite.ViewCount))
+	for _, st := range favTools {
+		resp.PopularTools = append(resp.PopularTools, SiteModelToDto(st))
+	}
+
+	// popular categories // use random instead
+	popTools, _, _ := s.categoryRepo.WithContext(ctx).FindPage(1, 20, query.StCategory.Columns(query.StCategory.Count))
+	for _, st := range favTools {
+		resp.PopularTools = append(resp.PopularTools, SiteModelToDto(st))
+	}
+
+	// featured tools
+
+	// randome tools
+
+	return resp, nil
 }

@@ -13,14 +13,14 @@ const TableNameStCategory = "st_category"
 // StCategory mapped from table <st_category>
 type StCategory struct {
 	ID        int        `gorm:"column:id;type:INTEGER;primaryKey" json:"id"`
-	ParentID  int        `gorm:"column:parent_id;type:int(11);not null" json:"parent_id"`
-	Sort      int        `gorm:"column:sort;type:int(11);not null" json:"sort"`
-	Slug      string     `gorm:"column:slug;type:varchar(255);not null" json:"slug"`
-	Title     string     `gorm:"column:title;type:varchar(255);not null" json:"title"`
-	Icon      string     `gorm:"column:icon;type:varchar(255);not null" json:"icon"`
-	IconCss   string     `gorm:"column:icon_css;type:varchar(255);not null" json:"icon_css"`
-	Desc      string     `gorm:"column:desc;type:varchar(255);not null" json:"desc"`
-	Level     int32      `gorm:"column:level;type:integer;not null" json:"level"`
+	ParentID  int        `gorm:"column:parent_id;type:int(11);default:0;not null" json:"parent_id"`
+	Sort      int        `gorm:"column:sort;type:int(11);default:0;not null" json:"sort"`
+	Slug      string     `gorm:"column:slug;type:varchar(255);default:'';not null" json:"slug"`
+	Title     string     `gorm:"column:title;type:varchar(255);default:'';not null" json:"title"`
+	Icon      string     `gorm:"column:icon;type:varchar(255);default:'';not null" json:"icon"`
+	IconCss   string     `gorm:"column:icon_css;type:varchar(255);default:'';not null" json:"icon_css"`
+	Desc      string     `gorm:"column:desc;type:varchar(255);default:'';not null" json:"desc"`
+	Level     int32      `gorm:"column:level;type:integer;default:0;not null" json:"level"`
 	IsUsed    bool       `gorm:"column:is_used;type:bool;default:false" json:"is_used"` //@deprecated
 	Status    int8       `gorm:"column:status;type:tinyint;default:0;not null" json:"status"`
 	CreatedAt *time.Time `gorm:"column:created_at;type:datetime;not null;default:CURRENT_TIMESTAMP not null" json:"created_at"`

@@ -21,7 +21,7 @@ type StSite struct {
 	IconCss     string     `gorm:"column:icon_css;type:varchar(255);default:'';not null" json:"icon_css"`
 	IconRemote  string     `gorm:"column:icon_remote;type:varchar(255);default:'';not null" json:"icon_remote"`
 	Description string     `gorm:"column:description;type:text;not null" json:"description"`
-	DescS       string     `gorm:"column:desc_s;type:varchar(255);not null" json:"desc_s"`
+	DescS       string     `gorm:"column:desc_s;type:varchar(255);default:'';not null" json:"desc_s"`
 	URL         string     `gorm:"column:url;type:varchar(255);default:'';not null" json:"url"`
 	ImgPreview  string     `gorm:"column:img_preview;type:varchar(255);default:'';not null" json:"img_preview"`
 	ImgRemote   string     `gorm:"column:img_remote;type:varchar(255);default:'';not null" json:"img_remote"`
@@ -38,9 +38,10 @@ type StSite struct {
 	IntroUse    string     `gorm:"column:intro_use;type:text;not null" json:"intro_use"`
 	IntroFeatures string   `gorm:"column:intro_features;type:text;not null" json:"intro_features"`
 	PriceDesc   string     `gorm:"column:price_desc;type:text;not null" json:"price_desc"`
-	Similar     string     `gorm:"column:similar;type:varchar(255);not null" json:"similar"`
+	Similar     string     `gorm:"column:similar;type:varchar(255);default:'';not null" json:"similar"`
 	Social      string     `gorm:"column:social;type:text;not null" json:"social"`
 	MarkRate    string     `gorm:"column:mark_rate;type:varchar(10);default:'';not null" json:"mark_rate"`
+	Featured    int8       `gorm:"column:featured;type:tinyint;not null;default:0" json:"featured"`
 }
 
 // TableName StSite's table name

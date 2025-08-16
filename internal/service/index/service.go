@@ -7,10 +7,12 @@ package index
 
 import (
 	"context"
+	"time"
 
 	"github.com/gin-gonic/gin"
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
+	"github.com/ch3nnn/webstack-go/internal/dal/model"
 	"github.com/ch3nnn/webstack-go/internal/dal/repository"
 	s "github.com/ch3nnn/webstack-go/internal/service"
 )
@@ -52,3 +54,112 @@ func NewService(
 }
 
 func (s *service) i() {}
+
+func SiteDtoToModel(dto *v1.Site) (m *model.StSite) {
+	return &model.StSite{
+		ID:          dto.Id,
+		Icon:        dto.Icon,
+		Slug:        dto.Slug,
+		Title:       dto.Title,
+		URL:         dto.Url,
+		Category:    dto.Category,
+		CategoryID:  dto.CategoryID,
+		Description: dto.Description,
+		DescS:       dto.DescS,
+		IsUsed:      dto.IsUsed,
+		Status:      dto.Status,
+		Sort:        dto.Sort,
+		// CreatedAt:     dto.CreatedAt,
+		// UpdatedAt:     dto.UpdatedAt,
+		ImgPreview:    dto.ImgPreview,
+		ImgRemote:     dto.ImgRemote,
+		IconCss:       dto.IconCss,
+		IconRemote:    dto.IconRemote,
+		Tags:          dto.Tags,
+		PriceType:     dto.PriceType,
+		ViewCount:     dto.ViewCount,
+		IntroBasic:    dto.IntroBasic,
+		IntroUse:      dto.IntroUse,
+		IntroFeatures: dto.IntroFeatures,
+		PriceDesc:     dto.PriceDesc,
+		Similar:       dto.Similar,
+		Social:        dto.Social,
+		MarkRate:      dto.MarkRate,
+		Featured:      dto.Featured,
+	}
+}
+
+func SiteModelToDto(m *model.StSite) *v1.Site {
+	return &v1.Site{
+		Id:            m.ID,
+		Icon:          m.Icon,
+		Slug:          m.Slug,
+		Title:         m.Title,
+		Url:           m.URL,
+		Category:      m.Category,
+		CategoryID:    m.CategoryID,
+		Description:   m.Description,
+		DescS:         m.DescS,
+		IsUsed:        m.IsUsed,
+		Status:        m.Status,
+		Sort:          m.Sort,
+		CreatedAt:     m.CreatedAt.Format(time.RFC3339),
+		UpdatedAt:     m.UpdatedAt.Format(time.RFC3339),
+		ImgPreview:    m.ImgPreview,
+		ImgRemote:     m.ImgRemote,
+		IconCss:       m.IconCss,
+		IconRemote:    m.IconRemote,
+		Tags:          m.Tags,
+		PriceType:     m.PriceType,
+		ViewCount:     m.ViewCount,
+		IntroBasic:    m.IntroBasic,
+		IntroUse:      m.IntroUse,
+		IntroFeatures: m.IntroFeatures,
+		PriceDesc:     m.PriceDesc,
+		Similar:       m.Similar,
+		Social:        m.Social,
+		MarkRate:      m.MarkRate,
+	}
+}
+
+func CategoryDtoToModel(dto *v1.Category) *model.StCategory {
+	return &model.StCategory{
+		ID:       dto.ID,
+		ParentID: dto.ParentID,
+		Sort:     dto.Sort,
+		Slug:     dto.Slug,
+		Title:    dto.Title,
+		Icon:     dto.Icon,
+		IconCss:  dto.IconCss,
+		Desc:     dto.Desc,
+		Level:    dto.Level,
+		IsUsed:   dto.IsUsed,
+		Status:   dto.Status,
+		// CreatedAt: dto.CreatedAt.Format(time.RFC3339),
+		// UpdatedAt: dto.UpdatedAt.Format(time.RFC3339),
+		// DeletedAt: dto.DeletedAt.Format(time.RFC3339),
+		Count:     dto.Count,
+		FreeCount: dto.FreeCount,
+	}
+}
+
+func CategoryModelToDto(m *model.StCategory) *v1.Category {
+	return &v1.Category{
+		ID:        m.ID,
+		ParentID:  m.ParentID,
+		Sort:      m.Sort,
+		Slug:      m.Slug,
+		Title:     m.Title,
+		Icon:      m.Icon,
+		IconCss:   m.IconCss,
+		Desc:      m.Desc,
+		Level:     m.Level,
+		IsUsed:    m.IsUsed,
+		Status:    m.Status,
+		CreatedAt: m.CreatedAt,
+		UpdatedAt: m.UpdatedAt,
+		// DeletedAt: m.DeletedAt,
+		Count:     m.Count,
+		FreeCount: m.FreeCount,
+	}
+}

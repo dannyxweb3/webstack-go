@@ -33,15 +33,21 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 	_stSite.Slug = field.NewString(tableName, "slug")
 	_stSite.Title = field.NewString(tableName, "title")
 	_stSite.Icon = field.NewString(tableName, "icon")
+	_stSite.IconRemote = field.NewString(tableName, "icon_remote")
 	_stSite.IconCss = field.NewString(tableName, "icon_css")
 	_stSite.ImgPreview = field.NewString(tableName, "img_preview")
+	_stSite.ImgRemote = field.NewString(tableName, "img_remote")
 	_stSite.Description = field.NewString(tableName, "description")
 	_stSite.URL = field.NewString(tableName, "url")
+	_stSite.Tags = field.NewString(tableName, "tags")
 	_stSite.IsUsed = field.NewBool(tableName, "is_used")
 	_stSite.CreatedAt = field.NewTime(tableName, "created_at")
 	_stSite.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_stSite.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_stSite.Sort = field.NewInt(tableName, "sort")
+	_stSite.ViewCount = field.NewInt(tableName, "view_count")
+	_stSite.Featured = field.NewInt8(tableName, "featured")
+	_stSite.Status = field.NewInt8(tableName, "status")
 
 	_stSite.fillFieldMap()
 
@@ -57,15 +63,21 @@ type stSite struct {
 	Title       field.String
 	Slug       field.String
 	Icon        field.String
+	IconRemote        field.String
 	IconCss     field.String
 	Description field.String
 	ImgPreview  field.String
+	ImgRemote  field.String
+	Tags  field.String
 	URL         field.String
 	IsUsed      field.Bool
 	CreatedAt   field.Time
 	UpdatedAt   field.Time
 	DeletedAt   field.Time
 	Sort        field.Int
+	ViewCount        field.Int
+	Featured        field.Int8
+	Status        field.Int8
 
 	fieldMap map[string]field.Expr
 }
@@ -87,15 +99,21 @@ func (s *stSite) updateTableName(table string) *stSite {
 	s.Title = field.NewString(table, "title")
 	s.Slug = field.NewString(table, "slug")
 	s.Icon = field.NewString(table, "icon")
+	s.IconRemote = field.NewString(table, "icon_remote")
 	s.IconCss = field.NewString(table, "icon_css")
 	s.Description = field.NewString(table, "description")
 	s.ImgPreview = field.NewString(table, "img_preview")
+	s.ImgRemote = field.NewString(table, "img_remote")
 	s.URL = field.NewString(table, "url")
+	s.Tags = field.NewString(table, "tags")
 	s.IsUsed = field.NewBool(table, "is_used")
 	s.CreatedAt = field.NewTime(table, "created_at")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
 	s.DeletedAt = field.NewTime(table, "deleted_at")
 	s.Sort = field.NewInt(table, "sort")
+	s.ViewCount = field.NewInt(table, "view_count")
+	s.Featured = field.NewInt8(table, "featured")
+	s.Status = field.NewInt8(table, "status")
 
 	s.fillFieldMap()
 
@@ -126,15 +144,21 @@ func (s *stSite) fillFieldMap() {
 	s.fieldMap["title"] = s.Title
 	s.fieldMap["slug"] = s.Slug
 	s.fieldMap["icon"] = s.Icon
+	s.fieldMap["icon_remote"] = s.IconRemote
 	s.fieldMap["icon_css"] = s.IconCss
 	s.fieldMap["description"] = s.Description
 	s.fieldMap["img_preview"] = s.ImgPreview
+	s.fieldMap["img_remote"] = s.ImgRemote
 	s.fieldMap["url"] = s.URL
+	s.fieldMap["tags"] = s.Tags
 	s.fieldMap["is_used"] = s.IsUsed
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["updated_at"] = s.UpdatedAt
 	s.fieldMap["deleted_at"] = s.DeletedAt
 	s.fieldMap["sort"] = s.Sort
+	s.fieldMap["view_count"] = s.ViewCount
+	s.fieldMap["featured"] = s.Featured
+	s.fieldMap["status"] = s.Status
 }
 
 func (s stSite) clone(db *gorm.DB) stSite {

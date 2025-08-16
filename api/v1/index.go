@@ -45,6 +45,20 @@ type IndexResp struct {
 	CategoryTree  []*TreeNode     // 分类树
 	CategorySites []*CategorySite // 归类站点数据
 	Ts            int64
+	// 一级分类
+	MainCategories []*Category
+	// 默认收藏
+	FavTools []*Site
+	// 主流工具 8个
+	PopularTools []*Site
+	// 每个一级分类下的前8个
+	// Featured (3)
+	FeaturedTools []*Site
+	// AI News Recommended
+	// Popular Categories (5)
+	PopularCategories []*Category
+	// Randomly Recommended (8)
+	RandomTools []*Site
 }
 
 type AboutResp struct {
