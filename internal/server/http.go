@@ -49,8 +49,13 @@ func NewHTTPServer(
 
 	s.StaticFS("/assets", http.FS(assets.Static))
 	s.StaticFS("/wp", http.FS(assets.WpContent))
+
 	// s.SetHTMLTemplate(template.Must(template.New("").ParseFS(assets.Templates, "templates/**/*")))
-	temp := template.Must(template.New("").ParseFS(assets.Templates, "templates/**/*"))
+	temp := template.New("")
+	temp.Funcs(template.FuncMap{
+		"sub": func(a, b int) int { return a - b },
+	})
+	temp = template.Must(temp.ParseFS(assets.Templates, "templates/**/*"))
 	confIndexTheme := conf.GetString("template.index_theme")
 	if confIndexTheme != "" {
 		// s.LoadHTMLGlob(fmt.Sprintf("templates/%s/*", confIndexTheme))

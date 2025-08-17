@@ -576,291 +576,61 @@
     </script>
 
     <!-- 推荐数据源（可替换为API请求） -->
-    <script>
-      // 示例数据（实际可从后端API获取） // 只推荐3，4个
-      const featuredRecommendations = [
+    <!-- 推荐数据源（可替换为API请求） Featured -->
+    <input type="hidden" id="featuredRecommendations" value='[
           {
-              name: "GitHub",
-              logo: "https://github.githubassets.com/favicons/favicon.png",
-              desc: "全球最大的代码托管平台，开发者必备工具。",
-              url: "https://github.com"
+              "name": "ChatGPT",
+              "logo": "https://cdn.oaistatic.com/assets/favicon-eex17e9e.ico",
+              "desc": "ChatGPT helps you get answers, find inspiration and be more productive. It is free to use and easy to try. Just ask and ChatGPT can help with writing, learning, brainstorming and more.",
+              "url": "https://chatgpt.com"
           },
           {
-              name: "Stack Overflow",
-              logo: "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico",
-              desc: "程序员问答社区，解决各种技术难题。",
-              url: "https://stackoverflow.com"
+              "name": "Grok",
+              "logo": "https://grok.com/images/favicon-light.png",
+              "desc": "Grok is a free AI assistant designed by xAI to maximize truth and objectivity. Grok offers real-time search, image generation, trend analysis, and more.",
+              "url": "https://grok.com/"
           },
           {
-              name: "Vue.js",
-              logo: "https://vuejs.org/images/logo.png",
-              desc: "渐进式JavaScript框架，易学易用。",
-              url: "https://vuejs.org"
+              "name": "Gemini",
+              "logo": "https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg",
+              "desc": "Meet Gemini, Google’s AI assistant. Get help with writing, planning, brainstorming, and more. Experience the power of generative AI.",
+              "url": "https://gemini.google.com/app"
           },
+          {{range $tool := .FeaturedTools}}
           {
-              name: "MDN Web Docs",
-              logo: "https://developer.mozilla.org/favicon-48x48.png",
-              desc: "最权威的Web开发文档，涵盖HTML/CSS/JS。",
-              url: "https://developer.mozilla.org"
+              "name": "{{$tool.Title}}",
+              "logo": "{{$tool.Icon}}",
+              "desc": "{{$tool.Description}}",
+              "url": "{{$tool.Url}}"
           },
+
+          {{end}}
           {
-              name: "Dribbble",
-              logo: "https://cdn.dribbble.com/assets/favicon-b38525134603b9513174ec887944bde1a869eb6cd414f4d640ee48ab2a15a26b.ico",
-              desc: "设计师灵感社区，展示创意作品。",
-              url: "https://dribbble.com"
+              "name": "Claude",
+              "logo": "https://claude.ai/images/claude_app_icon.png",
+              "desc": "Talk with Claude, an AI assistant from Anthropic.",
+              "url": "https://claude.ai/"
           }
-      ];
-
-      // 随机选择N个推荐项
-      function getFeaturedRecommendations(count = 3) {
-          const shuffled = [...featuredRecommendations].sort(() => 0.5 - Math.random());
-          return shuffled.slice(0, count);
-      }
-
-      // 渲染推荐列表
-      function renderFeaturedRecommendations() {
-          const recommendations = getFeaturedRecommendations();
-          const container = document.getElementById('featured-recommendList');
-          container.innerHTML = '';
-          
-          recommendations.forEach(item => {
-              container.innerHTML += `
-                  <a href="${item.url}" target="_blank" class="recommend-item">
-                      <div class="recommend-header">
-                          <img src="${item.logo}" class="recommend-logo" alt="${item.name}" 
-                               __onerror="this.src='https://via.placeholder.com/32'">
-                          <div class="recommend-name">${item.name}</div>
-                      </div>
-                      <div class="recommend-desc">${item.desc}</div>
-                  </a>
-              `;
-          });
-      }
-
-      // 初始化加载
-      $(document).ready(function() {
-          renderFeaturedRecommendations();
-          
-          // 点击刷新按钮换一批
-          $('#featured-refreshBtn').off('click').on('click', function() {
-              refreshFeaturedRecommendations();
-          });
-      });
-
-      // 暴露刷新方法供其他部分调用
-      function refreshFeaturedRecommendations() {
-        renderFeaturedRecommendations();
-      }
-    </script>
+      ]
+     ' />
+    <script src="assets/static/index/js/rightsidefeatured.js"></script>
     <!-- 推荐数据源（可替换为API请求） -->
-    <script>
-      // 示例数据（实际可从后端API获取）
-      const randomlyRecommendations = [
+    <input type="hidden" id="randomlyRecommendations" value='[
+        {{range $tidx, $tool := .RandomTools}}
           {
-              name: "GitHub",
-              logo: "https://github.githubassets.com/favicons/favicon.png",
-              desc: "全球最大的代码托管平台，开发者必备工具。",
-              url: "https://github.com"
-          },
-          {
-              name: "Stack Overflow",
-              logo: "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico",
-              desc: "程序员问答社区，解决各种技术难题。",
-              url: "https://stackoverflow.com"
-          },
-          {
-              name: "Vue.js",
-              logo: "https://vuejs.org/images/logo.png",
-              desc: "渐进式JavaScript框架，易学易用。",
-              url: "https://vuejs.org"
-          },
-          {
-              name: "MDN Web Docs",
-              logo: "https://developer.mozilla.org/favicon-48x48.png",
-              desc: "最权威的Web开发文档，涵盖HTML/CSS/JS。",
-              url: "https://developer.mozilla.org"
-          },
-          {
-              name: "Dribbble",
-              logo: "https://cdn.dribbble.com/assets/favicon-b38525134603b9513174ec887944bde1a869eb6cd414f4d640ee48ab2a15a26b.ico",
-              desc: "设计师灵感社区，展示创意作品。",
-              url: "https://dribbble.com"
+              "name": "{{$tool.Title}}",
+              "logo": "{{$tool.Icon}}",
+              "desc": "{{$tool.Description}}",
+              "url": "{{$tool.Url}}"
           }
-      ];
+          {{if not (eq $tidx (sub (len $.RandomTools) 1))}},{{end}}
+        {{end}}
+      ]' />
+    <script src="assets/static/index/js/rightsiderecomm.js"></script>
 
-      // 随机选择N个推荐项
-      function getRandomRecommendations(count = 10) {
-          const shuffled = [...randomlyRecommendations].sort(() => 0.5 - Math.random());
-          return shuffled.slice(0, count);
-      }
+    <script src="assets/static/index/js/rightsidenews.js"></script>
+    <script src="assets/static/index/js/rightsidecates.js"></script>
 
-      // 渲染推荐列表
-      function renderRecommendations() {
-          const recommendations = getRandomRecommendations();
-          const container = document.getElementById('randomly-recommendList');
-          container.innerHTML = '';
-          
-          recommendations.forEach(item => {
-              container.innerHTML += `
-                  <a href="${item.url}" target="_blank" class="recommend-item">
-                      <div class="recommend-header">
-                          <img src="${item.logo}" class="recommend-logo" alt="${item.name}" 
-                               __onerror="this.src='https://via.placeholder.com/32'">
-                          <div class="recommend-name">${item.name}</div>
-                      </div>
-                      <div class="recommend-desc">${item.desc}</div>
-                  </a>
-              `;
-          });
-      }
-
-      // 初始化加载
-      $(document).ready(function() {
-          renderRecommendations();
-          
-          // 点击刷新按钮换一批
-          $('#randomly-refreshBtn').off('click').on('click', function() {
-              refreshRandomlyRecommendations();
-          });
-      });
-
-      // 暴露刷新方法供其他部分调用
-      function refreshRandomlyRecommendations() {
-          renderRecommendations();
-      }
-    </script>
-
-    <script>
-      // 从隐藏元素加载新闻数据
-      function loadNewsData() {
-          const newsItems = [
-              {
-                  time: "2025-01-01 10:00",
-                  title: "AI技术在医疗领域的应用获得了众多高校机构的采纳和关注，已经成为研究热点。",
-                  logo: "/favicon.ico",
-                  source: "Tech News"
-              },
-              {
-                  time: "2025-01-02 12:30",
-                  title: "新一代AI模型发布",
-                  logo: "/favicon.ico",
-                  source: "AI Daily"
-              },
-              {
-                  time: "2025-01-03 15:45",
-                  title: "AI助力自动驾驶技术进步",
-                  logo: "/favicon.ico",
-                  source: "Auto Tech"
-              }
-          ];
-          $('#newsData > div').each(function() {
-              newsItems.push({
-                  time: $(this).data('time'),
-                  title: $(this).data('title'),
-                  logo: $(this).data('logo'),
-                  source: $(this).data('source')
-              });
-          });
-          return newsItems;
-      }
-
-      // 渲染新闻列表
-      function renderNewsList() {
-          const newsData = loadNewsData();
-          const container = document.getElementById('newsList');
-          container.innerHTML = '';
-          
-          newsData.forEach(item => {
-              container.innerHTML += `
-                  <a href="#" class="news-item" target="_blank">
-                      <div class="news-header">
-                          <img src="${item.logo}" class="news-logo" alt="${item.source}"
-                              __onerror="this.src='https://via.placeholder.com/24'">
-                          <div class="news-title">${item.title}</div>
-                      </div>
-                      <div class="news-meta">
-                          <span>${item.time}</span> · 
-                          <span>${item.source}</span>
-                      </div>
-                  </a>
-              `;
-          });
-      }
-
-      // 页面加载时初始化
-      $(document).ready(function() {
-          renderNewsList();
-          
-          // 点击新闻项跳转（示例，实际需绑定正确URL）
-          $(document).on('click', '.news-item', function(e) {
-              e.preventDefault();
-              alert('实际项目中这里会跳转到新闻详情页');
-              // window.open(newsUrl, '_blank');
-          });
-      });
-    </script>
-
-    <script>
-      // 从隐藏元素加载分类数据
-      function loadCategoriesData() {
-          const categories = [
-              {
-                  id: 1,
-                  name: "AI工具",
-                  url: "sites/ai-tools.html"
-              },
-              {
-                  id: 2,
-                  name: "AI学习",
-                  url: "sites/ai-learning.html"
-              },
-              {
-                  id: 3,
-                  name: "AI应用",
-                  url: "sites/ai-applications.html"
-              },
-              {
-                  id: 4,
-                  name: "AI开发",
-                  url: "sites/ai-development.html"
-              },
-              {
-                  id: 5,
-                  name: "AI赚钱",
-                  url: "sites/ai-money-making.html"
-              }
-          ];
-          $('#categoriesData > div').each(function() {
-              categories.push({
-                  id: $(this).data('id'),
-                  name: $(this).data('name'),
-                  url: $(this).data('url')
-              });
-          });
-          return categories;
-      }
-
-      // 渲染分类标签
-      function renderCategories() {
-          const categories = loadCategoriesData();
-          const container = document.getElementById('categoriesList');
-          container.innerHTML = '';
-          
-          categories.forEach(category => {
-              container.innerHTML += `
-                  <a href="${category.url}" class="category-tag" 
-                    data-id="${category.id}">
-                      ${category.name}
-                  </a>
-              `;
-          });
-      }
-
-      // 页面加载时初始化
-      $(document).ready(function() {
-          renderCategories();
-      });
-    </script>
 
     <script>
       $(function(){

@@ -95,11 +95,11 @@
         </a>
         <div class="dropdown-menu px-2">
             <a class="dropdown-item" href="/categories">All AI Categories</a>
-            <a class="dropdown-item" href="#">图像生成（Image Generation）</a>
-            <a class="dropdown-item" href="#">文本生成（Text Generation）</a>
-            <a class="dropdown-item" href="#">数据分析（Data Analysis）</a>
-            <a class="dropdown-item" href="#">语音与音频（Speech & Audio）</a>
-            <a class="dropdown-item" href="#">开发者工具（Developer Tools）</a>
+            <a class="dropdown-item" href="/category/ai-image-generation">Image Generation</a>
+            <a class="dropdown-item" href="/category/ai-text-generation">Text Generation</a>
+            <a class="dropdown-item" href="/category/ai-data-analysis">Data Analysis</a>
+            <a class="dropdown-item" href="/category/speech-audio">Speech & Audio</a>
+            <a class="dropdown-item" href="/category/developer-tools">Developer Tools</a>
         </div>
         </li>
 
@@ -109,10 +109,10 @@
             Featured
         </a>
         <div class="dropdown-menu px-2">
-            <a class="dropdown-item" href="/featured">赞助的AI工具</a>
-            <a class="dropdown-item" href="/newest">最新AI工具</a>
-            <a class="dropdown-item" href="/free-ai-tools">免费AI工具</a>
-            <a class="dropdown-item" href="/most-popular-ai-tools">最流行的AI工具</a>
+            <a class="dropdown-item" href="/featured">Featured AI Tools</a>
+            <a class="dropdown-item" href="/newest">Newest AI Tools</a>
+            <a class="dropdown-item" href="/free-ai-tools">Free AI Tools</a>
+            <a class="dropdown-item" href="/most-popular-ai-tools">Most Popular AI Tools</a>
         </div>
         </li>
 
@@ -122,7 +122,7 @@
             Explore Resources
         </a>
         <div class="dropdown-menu px-2">
-            <a class="dropdown-item" href="/ai-tutorials">AI教程</a>
+            <a class="dropdown-item" href="/ai-tutorials">AI Tutorials</a>
             <a class="dropdown-item" href="/news">AI News</a>
             <a class="dropdown-item" href="/community">AI Comminities</a>
         </div>
@@ -766,13 +766,14 @@
 
   <!-- favorite output here -->
   <input type="hidden" id="favRecommendations" value='[
-    { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
-    { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
-    { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
-    { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" }
-    ]' />
+  { "name": "ChatGPT", "url": "https://chat.openai.com", "icon": "https://chat.openai.com/favicon.ico" },
+  { "name": "Claude", "url": "https://claude.ai", "icon": "https://claude.ai/favicon.ico" },
+  { "name": "Gemini (Google AI)", "url": "https://gemini.google.com", "icon": "https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg" },
+  { "name": "Perplexity AI", "url": "https://www.perplexity.ai", "icon": "https://www.perplexity.ai/favicon.ico" },
+  { "name": "Midjourney", "url": "https://www.midjourney.com", "icon": "https://www.midjourney.com/public/apple-touch-icon.png" },
+  { "name": "DeepSeek Chat", "url": "https://chat.deepseek.com", "icon": "https://chat.deepseek.com/favicon.ico" },
+  { "name": "Hugging Face", "url": "https://huggingface.co", "icon": "https://huggingface.co/favicon.ico" }
+  ]' />
 
     
     <script type="text/javascript">
@@ -914,271 +915,60 @@
     </script>
 
     <!-- 推荐数据源（可替换为API请求） Featured -->
-    <script>
-      // 示例数据（实际可从后端API获取） // 只推荐3，4个
-      const featuredRecommendations = [
+    <input type="hidden" id="featuredRecommendations" value='[
           {
-              name: "ChatGPT",
-              logo: "https://cdn.oaistatic.com/assets/favicon-eex17e9e.ico",
-              desc: "ChatGPT helps you get answers, find inspiration and be more productive. It is free to use and easy to try. Just ask and ChatGPT can help with writing, learning, brainstorming and more.",
-              url: "https://chatgpt.com"
+              "name": "ChatGPT",
+              "logo": "https://cdn.oaistatic.com/assets/favicon-eex17e9e.ico",
+              "desc": "ChatGPT helps you get answers, find inspiration and be more productive. It is free to use and easy to try. Just ask and ChatGPT can help with writing, learning, brainstorming and more.",
+              "url": "https://chatgpt.com"
           },
           {
-              name: "Grok",
-              logo: "https://grok.com/images/favicon-light.png",
-              desc: "Grok is a free AI assistant designed by xAI to maximize truth and objectivity. Grok offers real-time search, image generation, trend analysis, and more.",
-              url: "https://grok.com/"
+              "name": "Grok",
+              "logo": "https://grok.com/images/favicon-light.png",
+              "desc": "Grok is a free AI assistant designed by xAI to maximize truth and objectivity. Grok offers real-time search, image generation, trend analysis, and more.",
+              "url": "https://grok.com/"
           },
           {
-              name: "Gemini",
-              logo: "https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg",
-              desc: "Meet Gemini, Google’s AI assistant. Get help with writing, planning, brainstorming, and more. Experience the power of generative AI.",
-              url: "https://gemini.google.com/app"
-          },
-          {
-              name: "Claude",
-              logo: "https://claude.ai/images/claude_app_icon.png",
-              desc: "Talk with Claude, an AI assistant from Anthropic.",
-              url: "https://claude.ai/"
+              "name": "Gemini",
+              "logo": "https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg",
+              "desc": "Meet Gemini, Google’s AI assistant. Get help with writing, planning, brainstorming, and more. Experience the power of generative AI.",
+              "url": "https://gemini.google.com/app"
           },
           {{range $tool := .FeaturedTools}}
           {
-              name: "{{$tool.Title}}",
-              logo: "{{$tool.Icon}}",
-              desc: "{{$tool.Description}}",
-              url: "{{$tool.Url}}"
+              "name": "{{$tool.Title}}",
+              "logo": "{{$tool.Icon}}",
+              "desc": "{{$tool.Description}}",
+              "url": "{{$tool.Url}}"
           },
+
           {{end}}
-      ];
-
-      // 随机选择N个推荐项
-      function getFeaturedRecommendations(count = 3) {
-          const shuffled = [...featuredRecommendations].sort(() => 0.5 - Math.random());
-          return shuffled.slice(0, count);
-      }
-
-      // 渲染推荐列表
-      function renderFeaturedRecommendations() {
-          const recommendations = getFeaturedRecommendations();
-          const container = document.getElementById('featured-recommendList');
-          container.innerHTML = '';
-          
-          recommendations.forEach(item => {
-              container.innerHTML += `
-                  <a href="${item.url}" target="_blank" class="recommend-item">
-                      <div class="recommend-header">
-                          <img src="${item.logo}" class="recommend-logo" alt="${item.name}" 
-                               __onerror="this.src='https://via.placeholder.com/32'">
-                          <div class="recommend-name">${item.name}</div>
-                      </div>
-                      <div class="recommend-desc">${item.desc}</div>
-                  </a>
-              `;
-          });
-      }
-
-      // 初始化加载
-      $(document).ready(function() {
-          renderFeaturedRecommendations();
-          
-          // 点击刷新按钮换一批
-          $('#featured-refreshBtn').off('click').on('click', function() {
-              refreshFeaturedRecommendations();
-          });
-      });
-
-      // 暴露刷新方法供其他部分调用
-      function refreshFeaturedRecommendations() {
-        renderFeaturedRecommendations();
-      }
-    </script>
-    <!-- 推荐数据源（可替换为API请求） -->
-    <script>
-      // 示例数据（实际可从后端API获取）
-      const randomlyRecommendations = [
-        {{range $tool := .RandomTools}}
           {
-              name: "{{$tool.Title}}",
-              logo: "{{$tool.Icon}}",
-              desc: "{{$tool.Description}}",
-              url: "{{$tool.Url}}"
-          },
+              "name": "Claude",
+              "logo": "https://claude.ai/images/claude_app_icon.png",
+              "desc": "Talk with Claude, an AI assistant from Anthropic.",
+              "url": "https://claude.ai/"
+          }
+      ]
+     ' />
+    <script src="assets/static/index/js/rightsidefeatured.js"></script>
+    <!-- 推荐数据源（可替换为API请求） -->
+    <input type="hidden" id="randomlyRecommendations" value='[
+        {{range $tidx, $tool := .RandomTools}}
+          {
+              "name": "{{$tool.Title}}",
+              "logo": "{{$tool.Icon}}",
+              "desc": "{{$tool.Description}}",
+              "url": "{{$tool.Url}}"
+          }
+          {{if not (eq $tidx (sub (len $.RandomTools) 1))}},{{end}}
         {{end}}
-      ];
+      ]' />
+    <script src="assets/static/index/js/rightsiderecomm.js"></script>
 
-      // 随机选择N个推荐项
-      function getRandomRecommendations(count = 10) {
-          const shuffled = [...randomlyRecommendations].sort(() => 0.5 - Math.random());
-          return shuffled.slice(0, count);
-      }
+    <script src="assets/static/index/js/rightsidenews.js"></script>
+    <script src="assets/static/index/js/rightsidecates.js"></script>
 
-      // 渲染推荐列表
-      function renderRecommendations() {
-          const recommendations = getRandomRecommendations();
-          const container = document.getElementById('randomly-recommendList');
-          container.innerHTML = '';
-          
-          recommendations.forEach(item => {
-              container.innerHTML += `
-                  <a href="${item.url}" target="_blank" class="recommend-item">
-                      <div class="recommend-header">
-                          <img src="${item.logo}" class="recommend-logo" alt="${item.name}" 
-                               __onerror="this.src='https://via.placeholder.com/32'">
-                          <div class="recommend-name">${item.name}</div>
-                      </div>
-                      <div class="recommend-desc">${item.desc}</div>
-                  </a>
-              `;
-          });
-      }
-
-      // 初始化加载
-      $(document).ready(function() {
-          renderRecommendations();
-          
-          // 点击刷新按钮换一批
-          $('#randomly-refreshBtn').off('click').on('click', function() {
-              refreshRandomlyRecommendations();
-          });
-      });
-
-      // 暴露刷新方法供其他部分调用
-      function refreshRandomlyRecommendations() {
-          renderRecommendations();
-      }
-    </script>
-
-    <script>
-      // 从隐藏元素加载新闻数据
-      function loadNewsData() {
-          const newsItems = [
-              {
-                  time: "2025-01-01 10:00",
-                  title: "AI技术在医疗领域的应用获得了众多高校机构的采纳和关注，已经成为研究热点。",
-                  logo: "/favicon.ico",
-                  source: "Tech News"
-              },
-              {
-                  time: "2025-01-02 12:30",
-                  title: "新一代AI模型发布",
-                  logo: "/favicon.ico",
-                  source: "AI Daily"
-              },
-              {
-                  time: "2025-01-03 15:45",
-                  title: "AI助力自动驾驶技术进步",
-                  logo: "/favicon.ico",
-                  source: "Auto Tech"
-              }
-          ];
-          $('#newsData > div').each(function() {
-              newsItems.push({
-                  time: $(this).data('time'),
-                  title: $(this).data('title'),
-                  logo: $(this).data('logo'),
-                  source: $(this).data('source')
-              });
-          });
-          return newsItems;
-      }
-
-      // 渲染新闻列表
-      function renderNewsList() {
-          const newsData = loadNewsData();
-          const container = document.getElementById('newsList');
-          container.innerHTML = '';
-          
-          newsData.forEach(item => {
-              container.innerHTML += `
-                  <a href="#" class="news-item" target="_blank">
-                      <div class="news-header">
-                          <img src="${item.logo}" class="news-logo" alt="${item.source}"
-                              __onerror="this.src='https://via.placeholder.com/24'">
-                          <div class="news-title">${item.title}</div>
-                      </div>
-                      <div class="news-meta">
-                          <span>${item.time}</span> · 
-                          <span>${item.source}</span>
-                      </div>
-                  </a>
-              `;
-          });
-      }
-
-      // 页面加载时初始化
-      $(document).ready(function() {
-          renderNewsList();
-          
-          // 点击新闻项跳转（示例，实际需绑定正确URL）
-          $(document).on('click', '.news-item', function(e) {
-              e.preventDefault();
-              alert('实际项目中这里会跳转到新闻详情页');
-              // window.open(newsUrl, '_blank');
-          });
-      });
-    </script>
-
-    <script>
-      // 侧边栏热门分类 从隐藏元素加载分类数据
-      function loadCategoriesData() {
-          const categories = [
-              {
-                  id: 1,
-                  name: "AI工具",
-                  url: "category/ai-tools.html"
-              },
-              {
-                  id: 2,
-                  name: "AI学习",
-                  url: "category/ai-learning.html"
-              },
-              {
-                  id: 3,
-                  name: "AI应用",
-                  url: "category/ai-applications.html"
-              },
-              {
-                  id: 4,
-                  name: "AI开发",
-                  url: "category/ai-development.html"
-              },
-              {
-                  id: 5,
-                  name: "AI赚钱",
-                  url: "category/ai-money-making.html"
-              }
-          ];
-          $('#categoriesData > div').each(function() {
-              categories.push({
-                  id: $(this).data('id'),
-                  name: $(this).data('name'),
-                  url: $(this).data('url')
-              });
-          });
-          return categories;
-      }
-
-      // 渲染分类标签
-      function renderCategories() {
-          const categories = loadCategoriesData();
-          const container = document.getElementById('categoriesList');
-          container.innerHTML = '';
-          
-          categories.forEach(category => {
-              container.innerHTML += `
-                  <a href="${category.url}" class="category-tag" 
-                    data-id="${category.id}">
-                      ${category.name}
-                  </a>
-              `;
-          });
-      }
-
-      // 页面加载时初始化
-      $(document).ready(function() {
-          renderCategories();
-      });
-    </script>
 
     <!-- 搜索js -->
     <script>
