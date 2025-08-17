@@ -764,7 +764,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>    
 
-  <input type="hidden" id="recommendations" value='[
+  <!-- favorite output here -->
+  <input type="hidden" id="favRecommendations" value='[
     { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
     { "name": "Google", "url": "https://www.google.com", "icon": "https://www.google.com/favicon.ico" },
     { "name": "GitHub", "url": "https://github.com", "icon": "https://github.com/favicon.ico" },
@@ -813,7 +814,7 @@
           
           // 从隐藏元素加载推荐
           loadRecommendations: function() {
-              const items = $('#recommendations').val();
+              const items = $('#favRecommendations').val();
               
               return items ? JSON.parse(items) : [];
           },
@@ -912,40 +913,42 @@
 
     </script>
 
-    <!-- 推荐数据源（可替换为API请求） -->
+    <!-- 推荐数据源（可替换为API请求） Featured -->
     <script>
       // 示例数据（实际可从后端API获取） // 只推荐3，4个
       const featuredRecommendations = [
           {
-              name: "GitHub",
-              logo: "https://github.githubassets.com/favicons/favicon.png",
-              desc: "全球最大的代码托管平台，开发者必备工具。",
-              url: "https://github.com"
+              name: "ChatGPT",
+              logo: "https://cdn.oaistatic.com/assets/favicon-eex17e9e.ico",
+              desc: "ChatGPT helps you get answers, find inspiration and be more productive. It is free to use and easy to try. Just ask and ChatGPT can help with writing, learning, brainstorming and more.",
+              url: "https://chatgpt.com"
           },
           {
-              name: "Stack Overflow",
-              logo: "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico",
-              desc: "程序员问答社区，解决各种技术难题。",
-              url: "https://stackoverflow.com"
+              name: "Grok",
+              logo: "https://grok.com/images/favicon-light.png",
+              desc: "Grok is a free AI assistant designed by xAI to maximize truth and objectivity. Grok offers real-time search, image generation, trend analysis, and more.",
+              url: "https://grok.com/"
           },
           {
-              name: "Vue.js",
-              logo: "https://vuejs.org/images/logo.png",
-              desc: "渐进式JavaScript框架，易学易用。",
-              url: "https://vuejs.org"
+              name: "Gemini",
+              logo: "https://www.gstatic.com/lamda/images/gemini_sparkle_aurora_33f86dc0c0257da337c63.svg",
+              desc: "Meet Gemini, Google’s AI assistant. Get help with writing, planning, brainstorming, and more. Experience the power of generative AI.",
+              url: "https://gemini.google.com/app"
           },
           {
-              name: "MDN Web Docs",
-              logo: "https://developer.mozilla.org/favicon-48x48.png",
-              desc: "最权威的Web开发文档，涵盖HTML/CSS/JS。",
-              url: "https://developer.mozilla.org"
+              name: "Claude",
+              logo: "https://claude.ai/images/claude_app_icon.png",
+              desc: "Talk with Claude, an AI assistant from Anthropic.",
+              url: "https://claude.ai/"
           },
+          {{range $tool := .FeaturedTools}}
           {
-              name: "Dribbble",
-              logo: "https://cdn.dribbble.com/assets/favicon-b38525134603b9513174ec887944bde1a869eb6cd414f4d640ee48ab2a15a26b.ico",
-              desc: "设计师灵感社区，展示创意作品。",
-              url: "https://dribbble.com"
-          }
+              name: "{{$tool.Title}}",
+              logo: "{{$tool.Icon}}",
+              desc: "{{$tool.Description}}",
+              url: "{{$tool.Url}}"
+          },
+          {{end}}
       ];
 
       // 随机选择N个推荐项
@@ -993,36 +996,14 @@
     <script>
       // 示例数据（实际可从后端API获取）
       const randomlyRecommendations = [
+        {{range $tool := .RandomTools}}
           {
-              name: "GitHub",
-              logo: "https://github.githubassets.com/favicons/favicon.png",
-              desc: "全球最大的代码托管平台，开发者必备工具。",
-              url: "https://github.com"
+              name: "{{$tool.Title}}",
+              logo: "{{$tool.Icon}}",
+              desc: "{{$tool.Description}}",
+              url: "{{$tool.Url}}"
           },
-          {
-              name: "Stack Overflow",
-              logo: "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico",
-              desc: "程序员问答社区，解决各种技术难题。",
-              url: "https://stackoverflow.com"
-          },
-          {
-              name: "Vue.js",
-              logo: "https://vuejs.org/images/logo.png",
-              desc: "渐进式JavaScript框架，易学易用。",
-              url: "https://vuejs.org"
-          },
-          {
-              name: "MDN Web Docs",
-              logo: "https://developer.mozilla.org/favicon-48x48.png",
-              desc: "最权威的Web开发文档，涵盖HTML/CSS/JS。",
-              url: "https://developer.mozilla.org"
-          },
-          {
-              name: "Dribbble",
-              logo: "https://cdn.dribbble.com/assets/favicon-b38525134603b9513174ec887944bde1a869eb6cd414f4d640ee48ab2a15a26b.ico",
-              desc: "设计师灵感社区，展示创意作品。",
-              url: "https://dribbble.com"
-          }
+        {{end}}
       ];
 
       // 随机选择N个推荐项
