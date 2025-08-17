@@ -237,13 +237,12 @@
               </div>
             </div>
 
-              
             <div class="popular-keywords">
-              <div class="keyword" data-query="AI news">AI news</div>
-              <div class="keyword" data-query="latest tech trends">latest tech trends</div>
-              <div class="keyword" data-query="JavaScript tutorials">JavaScript tutorials</div>
-              <div class="keyword" data-query="Python programming">Python programming</div>
-              <div class="keyword" data-query="web design inspiration">web design inspiration</div>
+              <div class="keyword" data-query="AI chatbot">AI chatbot</div>
+              <div class="keyword" data-query="AI assistant">AI assistant</div>
+              <div class="keyword" data-query="AI script to video">AI script to video</div>
+              <div class="keyword" data-query="AI stock analysis">AI stock analysis</div>
+              <div class="keyword" data-query="Free AI tools">Free AI tools</div>
             </div>
           </div>
         </div>
@@ -287,66 +286,18 @@
               Other
               -->
               <ul class="category-list">
+                <li class="category-item text-sm">
+                    <a href="#section-popular-tools" class="category-link">
+                        <i class="fas fa-fire  mr-2"></i>Popular Tools
+                    </a>
+                </li>
+                  {{range .MainCategories}}
                   <li class="category-item">
-                      <a href="#generative-ai" class="category-link active">
-                          <i class="fas fa-magic mr-2"></i>生成式AI
+                      <a href="#section-{{.Slug}}" class="category-link">
+                        <i class="{{.IconCss}} mr-2"></i>{{.Title}}
                       </a>
                   </li>
-                  <li class="category-item">
-                      <a href="#computer-vision" class="category-link">
-                          <i class="fas fa-eye mr-2"></i>计算机视觉
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#nlp" class="category-link">
-                          <i class="fas fa-language mr-2"></i>自然语言处理
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#speech" class="category-link">
-                          <i class="fas fa-microphone mr-2"></i>语音技术
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#data-science" class="category-link">
-                          <i class="fas fa-chart-bar mr-2"></i>数据分析
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#developer" class="category-link">
-                          <i class="fas fa-code mr-2"></i>开发者工具
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#productivity" class="category-link">
-                          <i class="fas fa-briefcase mr-2"></i>效率办公
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#education" class="category-link">
-                          <i class="fas fa-graduation-cap mr-2"></i>教育学习
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#marketing" class="category-link">
-                          <i class="fas fa-bullhorn mr-2"></i>营销工具
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#healthcare" class="category-link">
-                          <i class="fas fa-heartbeat mr-2"></i>医疗健康
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#robotics" class="category-link">
-                          <i class="fas fa-robot mr-2"></i>机器人技术
-                      </a>
-                  </li>
-                  <li class="category-item">
-                      <a href="#gaming" class="category-link">
-                          <i class="fas fa-gamepad mr-2"></i>游戏开发
-                      </a>
-                  </li>
+                  {{end}}
               </ul>
             </div>
 
@@ -366,7 +317,7 @@
             <!-- my pinned tools end -->
 
             <div class="d-flex my-3">
-              <span class="badge badge-pill category-title mr-auto"><i class="fa fa-fire mr-2"></i> Popular Tools</span>
+              <span class="badge badge-pill category-title mr-auto" id="section-popular-tools"><i class="fa fa-fire mr-2"></i> Popular Tools</span>
               <a class="ms-auto ms-3 me-3" href="#">
                 <span class="" style="font-size: 0.75rem;"> View All In This Category &gt;</span>
               </a>
@@ -593,9 +544,53 @@
               </div>
             </div>
 
-    
+            <!-- 逐个分类 MainCategories -->
+            {{range $cate := .CategorySites}}
+            <div class="category-section" id="section-{{$cate.CategorySlug}}">
+              <div class="d-flex">
+                <h4 class="category-section-title mr-auto"><i class=" mr-2"></i>
+                  <span class="category-section-title-text">{{$cate.Category}}</span>
+                </h4>
+                <a class="ms-auto ms-3 me-3" href="#">
+                  <span class="" style="font-size: 0.75rem;"> View All In This Category &gt;</span>
+                </a>
+  
+              </div>
+              <div class="row">
+                {{range $site := .SiteList}}
+                <!-- 单个网站项目 -->
+                <div class="col-md-3 mb-4">
+                  <div class="site-card position-relative">
+                    <!-- 置顶按钮 -->
+                    <span class="btn-top position-absolute" style="top:-10px;left:5px;">
+                      <i class="fas fa-thumbtack"></i>
+                    </span>
+
+                    <!-- FREE 标签 -->
+                    <span class="badge badge-info position-absolute" style="top:5px;right:5px;">FREE</span>
+
+                    <!-- 内容 -->
+                    <div class="d-flex align-items-center mb-2">
+                      <a href="/tool/{{$site.Slug}}" target="_blank" class="d-flex align-items-center text-decoration-none">
+                        <img src="{{$site.IconRemote}}" loading="lazy" class="rounded-circle mr-2" width="32" height="32" alt="Logo">
+                        <span class="site-name font-weight-bold text-md">{{$site.Title}}</span>
+                      </a>
+                    </div>
+
+                    <div class="site-desc text-muted text-xs" data-toggle="tooltip" data-placement="bottom" title="{{$site.Description}}">
+                      <a href="/tool/{{$site.Slug}}" target="_blank" class="text-decoration-none ">
+                        {{$site.Description}}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {{end}}
+              </div>
+            </div>
+            {{end}}
     
           </div>
+
           <div class="col-md-2 col-sm-12">
             <!-- 右侧推荐栏目 -->
             <!-- 右侧栏容器 -->
@@ -1332,9 +1327,11 @@
               // 切换图标
               const icon = $(this).find('i');
               if ($('body').hasClass('dark-mode')) {
-                  icon.removeClass('fa-moon').addClass('fa-sun');
+                // $('html').addClass('io-black-mode');
+                icon.removeClass('fa-moon').addClass('fa-sun');
               } else {
-                  icon.removeClass('fa-sun').addClass('fa-moon');
+                // $('html').removeClass('io-black-mode');
+                icon.removeClass('fa-sun').addClass('fa-moon');
               }
               
               // 可以保存用户偏好到localStorage

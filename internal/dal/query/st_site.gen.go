@@ -29,6 +29,7 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 	_stSite.ALL = field.NewAsterisk(tableName)
 	_stSite.ID = field.NewInt(tableName, "id")
 	_stSite.Slug = field.NewString(tableName, "slug")
+	_stSite.MainCategoryID = field.NewInt(tableName, "main_category_id")
 	_stSite.CategoryID = field.NewInt(tableName, "category_id")
 	_stSite.Category = field.NewString(tableName, "category")
 	_stSite.Title = field.NewString(tableName, "title")
@@ -66,37 +67,38 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 type stSite struct {
 	stSiteDo stSiteDo
 
-	ALL           field.Asterisk
-	ID            field.Int
-	Slug          field.String
-	CategoryID    field.Int
-	Category      field.String
-	Title         field.String
-	Icon          field.String
-	IconCSS       field.String
-	IconRemote    field.String
-	Description   field.String
-	DescS         field.String
-	URL           field.String
-	ImgPreview    field.String
-	ImgRemote     field.String
-	IsUsed        field.Bool
-	Status        field.Int8
-	CreatedAt     field.Time
-	UpdatedAt     field.Time
-	DeletedAt     field.Time
-	Sort          field.Int
-	Tags          field.String
-	PriceType     field.Int8
-	ViewCount     field.Int
-	IntroBasic    field.String
-	IntroUse      field.String
-	IntroFeatures field.String
-	PriceDesc     field.String
-	Similar       field.String
-	Social        field.String
-	MarkRate      field.String
-	Featured      field.Int8
+	ALL            field.Asterisk
+	ID             field.Int
+	Slug           field.String
+	MainCategoryID field.Int
+	CategoryID     field.Int
+	Category       field.String
+	Title          field.String
+	Icon           field.String
+	IconCSS        field.String
+	IconRemote     field.String
+	Description    field.String
+	DescS          field.String
+	URL            field.String
+	ImgPreview     field.String
+	ImgRemote      field.String
+	IsUsed         field.Bool
+	Status         field.Int8
+	CreatedAt      field.Time
+	UpdatedAt      field.Time
+	DeletedAt      field.Time
+	Sort           field.Int
+	Tags           field.String
+	PriceType      field.Int8
+	ViewCount      field.Int
+	IntroBasic     field.String
+	IntroUse       field.String
+	IntroFeatures  field.String
+	PriceDesc      field.String
+	Similar        field.String
+	Social         field.String
+	MarkRate       field.String
+	Featured       field.Int8
 
 	fieldMap map[string]field.Expr
 }
@@ -115,6 +117,7 @@ func (s *stSite) updateTableName(table string) *stSite {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt(table, "id")
 	s.Slug = field.NewString(table, "slug")
+	s.MainCategoryID = field.NewInt(table, "main_category_id")
 	s.CategoryID = field.NewInt(table, "category_id")
 	s.Category = field.NewString(table, "category")
 	s.Title = field.NewString(table, "title")
@@ -167,9 +170,10 @@ func (s *stSite) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *stSite) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 30)
+	s.fieldMap = make(map[string]field.Expr, 31)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["slug"] = s.Slug
+	s.fieldMap["main_category_id"] = s.MainCategoryID
 	s.fieldMap["category_id"] = s.CategoryID
 	s.fieldMap["category"] = s.Category
 	s.fieldMap["title"] = s.Title

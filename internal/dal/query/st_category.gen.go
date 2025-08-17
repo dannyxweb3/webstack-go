@@ -29,20 +29,21 @@ func newStCategory(db *gorm.DB, opts ...gen.DOOption) stCategory {
 	_stCategory.ALL = field.NewAsterisk(tableName)
 	_stCategory.ID = field.NewInt(tableName, "id")
 	_stCategory.ParentID = field.NewInt(tableName, "parent_id")
-	_stCategory.Sort = field.NewInt(tableName, "sort")
 	_stCategory.Slug = field.NewString(tableName, "slug")
 	_stCategory.Title = field.NewString(tableName, "title")
 	_stCategory.Icon = field.NewString(tableName, "icon")
+	_stCategory.IconCSS = field.NewString(tableName, "icon_css")
 	_stCategory.Level = field.NewInt(tableName, "level")
 	_stCategory.IsUsed = field.NewBool(tableName, "is_used")
 	_stCategory.Status = field.NewInt8(tableName, "status")
+	_stCategory.Sort = field.NewInt(tableName, "sort")
 	_stCategory.CreatedAt = field.NewTime(tableName, "created_at")
 	_stCategory.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_stCategory.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_stCategory.Desc = field.NewString(tableName, "desc")
-	_stCategory.IconCSS = field.NewString(tableName, "icon_css")
 	_stCategory.Count = field.NewInt(tableName, "count")
 	_stCategory.FreeCount = field.NewInt(tableName, "free_count")
+	_stCategory.Tools = field.NewString(tableName, "tools")
 
 	_stCategory.fillFieldMap()
 
@@ -55,20 +56,21 @@ type stCategory struct {
 	ALL       field.Asterisk
 	ID        field.Int
 	ParentID  field.Int
-	Sort      field.Int
 	Slug      field.String
 	Title     field.String
 	Icon      field.String
+	IconCSS   field.String
 	Level     field.Int
 	IsUsed    field.Bool
 	Status    field.Int8
+	Sort      field.Int
 	CreatedAt field.Time
 	UpdatedAt field.Time
 	DeletedAt field.Time
 	Desc      field.String
-	IconCSS   field.String
 	Count     field.Int
 	FreeCount field.Int
+	Tools     field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -87,20 +89,21 @@ func (s *stCategory) updateTableName(table string) *stCategory {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt(table, "id")
 	s.ParentID = field.NewInt(table, "parent_id")
-	s.Sort = field.NewInt(table, "sort")
 	s.Slug = field.NewString(table, "slug")
 	s.Title = field.NewString(table, "title")
 	s.Icon = field.NewString(table, "icon")
+	s.IconCSS = field.NewString(table, "icon_css")
 	s.Level = field.NewInt(table, "level")
 	s.IsUsed = field.NewBool(table, "is_used")
 	s.Status = field.NewInt8(table, "status")
+	s.Sort = field.NewInt(table, "sort")
 	s.CreatedAt = field.NewTime(table, "created_at")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
 	s.DeletedAt = field.NewTime(table, "deleted_at")
 	s.Desc = field.NewString(table, "desc")
-	s.IconCSS = field.NewString(table, "icon_css")
 	s.Count = field.NewInt(table, "count")
 	s.FreeCount = field.NewInt(table, "free_count")
+	s.Tools = field.NewString(table, "tools")
 
 	s.fillFieldMap()
 
@@ -127,23 +130,24 @@ func (s *stCategory) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *stCategory) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 16)
+	s.fieldMap = make(map[string]field.Expr, 17)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["parent_id"] = s.ParentID
-	s.fieldMap["sort"] = s.Sort
 	s.fieldMap["slug"] = s.Slug
 	s.fieldMap["title"] = s.Title
 	s.fieldMap["icon"] = s.Icon
+	s.fieldMap["icon_css"] = s.IconCSS
 	s.fieldMap["level"] = s.Level
 	s.fieldMap["is_used"] = s.IsUsed
 	s.fieldMap["status"] = s.Status
+	s.fieldMap["sort"] = s.Sort
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["updated_at"] = s.UpdatedAt
 	s.fieldMap["deleted_at"] = s.DeletedAt
 	s.fieldMap["desc"] = s.Desc
-	s.fieldMap["icon_css"] = s.IconCSS
 	s.fieldMap["count"] = s.Count
 	s.fieldMap["free_count"] = s.FreeCount
+	s.fieldMap["tools"] = s.Tools
 }
 
 func (s stCategory) clone(db *gorm.DB) stCategory {

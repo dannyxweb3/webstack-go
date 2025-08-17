@@ -21,7 +21,7 @@
     border-bottom: 2px solid transparent;
 }
 
-.io-black-mode .engine-option {
+.dark-mode .engine-option {
     color: #dee2e6;
 }
 
@@ -31,7 +31,7 @@
     border-bottom: 2px solid #5961f9;
 }
 
-.io-black-mode .engine-option.active {
+.dark-mode .engine-option.active {
     color: #dee2e6;
     border-bottom: 2px solid #dee2e6;
 }
@@ -45,7 +45,7 @@
     margin-bottom: 15px;
 }
 
-.io-black-mode .search-box {
+.dark-mode .search-box {
     border: 1px solid #495057;
 }
 
@@ -57,7 +57,7 @@
     font-size: 16px;
 }
 
-.io-black-mode .search-input {
+.dark-mode .search-input {
     background: #343a40;
     color: #dee2e6;
 }
@@ -70,7 +70,7 @@
     color: #555;
 }
 
-.io-black-mode .search-button {
+.dark-mode .search-button {
     background: #495057;
     color: #dee2e6;
 }
@@ -79,7 +79,7 @@
     background: #f0f0f0;
 }
 
-.io-black-mode .search-button:hover {
+.dark-mode .search-button:hover {
     background: #343a40;
     color: #dee2e6;
 }
@@ -107,7 +107,7 @@
     color: #111827;
 }
 
-.io-black-mode .keyword:hover {
+.dark-mode .keyword:hover {
     background: #495057;
     color: #dee2e6;
 }

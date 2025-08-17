@@ -19,7 +19,6 @@ body {
     width: 250px;
     height: calc(100vh - 70px); /* 高度计算 */
     /* background: white; */
-    border-right: 1px solid #e1e5eb;
     overflow-y: auto;
     z-index: 1000;
     padding: 20px 0;

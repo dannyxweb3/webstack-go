@@ -81,7 +81,7 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	var (
 		g         errgroup.Group
 		sysConfig *model.SysConfig
-		sites     []*model.StSite
+		// sites     []*model.StSite
 
 		categories []*model.StCategory
 		// 一级分类
@@ -95,11 +95,11 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		return err
 	})
 
-	g.Go(func() (err error) {
-		sites, err = s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByIsUsed(true))
-		// s.Logger.Info("Get Sites:", zap.Any("sites", sites), zap.Error(err)) // ok
-		return err
-	})
+	// g.Go(func() (err error) {
+	// 	// sites, err = s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByIsUsed(true))
+	// 	// s.Logger.Info("Get Sites:", zap.Any("sites", sites), zap.Error(err)) // ok
+	// 	// return err
+	// })
 
 	g.Go(func() (err error) {
 		sysConfig, err = s.configRepo.WithContext(ctx).FindOne()
@@ -121,8 +121,8 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		}
 	}
 
-	categoryTree := categoryTree(buildTree(nodes, 0))
-	categorySites := categorySites(sites, categoryTree)
+	// categoryTree := categoryTree(buildTree(nodes, 0))
+	// categorySites := categorySites(sites, categoryTree)
 
 	resp := &v1.IndexResp{
 		ConfigSite: &v1.ConfigSite{
@@ -139,15 +139,29 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 			AboutAuthor: sysConfig.AboutAuthor,
 			IsAbout:     sysConfig.IsAbout,
 		},
-		CategoryTree:  categoryTree,
-		CategorySites: categorySites,
-		Ts:            time.Now().Unix(),
+		// CategoryTree:  categoryTree,
+		// CategorySites: categorySites,
+		Ts: time.Now().Unix(),
 	}
 
 	// main categories
-	mainCategories, _ := query.StCategory.WithContext(ctx).Where(query.StCategory.ParentID.Eq(0)).Find()
+	mainCategories, _ := query.StCategory.WithContext(ctx).Order(query.StCategory.Sort, query.StCategory.Title).Where(query.StCategory.ParentID.Eq(0)).Find()
 	for _, ct := range mainCategories {
 		resp.MainCategories = append(resp.MainCategories, CategoryModelToDto(ct))
+		newCateSite := &v1.CategorySite{
+			Category:     ct.Title,
+			CategorySlug: ct.Slug,
+			CateId:       ct.ID,
+		}
+
+		// sites under main categories
+		sites, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.CreatedAt.Desc()).Where(query.StSite.MainCategoryID.Eq(ct.ID)).FindByPage(1, 8)
+		for _, st := range sites {
+			newCateSite.SiteList = append(newCateSite.SiteList, *st)
+		}
+		newCateSite.Cnt = int(cnt)
+
+		resp.CategorySites = append(resp.CategorySites, newCateSite)
 	}
 
 	// favorite tools

@@ -17,10 +17,12 @@ type TreeNode struct {
 }
 
 type CategorySite struct {
-	Category string // 分类
-	CateId   int
-	CateIcon string
-	SiteList []model.StSite // 站点列表
+	Category     string // 分类
+	CateId       int
+	CateIcon     string
+	CategorySlug string
+	Cnt          int
+	SiteList     []model.StSite // 站点列表
 }
 
 type About struct {
