@@ -23,6 +23,8 @@ type CategorySite struct {
 	CategorySlug string
 	Cnt          int
 	SiteList     []model.StSite // 站点列表
+
+	SubCategories []CategorySite
 }
 
 type About struct {
@@ -49,6 +51,8 @@ type IndexResp struct {
 	Ts            int64
 	// 一级分类
 	MainCategories []*Category
+	// 包含一级，二级，二级下的5个站点
+	// MainTree []*CategorySite
 	// 默认收藏
 	FavTools []*Site
 	// 主流工具 8个

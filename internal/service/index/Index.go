@@ -146,7 +146,7 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 
 	// main categories
 	mainCategories, _ := query.StCategory.WithContext(ctx).Order(query.StCategory.Sort, query.StCategory.Title).Where(query.StCategory.ParentID.Eq(0)).Find()
-	for _, ct := range mainCategories {
+	for mainCateIdx, ct := range mainCategories {
 		resp.MainCategories = append(resp.MainCategories, CategoryModelToDto(ct))
 		newCateSite := &v1.CategorySite{
 			Category:     ct.Title,
@@ -160,6 +160,26 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 			newCateSite.SiteList = append(newCateSite.SiteList, *st)
 		}
 		newCateSite.Cnt = int(cnt)
+
+		// load subcategories
+		subCates, _ := query.StCategory.WithContext(ctx).Order(query.StCategory.Sort, query.StCategory.Title).Where(query.StCategory.ParentID.Eq(ct.ID)).Find()
+		for _, subCate := range subCates {
+			subCate := v1.CategorySite{
+				Category:     subCate.Title,
+				CategorySlug: subCate.Slug,
+				CateIcon:     subCate.Icon,
+			}
+			if mainCateIdx < 2 {
+				// 防止加载过多，只加载前两个
+				sitesOfSubCates, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.CreatedAt.Desc()).Where(query.StSite.CategoryID.Eq(subCate.CateId)).FindByPage(1, 5)
+				for _, st := range sitesOfSubCates {
+					subCate.SiteList = append(subCate.SiteList, *st)
+				}
+				subCate.Cnt = int(cnt)
+			}
+
+			newCateSite.SubCategories = append(newCateSite.SubCategories, subCate)
+		}
 
 		resp.CategorySites = append(resp.CategorySites, newCateSite)
 	}

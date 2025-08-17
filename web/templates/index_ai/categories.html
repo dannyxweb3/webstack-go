@@ -219,286 +219,50 @@
             Other
              -->
             <ul class="category-list">
-                <li class="category-item">
-                    <a href="#generative-ai" class="category-link active">
-                        <i class="fas fa-magic mr-2"></i>生成式AI
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#computer-vision" class="category-link">
-                        <i class="fas fa-eye mr-2"></i>计算机视觉
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#nlp" class="category-link">
-                        <i class="fas fa-language mr-2"></i>自然语言处理
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#speech" class="category-link">
-                        <i class="fas fa-microphone mr-2"></i>语音技术
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#data-science" class="category-link">
-                        <i class="fas fa-chart-bar mr-2"></i>数据分析
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#developer" class="category-link">
-                        <i class="fas fa-code mr-2"></i>开发者工具
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#productivity" class="category-link">
-                        <i class="fas fa-briefcase mr-2"></i>效率办公
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#education" class="category-link">
-                        <i class="fas fa-graduation-cap mr-2"></i>教育学习
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#marketing" class="category-link">
-                        <i class="fas fa-bullhorn mr-2"></i>营销工具
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#healthcare" class="category-link">
-                        <i class="fas fa-heartbeat mr-2"></i>医疗健康
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#robotics" class="category-link">
-                        <i class="fas fa-robot mr-2"></i>机器人技术
-                    </a>
-                </li>
-                <li class="category-item">
-                    <a href="#gaming" class="category-link">
-                        <i class="fas fa-gamepad mr-2"></i>游戏开发
-                    </a>
-                </li>
+              {{range .MainCategories}}
+              <li class="category-item">
+                  <a href="#section-{{.Slug}}" class="category-link">
+                    <i class="{{.IconCss}} mr-2"></i>{{.Title}}
+                  </a>
+              </li>
+              {{end}}
+  
             </ul>
           </div>
         </div>
         <div class="col-lg-7 col-md-7 col-sm-12">
 
-          <!-- 生成式AI分类 -->
-          <div class="category-section" id="generative-ai">
-            <h4 class="category-title"><i class="fas fa-magic mr-2"></i>生成式AI</h4>
+          <!-- 循环主类 -->
+          {{range $mainCate := .CategorySites}}
+          <div class="category-section" id="section-{{$mainCate.CategorySlug}}">
+            <h4 class="category-title"><i class="{{$mainCate.CateIcon}} mr-2"></i>{{$mainCate.Category}}</h4>
             <div class="row">
-                <!-- 图像生成 -->
+                <!-- 每个子类 -->
+                {{range $subCate := $mainCate.SubCategories}}
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3">
                     <div class="subcategory-card">
-                        <h5 class="subcategory-name">图像生成</h5>
+                        <h5 class="subcategory-name">{{$subCate.Category}}</h5>
                         <div class="tool-logos">
+                            {{range $site := $subCate.SiteList}}
                             <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=MJ" alt="MidJourney">
+                              <a class="text-muted" href="{{$site.URL}}">
+                                <img src="{{$site.Icon}}" alt="{{$site.Title}}">
+                              </a>
                                 <!-- <span class="tool-tooltip">MidJourney</span> -->
                             </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=SD" alt="Stable Diffusion">
-                                <!-- <span class="tool-tooltip">Stable Diffusion</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=DE" alt="DALL-E">
-                                <!-- <span class="tool-tooltip">DALL-E</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=AF" alt="Adobe Firefly">
-                                <!-- <span class="tool-tooltip">Adobe Firefly</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=RN" alt="Runway">
-                                <!-- <span class="tool-tooltip">Runway</span> -->
-                            </div>
+                            {{end}}
                         </div>
-                        <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
+                        <a href="/category/{{$subCate.CategorySlug}}" class="view-all">View All <i class="fas fa-angle-right"></i></a>
                     </div>
                 </div>
+                {{end}}
                 
-                <!-- 文本生成 -->
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3">
-                    <div class="subcategory-card">
-                        <h5 class="subcategory-name">文本生成</h5>
-                        <div class="tool-logos">
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=CG" alt="ChatGPT">
-                                <!-- <span class="tool-tooltip">ChatGPT</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=CL" alt="Claude">
-                                <!-- <span class="tool-tooltip">Claude</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=GP" alt="GPT-4">
-                                <!-- <span class="tool-tooltip">GPT-4</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=JD" alt="Jasper">
-                                <!-- <span class="tool-tooltip">Jasper</span> -->
-                            </div>
-                        </div>
-                        <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                    </div>
-                </div>
-                
-                <!-- 视频生成 -->
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-3">
-                    <div class="subcategory-card">
-                        <h5 class="subcategory-name">视频生成</h5>
-                        <div class="tool-logos">
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=RN" alt="Runway">
-                                <!-- <span class="tool-tooltip">Runway</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=PI" alt="Pika">
-                                <!-- <span class="tool-tooltip">Pika</span> -->
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=SD" alt="Stable Video">
-                                <!-- <span class="tool-tooltip">Stable Video</span> -->
-                            </div>
-                        </div>
-                        <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                    </div>
-                </div>
-                
-                <!-- 3D模型生成 -->
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="subcategory-card">
-                        <h3 class="subcategory-name">3D模型生成</h3>
-                        <div class="tool-logos">
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=LD" alt="Leonardo">
-                                <span class="tool-tooltip">Leonardo</span>
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=KA" alt="Kaedim">
-                                <span class="tool-tooltip">Kaedim</span>
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=MV" alt="Masterpiece Studio">
-                                <span class="tool-tooltip">Masterpiece Studio</span>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                    </div>
-                </div>
-                
-                <!-- 代码生成 -->
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="subcategory-card">
-                        <h3 class="subcategory-name">代码生成</h3>
-                        <div class="tool-logos">
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=GH" alt="GitHub Copilot">
-                                <span class="tool-tooltip">GitHub Copilot</span>
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=CB" alt="Codeium">
-                                <span class="tool-tooltip">Codeium</span>
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=TA" alt="Tabnine">
-                                <span class="tool-tooltip">Tabnine</span>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                    </div>
-                </div>
-                
-                <!-- 音乐生成 -->
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="subcategory-card">
-                        <h3 class="subcategory-name">音乐生成</h3>
-                        <div class="tool-logos">
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=SM" alt="Soundraw">
-                                <span class="tool-tooltip">Soundraw</span>
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=AM" alt="AIVA">
-                                <span class="tool-tooltip">AIVA</span>
-                            </div>
-                            <div class="tool-logo">
-                                <img src="https://via.placeholder.com/32?text=BO" alt="Boomy">
-                                <span class="tool-tooltip">Boomy</span>
-                            </div>
-                        </div>
-                        <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                    </div>
-                </div>
             </div>
         
         
           </div>
-            <!-- 计算机视觉分类 -->
-            <div class="category-section" id="computer-vision">
-                <h2 class="category-title"><i class="fas fa-eye mr-2"></i>计算机视觉</h2>
-                <div class="row">
-                    <!-- 图像识别 -->
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="subcategory-card">
-                            <h3 class="subcategory-name">图像识别</h3>
-                            <div class="tool-logos">
-                                <div class="tool-logo">
-                                    <img src="https://via.placeholder.com/32?text=CV" alt="Clarifai">
-                                    <span class="tool-tooltip">Clarifai</span>
-                                </div>
-                                <div class="tool-logo">
-                                    <img src="https://via.placeholder.com/32?text=GV" alt="Google Vision">
-                                    <span class="tool-tooltip">Google Vision</span>
-                                </div>
-                                <div class="tool-logo">
-                                    <img src="https://via.placeholder.com/32?text=AM" alt="Amazon Rekognition">
-                                    <span class="tool-tooltip">Amazon Rekognition</span>
-                                </div>
-                            </div>
-                            <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- 目标检测 -->
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="subcategory-card">
-                            <h3 class="subcategory-name">目标检测</h3>
-                            <div class="tool-logos">
-                                <div class="tool-logo">
-                                    <img src="https://via.placeholder.com/32?text=YO" alt="YOLO">
-                                    <span class="tool-tooltip">YOLO</span>
-                                </div>
-                                <div class="tool-logo">
-                                    <img src="https://via.placeholder.com/32?text=TF" alt="TensorFlow OD">
-                                    <span class="tool-tooltip">TensorFlow OD</span>
-                                </div>
-                            </div>
-                            <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    
-                    <!-- 图像分割 -->
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="subcategory-card">
-                            <h3 class="subcategory-name">图像分割</h3>
-                            <div class="tool-logos">
-                                <div class="tool-logo">
-                                    <img src="https://via.placeholder.com/32?text=SM" alt="Segment Anything">
-                                    <span class="tool-tooltip">Segment Anything</span>
-                                </div>
-                                <div class="tool-logo">
-                                    <img src="https://via.placeholder.com/32?text=RM" alt="Remove.bg">
-                                    <span class="tool-tooltip">Remove.bg</span>
-                                </div>
-                            </div>
-                            <a href="#" class="view-all">查看全部 <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          <!-- 其他分类... -->
+          {{end}}
+          <!-- 分类结束... -->
 
           <!-- 页面底部广告位 -->
           <div class="col-12 mb-4 fade-in">
