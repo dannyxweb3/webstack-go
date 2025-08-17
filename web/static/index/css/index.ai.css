@@ -535,88 +535,39 @@
 }
 
 
-/* 左侧分类导航 */
-.category-sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 250px;
-    height: 100vh;
-    background: #f8f9fa;
-    border-right: 1px solid #dee2e6;
-    margin-top: 80px;
+
+/* 主内容区域 */
+.main-content {
     padding: 20px;
+}
+
+
+
+/* 左侧内容 新 */
+
+/* 侧边栏样式 */
+.sidebar {
+    position: sticky; /* 初始为绝对定位 */
+    top: 80px; /* 初始距离顶部300px */
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 70px); /* 高度计算 */
     overflow-y: auto;
     z-index: 1000;
-    transform: translateX(-100%);
-    opacity: 0;
-    transition: all 0.3s ease;
 }
 
-.category-sidebar-title {
-    font-size: 1rem;
+/* 当页面滚动时的固定定位样式 */
+.sidebar.fixed {
+    position: fixed;
+    top: 70px; /* 固定在头部导航栏下方 */
+    /* 重新计算高度 */
+    height: calc(100vh - 70px); 
 }
 
-.category-sidebar.active {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-/* 折叠状态样式 */
-.category-sidebar.collapsed {
-    width: 60px;
-    overflow: hidden;
-    cursor: pointer; /* 添加手型光标 */
-
-}
-
-.category-sidebar.collapsed .sidebar-content {
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-
-.category-sidebar.collapsed .toggle-sidebar {
-    left: 15px;
-}
-
-.category-sidebar.collapsed .toggle-sidebar i {
-    /* transform: rotate(180deg); */
-    display: none;
-}
-.category-sidebar.collapsed .category-sidebar-title {
-    /* transform: rotate(180deg); */
-    display: none;
-}
-
-/* 折叠时显示更大的点击区域 */
-.category-sidebar.collapsed h4 {
-    padding: 15px;
-    margin: -15px;
-    width: calc(100% + 30px);
-}
-
-.sidebar-content {
-    transition: opacity 0.3s 0.1s;
-}
-
-.category-sidebar h4 {
-    position: relative;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #6e48aa;
-    color: #343a40;
-    padding-right: 30px; /* 为切换按钮留空间 */
-}
-
-.toggle-sidebar {
-    position: absolute;
-    right: 0;
-    top: 0;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.toggle-sidebar i {
-    transition: transform 0.3s;
+.sidebar-header {
+    padding: 0 20px 15px;
+    border-bottom: 1px solid #e1e5eb;
+    margin-bottom: 15px;
 }
 
 .category-list {
@@ -625,65 +576,77 @@
 }
 
 .category-item {
-    margin-bottom: 8px;
+    margin-bottom: 2px;
+    width: 100%;
 }
 
 .category-link {
     display: block;
-    padding: 8px 12px;
-    color: #495057;
+    padding: 10px 20px;
+    color: var(--dark-color);
     text-decoration: none;
-    border-radius: 4px;
     transition: all 0.2s;
-    white-space: nowrap;
+    position: relative;
 }
 
 .category-link:hover,
 .category-link.active {
-    background: #6e48aa;
-    color: white;
+    background: rgba(110, 72, 170, 0.1);
+    color: var(--primary-color);
 }
 
-/* 主内容区域 */
-.main-content {
-    padding: 20px;
+.category-link.active:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: var(--primary-color);
 }
 
-.category-section {
-    padding: 80px 0 40px;
-    margin-bottom: 40px;
-}
-
-.category-section h2 {
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #eee;
-}
-
-/* 响应式调整 */
+/* 响应式设计 */
 @media (max-width: 992px) {
     body {
         padding-left: 0;
     }
-    .category-sidebar {
-        width: 250px;
-    }
     
-    /* 移动端默认折叠 */
-    body.collapsed {
-        padding-left: 60px;
-    }
-    
-    .category-sidebar.collapsed {
-        width: 60px;
-    }
-    
-    .category-sidebar.collapsed h4 {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-    
-    .category-sidebar.collapsed h4 span {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
         display: none;
     }
+    
+    .sidebar.active {
+        transform: translateX(0);
+        display: block;
+        position: fixed;
+        height: auto;
+        left: 10px;
+        top: 140px;
+        background: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .main-content {
+        padding: 20px;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        z-index: 1010;
+        background: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        margin-top: 80px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 }
+
+
+

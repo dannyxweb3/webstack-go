@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"golang.org/x/sync/errgroup"
-	"gorm.io/gen"
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
 	"github.com/ch3nnn/webstack-go/internal/dal/model"
@@ -83,8 +82,10 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		g         errgroup.Group
 		sysConfig *model.SysConfig
 		sites     []*model.StSite
-		// 一级分类
+
 		categories []*model.StCategory
+		// 一级分类
+		// mainCategories []*model.StCategory
 	)
 
 	// s.Logger.Info("Test Index") // ok
@@ -144,35 +145,50 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	}
 
 	// main categories
-	for _, ct := range categories {
+	mainCategories, _ := query.StCategory.WithContext(ctx).Where(query.StCategory.ParentID.Eq(0)).Find()
+	for _, ct := range mainCategories {
 		resp.MainCategories = append(resp.MainCategories, CategoryModelToDto(ct))
 	}
 
 	// favorite tools
 	defaultFavTools := []string{"chatgpt", "grok", "gemini", "claude", "purplexity", "midjourney"}
-	favTools, _ := s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByStatus(1), func(dao gen.Dao) gen.Dao {
-		return dao.Where(query.StSite.Slug.In(defaultFavTools...))
-	})
+	// favTools, _ := s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByStatus(1), func(dao gen.Dao) gen.Dao {
+	// return dao.Where(query.StSite.Slug.In(defaultFavTools...))
+	// })
+	favTools, _ := query.StSite.WithContext(ctx).Where(query.StSite.Slug.In(defaultFavTools...)).Find()
 	for _, st := range favTools {
 		resp.FavTools = append(resp.FavTools, SiteModelToDto(st))
 	}
 
 	// popular tools
-	popTools, _, _ := s.siteRepo.WithContext(ctx).FindPage(1, 20, query.StSite.Columns(query.StSite.ViewCount))
+	// popTools, _, _ := s.siteRepo.WithContext(ctx).FindPage(1, 20, query.StSite.Columns(query.StSite.ViewCount))
+	popTools, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.ViewCount).FindByPage(1, 20)
 	for _, st := range popTools {
 		resp.PopularTools = append(resp.PopularTools, SiteModelToDto(st))
 	}
 
 	// popular categories // use random instead
-	popCates, _, _ := s.categoryRepo.WithContext(ctx).FindPage(1, 20, query.StCategory.Columns(query.StCategory.Count))
-	for _, st := range popCates {
-		resp.PopularCategories = append(resp.PopularCategories, CategoryModelToDto(st))
+	// popCates, _, _ := s.categoryRepo.WithContext(ctx).FindPage(1, 20, query.StCategory.Columns(query.StCategory.Count))
+	popCates, _, _ := query.StCategory.WithContext(ctx).Order(query.StCategory.Count).FindByPage(1, 20)
+	for _, ct := range popCates {
+		resp.PopularCategories = append(resp.PopularCategories, CategoryModelToDto(ct))
 	}
 
 	// featured tools
-	// qc := query.Q.WithContext(ctx)
+	featuredTools, _, _ := query.StSite.WithContext(ctx).Where(query.StSite.Featured.Eq(1)).FindByPage(1, 3)
+	for _, st := range featuredTools {
+		resp.FeaturedTools = append(resp.FeaturedTools, SiteModelToDto(st))
+	}
 
 	// randome tools
+	rnd := time.Now().UnixMicro() % 2000
+	for rnd > cnt {
+		rnd /= 2
+	}
+	randomTools, _, _ := query.StSite.WithContext(ctx).FindByPage(int(rnd), 20)
+	for _, st := range randomTools {
+		resp.RandomTools = append(resp.RandomTools, SiteModelToDto(st))
+	}
 
 	return resp, nil
 }
