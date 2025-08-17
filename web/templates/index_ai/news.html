@@ -494,7 +494,7 @@
           }
       ]
      ' />
-    <script src="assets/static/index/js/rightsidefeatured.js"></script>
+    <script src="/assets/static/index/js/rightsidefeatured.js"></script>
     <!-- 推荐数据源（可替换为API请求） -->
     <input type="hidden" id="randomlyRecommendations" value='[
         {{range $tidx, $tool := .RandomTools}}
@@ -507,10 +507,10 @@
           {{if not (eq $tidx (sub (len $.RandomTools) 1))}},{{end}}
         {{end}}
       ]' />
-    <script src="assets/static/index/js/rightsiderecomm.js"></script>
+    <script src="/assets/static/index/js/rightsiderecomm.js"></script>
 
-    <script src="assets/static/index/js/rightsidenews.js"></script>
-    <script src="assets/static/index/js/rightsidecates.js"></script>
+    <script src="/assets/static/index/js/rightsidenews.js"></script>
+    <script src="/assets/static/index/js/rightsidecates.js"></script>
 
 
     <script>

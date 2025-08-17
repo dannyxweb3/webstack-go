@@ -69,7 +69,13 @@ func (h *Handler) Categories(ctx *gin.Context) {
 	ctx.HTML(http.StatusOK, "categories.html", resp)
 }
 func (h *Handler) CategoryDetail(ctx *gin.Context) {
-	resp, err := h.indexService.Index(ctx)
+	cateSlug := ctx.Param("cate")
+	if cateSlug == "" {
+		h.Categories(ctx)
+		return
+	}
+	page := ctx.GetInt("page")
+	resp, err := h.indexService.CategoryDetail(ctx, cateSlug, page)
 	if err != nil {
 		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
 		return

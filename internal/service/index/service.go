@@ -30,6 +30,8 @@ type Service interface {
 	ContactUs(ctx *gin.Context) (*v1.ContactUsResp, error)
 	// AddYourSite
 	AddYourSite(ctx *gin.Context) (*v1.AddYourSiteResp, error)
+	// CategoryDetail
+	CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.CategorySitesResp, error)
 }
 
 type service struct {

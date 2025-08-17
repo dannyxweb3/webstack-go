@@ -53,10 +53,12 @@ type IndexResp struct {
 	MainCategories []*Category
 	// 包含一级，二级，二级下的5个站点
 	// MainTree []*CategorySite
+
 	// 默认收藏
 	FavTools []*Site
 	// 主流工具 8个
 	PopularTools []*Site
+
 	// 每个一级分类下的前8个
 	// Featured (3)
 	FeaturedTools []*Site

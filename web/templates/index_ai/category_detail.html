@@ -48,13 +48,12 @@
             Categories
         </a>
         <div class="dropdown-menu px-2">
-            <a class="dropdown-item" href="/categories">所有分类</a>
-            <a class="dropdown-item" href="#">图像生成（Image Generation）</a>
-            <a class="dropdown-item" href="#">文本生成（Text Generation）</a>
-            <a class="dropdown-item" href="#">数据分析（Data Analysis）</a>
-            <a class="dropdown-item" href="#">语音与音频（Speech & Audio）</a>
-            <a class="dropdown-item" href="#">开发者工具（Developer Tools）</a>
-            <a class="dropdown-item" href="#">其他工具</a>
+          <a class="dropdown-item" href="/categories">All AI Categories</a>
+          <a class="dropdown-item" href="/category/ai-image-generation">Image Generation</a>
+          <a class="dropdown-item" href="/category/ai-text-generation">Text Generation</a>
+          <a class="dropdown-item" href="/category/ai-data-analysis">Data Analysis</a>
+          <a class="dropdown-item" href="/category/speech-audio">Speech & Audio</a>
+          <a class="dropdown-item" href="/category/developer-tools">Developer Tools</a>
         </div>
         </li>
 
@@ -64,11 +63,11 @@
             Featured
         </a>
         <div class="dropdown-menu px-2">
-            <a class="dropdown-item" href="#">赞助的AI工具</a>
-            <a class="dropdown-item" href="#">最新AI工具</a>
-            <a class="dropdown-item" href="#">免费AI工具</a>
-            <a class="dropdown-item" href="#">最流行的AI工具</a>
-        </div>
+          <a class="dropdown-item" href="/featured">Featured AI Tools</a>
+          <a class="dropdown-item" href="/newest">Newest AI Tools</a>
+          <a class="dropdown-item" href="/free-ai-tools">Free AI Tools</a>
+          <a class="dropdown-item" href="/most-popular-ai-tools">Most Popular AI Tools</a>
+         </div>
         </li>
 
         <!-- 2.3 资源 -->
@@ -166,8 +165,11 @@
         <div class="col-lg-8 col-md-8 col-sm-12">
           <div class="page-header">
             <div>
-              <h1><i class="fas fa-image mr-2"></i>图像生成工具</h1>
-              <p class="text-muted">探索最先进的AI图像生成与编辑工具</p>
+              <h1><i class="{{.IconCss}} mr-2"></i>{{.Title}}</h1>
+              <p class="text-muted">{{.Desc}}</p>
+              <span class="badge badge-secondary mr-2">156 Tools</span>
+              <span class="badge badge-success mr-2">32 Free</span>
+
             </div>
           </div>
         </div>
@@ -189,7 +191,7 @@
           <!-- 中间内容区 -->
               
           <!-- 分类简介 -->
-          <div class="category-info fade-in">
+          <div class="category-info fade-in" style="display:none;">
             <div class="row">
                 <div class="col-md-8">
                     <h3>AI图像生成</h3>
@@ -223,6 +225,7 @@
           <!-- 工具列表 - 使用Bootstrap网格系统 -->
           <div class="row tool-list">
             <!-- 工具1 -->
+            {{range $site := .Sites}}
             <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
                 <div class="tool-item">
                     <div class="tool-pin" onclick="showPinToast()">
@@ -230,11 +233,11 @@
                     </div>
                     <div class="tool-free">FREE</div>
                     <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x500?text=MidJourney" alt="MidJourney" class="tool-image">
+                        <img src="{{$site.ImgRemote}}" alt="{{$site.Title}}" class="tool-image">
                     </div>
                     <div class="tool-body">
-                        <h4 class="tool-title">MidJourney</h4>
-                        <p class="tool-desc">通过简单的文本提示生成高质量艺术图像的AI工具，支持多种艺术风格，操作简单但需要Discord使用。</p>
+                        <h4 class="tool-title">{{$site.Title}}</h4>
+                        <p class="tool-desc">{{$site.Description}}</p>
                         <div class="tool-meta">
                             <div class="tool-rating">
                                 <i class="fas fa-star"></i>
@@ -245,289 +248,22 @@
                                 <span class="ml-1">4.7</span>
                             </div>
                             <div class="tool-views">
-                                <i class="far fa-eye"></i> 12,458
+                                <i class="far fa-eye"></i> {{$site.ViewCount}}
                             </div>
                         </div>
                         <div class="tool-tags">
-                            <span class="tool-tag">AI绘画</span>
-                            <span class="tool-tag">艺术创作</span>
-                            <span class="tool-tag">Discord</span>
+                          {{range $tag := $site.Tags}}
+                            <span class="tool-tag">{{$tag}}</span>
+                          {{end}}
                         </div>
                         <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
+                            <a href="{{$site.URL}}" class="btn btn-sm btn-outline-primary">Visit</a>
+                            <a href="/tool/{{$site.Slug}}" class="btn btn-sm btn-outline-secondary">Detail</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- 工具2 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
-                <div class="tool-item">
-                    <div class="tool-pin" onclick="showPinToast()">
-                        <i class="fas fa-thumbtack"></i>
-                    </div>
-                    <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x450?text=Stable+Diffusion" alt="Stable Diffusion" class="tool-image">
-                    </div>
-                    <div class="tool-body">
-                        <h4 class="tool-title">Stable Diffusion</h4>
-                        <p class="tool-desc">开源的文本到图像生成模型，可在本地运行，支持自定义模型训练和大量插件扩展。</p>
-                        <div class="tool-meta">
-                            <div class="tool-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span class="ml-1">4.2</span>
-                            </div>
-                            <div class="tool-views">
-                                <i class="far fa-eye"></i> 9,876
-                            </div>
-                        </div>
-                        <div class="tool-tags">
-                            <span class="tool-tag">开源</span>
-                            <span class="tool-tag">本地部署</span>
-                            <span class="tool-tag">自定义模型</span>
-                        </div>
-                        <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 工具3 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
-                <div class="tool-item">
-                    <div class="tool-pin" onclick="showPinToast()">
-                        <i class="fas fa-thumbtack"></i>
-                    </div>
-                    <div class="tool-free">FREE</div>
-                    <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x600?text=DALL·E+3" alt="DALL·E 3" class="tool-image">
-                    </div>
-                    <div class="tool-body">
-                        <h4 class="tool-title">DALL·E 3</h4>
-                        <p class="tool-desc">OpenAI开发的最新文本到图像生成系统，与ChatGPT深度集成，能更好理解复杂提示词。</p>
-                        <div class="tool-meta">
-                            <div class="tool-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="ml-1">4.9</span>
-                            </div>
-                            <div class="tool-views">
-                                <i class="far fa-eye"></i> 15,342
-                            </div>
-                        </div>
-                        <div class="tool-tags">
-                            <span class="tool-tag">OpenAI</span>
-                            <span class="tool-tag">ChatGPT集成</span>
-                            <span class="tool-tag">高精度</span>
-                        </div>
-                        <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 工具4 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
-                <div class="tool-item">
-                    <div class="tool-pin" onclick="showPinToast()">
-                        <i class="fas fa-thumbtack"></i>
-                    </div>
-                    <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x500?text=Adobe+Firefly" alt="Adobe Firefly" class="tool-image">
-                    </div>
-                    <div class="tool-body">
-                        <h4 class="tool-title">Adobe Firefly</h4>
-                        <p class="tool-desc">Adobe推出的创意生成式AI工具集，深度集成于Photoshop等创意软件，专注于商业安全使用。</p>
-                        <div class="tool-meta">
-                            <div class="tool-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="ml-1">4.5</span>
-                            </div>
-                            <div class="tool-views">
-                                <i class="far fa-eye"></i> 7,654
-                            </div>
-                        </div>
-                        <div class="tool-tags">
-                            <span class="tool-tag">商业安全</span>
-                            <span class="tool-tag">Photoshop集成</span>
-                            <span class="tool-tag">Adobe</span>
-                        </div>
-                        <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 工具5 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
-                <div class="tool-item">
-                    <div class="tool-pin" onclick="showPinToast()">
-                        <i class="fas fa-thumbtack"></i>
-                    </div>
-                    <div class="tool-free">FREE</div>
-                    <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x500?text=Runway" alt="Runway" class="tool-image">
-                    </div>
-                    <div class="tool-body">
-                        <h4 class="tool-title">Runway</h4>
-                        <p class="tool-desc">多功能AI创意工具，提供图像生成、视频编辑和3D模型创建等多种功能。</p>
-                        <div class="tool-meta">
-                            <div class="tool-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span class="ml-1">4.3</span>
-                            </div>
-                            <div class="tool-views">
-                                <i class="far fa-eye"></i> 8,765
-                            </div>
-                        </div>
-                        <div class="tool-tags">
-                            <span class="tool-tag">多功能</span>
-                            <span class="tool-tag">视频编辑</span>
-                            <span class="tool-tag">创意工具</span>
-                        </div>
-                        <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 工具6 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
-                <div class="tool-item">
-                    <div class="tool-pin" onclick="showPinToast()">
-                        <i class="fas fa-thumbtack"></i>
-                    </div>
-                    <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x500?text=Leonardo.AI" alt="Leonardo.AI" class="tool-image">
-                    </div>
-                    <div class="tool-body">
-                        <h4 class="tool-title">Leonardo.AI</h4>
-                        <p class="tool-desc">专注于游戏和数字艺术创作的AI图像生成工具，提供高质量的3D渲染风格。</p>
-                        <div class="tool-meta">
-                            <div class="tool-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="ml-1">4.6</span>
-                            </div>
-                            <div class="tool-views">
-                                <i class="far fa-eye"></i> 6,543
-                            </div>
-                        </div>
-                        <div class="tool-tags">
-                            <span class="tool-tag">游戏艺术</span>
-                            <span class="tool-tag">3D渲染</span>
-                            <span class="tool-tag">数字创作</span>
-                        </div>
-                        <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 工具7 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
-                <div class="tool-item">
-                    <div class="tool-pin" onclick="showPinToast()">
-                        <i class="fas fa-thumbtack"></i>
-                    </div>
-                    <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x500?text=DeepFloyd+IF" alt="DeepFloyd IF" class="tool-image">
-                    </div>
-                    <div class="tool-body">
-                        <h4 class="tool-title">DeepFloyd IF</h4>
-                        <p class="tool-desc">Stability AI推出的模块化文本到图像模型，支持多阶段生成和更高分辨率输出。</p>
-                        <div class="tool-meta">
-                            <div class="tool-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span class="ml-1">4.1</span>
-                            </div>
-                            <div class="tool-views">
-                                <i class="far fa-eye"></i> 5,432
-                            </div>
-                        </div>
-                        <div class="tool-tags">
-                            <span class="tool-tag">高分辨率</span>
-                            <span class="tool-tag">模块化</span>
-                            <span class="tool-tag">Stability AI</span>
-                        </div>
-                        <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 工具8 -->
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 fade-in">
-                <div class="tool-item">
-                    <div class="tool-pin" onclick="showPinToast()">
-                        <i class="fas fa-thumbtack"></i>
-                    </div>
-                    <div class="tool-image-container">
-                        <img src="https://via.placeholder.com/800x500?text=MidJourney" alt="MidJourney" class="tool-image">
-                    </div>
-                    <div class="tool-body">
-                        <h4 class="tool-title">MidJourney</h4>
-                        <p class="tool-desc">通过简单的文本提示生成高质量艺术图像的AI工具，支持多种艺术风格，操作简单但需要Discord使用。</p>
-                        <div class="tool-meta">
-                            <div class="tool-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="ml-1">4.7</span>
-                            </div>
-                            <div class="tool-views">
-                                <i class="far fa-eye"></i> 12,458
-                            </div>
-                        </div>
-                        <div class="tool-tags">
-                            <span class="tool-tag">AI绘画</span>
-                            <span class="tool-tag">艺术创作</span>
-                            <span class="tool-tag">Discord</span>
-                        </div>
-                        <div class="tool-actions">
-                            <a href="#" class="btn btn-sm btn-outline-primary">访问</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">详情</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{end}}
             
             <!-- 页面底部广告位 -->
             <div class="col-12 mb-4 fade-in">
@@ -750,7 +486,7 @@
           }
       ]
      ' />
-    <script src="assets/static/index/js/rightsidefeatured.js"></script>
+    <script src="/assets/static/index/js/rightsidefeatured.js"></script>
     <!-- 推荐数据源（可替换为API请求） -->
     <input type="hidden" id="randomlyRecommendations" value='[
         {{range $tidx, $tool := .RandomTools}}
@@ -763,10 +499,10 @@
           {{if not (eq $tidx (sub (len $.RandomTools) 1))}},{{end}}
         {{end}}
       ]' />
-    <script src="assets/static/index/js/rightsiderecomm.js"></script>
+    <script src="/assets/static/index/js/rightsiderecomm.js"></script>
 
-    <script src="assets/static/index/js/rightsidenews.js"></script>
-    <script src="assets/static/index/js/rightsidecates.js"></script>
+    <script src="/assets/static/index/js/rightsidenews.js"></script>
+    <script src="/assets/static/index/js/rightsidecates.js"></script>
 
 
     <script>
