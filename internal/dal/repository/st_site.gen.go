@@ -92,7 +92,7 @@ func (s *stSiteDao) WhereByIcon(icon string) func(dao gen.Dao) gen.Dao {
 
 func (s *stSiteDao) WhereByIconCss(iconcss string) func(dao gen.Dao) gen.Dao {
 	return func(dao gen.Dao) gen.Dao {
-		return dao.Where(query.StSite.IconCss.Eq(iconcss))
+		return dao.Where(query.StSite.IconCSS.Eq(iconcss))
 	}
 }
 

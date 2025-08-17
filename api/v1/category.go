@@ -19,7 +19,7 @@ type Category struct {
 	CreatedAt *time.Time `json:"created_at"`                   // 创建时间
 	UpdatedAt *time.Time `json:"updated_at"`                   // 更新时间
 	IsUsed    bool       `json:"is_used" form:"is_used"`       // 是否启用 1:是 0:否
-	Level     int32      `json:"level" form:"level"`           // 分类等级
+	Level     int        `json:"level" form:"level"`           // 分类等级
 	Link      string     `json:"link" form:"link"`             // 链接地址
 	Count     int        `json:"count" form:"count"`           //
 	FreeCount int        `json:"free_count" form:"free_count"` //

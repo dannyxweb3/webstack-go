@@ -6,7 +6,6 @@ package query
 
 import (
 	"context"
-	"errors"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -34,12 +33,16 @@ func newStCategory(db *gorm.DB, opts ...gen.DOOption) stCategory {
 	_stCategory.Slug = field.NewString(tableName, "slug")
 	_stCategory.Title = field.NewString(tableName, "title")
 	_stCategory.Icon = field.NewString(tableName, "icon")
-	_stCategory.IconCss = field.NewString(tableName, "icon_css")
-	_stCategory.Level = field.NewInt32(tableName, "level")
+	_stCategory.Level = field.NewInt(tableName, "level")
 	_stCategory.IsUsed = field.NewBool(tableName, "is_used")
+	_stCategory.Status = field.NewInt8(tableName, "status")
 	_stCategory.CreatedAt = field.NewTime(tableName, "created_at")
 	_stCategory.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_stCategory.DeletedAt = field.NewTime(tableName, "deleted_at")
+	_stCategory.Desc = field.NewString(tableName, "desc")
+	_stCategory.IconCSS = field.NewString(tableName, "icon_css")
+	_stCategory.Count = field.NewInt(tableName, "count")
+	_stCategory.FreeCount = field.NewInt(tableName, "free_count")
 
 	_stCategory.fillFieldMap()
 
@@ -53,15 +56,19 @@ type stCategory struct {
 	ID        field.Int
 	ParentID  field.Int
 	Sort      field.Int
-	Title     field.String
 	Slug      field.String
+	Title     field.String
 	Icon      field.String
-	IconCss   field.String
-	Level     field.Int32
+	Level     field.Int
 	IsUsed    field.Bool
+	Status    field.Int8
 	CreatedAt field.Time
 	UpdatedAt field.Time
 	DeletedAt field.Time
+	Desc      field.String
+	IconCSS   field.String
+	Count     field.Int
+	FreeCount field.Int
 
 	fieldMap map[string]field.Expr
 }
@@ -81,15 +88,19 @@ func (s *stCategory) updateTableName(table string) *stCategory {
 	s.ID = field.NewInt(table, "id")
 	s.ParentID = field.NewInt(table, "parent_id")
 	s.Sort = field.NewInt(table, "sort")
-	s.Title = field.NewString(table, "title")
 	s.Slug = field.NewString(table, "slug")
+	s.Title = field.NewString(table, "title")
 	s.Icon = field.NewString(table, "icon")
-	s.IconCss = field.NewString(table, "icon_css")
-	s.Level = field.NewInt32(table, "level")
+	s.Level = field.NewInt(table, "level")
 	s.IsUsed = field.NewBool(table, "is_used")
+	s.Status = field.NewInt8(table, "status")
 	s.CreatedAt = field.NewTime(table, "created_at")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
 	s.DeletedAt = field.NewTime(table, "deleted_at")
+	s.Desc = field.NewString(table, "desc")
+	s.IconCSS = field.NewString(table, "icon_css")
+	s.Count = field.NewInt(table, "count")
+	s.FreeCount = field.NewInt(table, "free_count")
 
 	s.fillFieldMap()
 
@@ -116,19 +127,23 @@ func (s *stCategory) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *stCategory) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 10)
+	s.fieldMap = make(map[string]field.Expr, 16)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["parent_id"] = s.ParentID
 	s.fieldMap["sort"] = s.Sort
-	s.fieldMap["title"] = s.Title
 	s.fieldMap["slug"] = s.Slug
+	s.fieldMap["title"] = s.Title
 	s.fieldMap["icon"] = s.Icon
-	s.fieldMap["icon_css"] = s.IconCss
 	s.fieldMap["level"] = s.Level
 	s.fieldMap["is_used"] = s.IsUsed
+	s.fieldMap["status"] = s.Status
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["updated_at"] = s.UpdatedAt
 	s.fieldMap["deleted_at"] = s.DeletedAt
+	s.fieldMap["desc"] = s.Desc
+	s.fieldMap["icon_css"] = s.IconCSS
+	s.fieldMap["count"] = s.Count
+	s.fieldMap["free_count"] = s.FreeCount
 }
 
 func (s stCategory) clone(db *gorm.DB) stCategory {
@@ -318,9 +333,6 @@ func (s stCategoryDo) Save(values ...*model.StCategory) error {
 
 func (s stCategoryDo) First() (*model.StCategory, error) {
 	if result, err := s.DO.First(); err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
-		}
 		return nil, err
 	} else {
 		return result.(*model.StCategory), nil
@@ -337,9 +349,6 @@ func (s stCategoryDo) Take() (*model.StCategory, error) {
 
 func (s stCategoryDo) Last() (*model.StCategory, error) {
 	if result, err := s.DO.Last(); err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
-		}
 		return nil, err
 	} else {
 		return result.(*model.StCategory), nil
@@ -348,9 +357,6 @@ func (s stCategoryDo) Last() (*model.StCategory, error) {
 
 func (s stCategoryDo) Find() ([]*model.StCategory, error) {
 	result, err := s.DO.Find()
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, nil
-	}
 	return result.([]*model.StCategory), err
 }
 
@@ -360,18 +366,11 @@ func (s stCategoryDo) FindInBatch(batchSize int, fc func(tx gen.Dao, batch int) 
 		defer func() { results = append(results, buf...) }()
 		return fc(tx, batch)
 	})
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return results, nil
-	}
 	return results, err
 }
 
 func (s stCategoryDo) FindInBatches(result *[]*model.StCategory, batchSize int, fc func(tx gen.Dao, batch int) error) error {
-	err := s.DO.FindInBatches(result, batchSize, fc)
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil
-	}
-	return err
+	return s.DO.FindInBatches(result, batchSize, fc)
 }
 
 func (s stCategoryDo) Attrs(attrs ...field.AssignExpr) IStCategoryDo {
@@ -414,9 +413,6 @@ func (s stCategoryDo) FirstOrCreate() (*model.StCategory, error) {
 
 func (s stCategoryDo) FindByPage(offset int, limit int) (result []*model.StCategory, count int64, err error) {
 	result, err = s.Offset(offset).Limit(limit).Find()
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return result, count, nil
-	}
 	if err != nil {
 		return
 	}

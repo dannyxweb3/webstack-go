@@ -6,7 +6,6 @@ package query
 
 import (
 	"context"
-	"errors"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -29,25 +28,35 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 	tableName := _stSite.stSiteDo.TableName()
 	_stSite.ALL = field.NewAsterisk(tableName)
 	_stSite.ID = field.NewInt(tableName, "id")
-	_stSite.CategoryID = field.NewInt(tableName, "category_id")
 	_stSite.Slug = field.NewString(tableName, "slug")
+	_stSite.CategoryID = field.NewInt(tableName, "category_id")
+	_stSite.Category = field.NewString(tableName, "category")
 	_stSite.Title = field.NewString(tableName, "title")
 	_stSite.Icon = field.NewString(tableName, "icon")
+	_stSite.IconCSS = field.NewString(tableName, "icon_css")
 	_stSite.IconRemote = field.NewString(tableName, "icon_remote")
-	_stSite.IconCss = field.NewString(tableName, "icon_css")
+	_stSite.Description = field.NewString(tableName, "description")
+	_stSite.DescS = field.NewString(tableName, "desc_s")
+	_stSite.URL = field.NewString(tableName, "url")
 	_stSite.ImgPreview = field.NewString(tableName, "img_preview")
 	_stSite.ImgRemote = field.NewString(tableName, "img_remote")
-	_stSite.Description = field.NewString(tableName, "description")
-	_stSite.URL = field.NewString(tableName, "url")
-	_stSite.Tags = field.NewString(tableName, "tags")
 	_stSite.IsUsed = field.NewBool(tableName, "is_used")
+	_stSite.Status = field.NewInt8(tableName, "status")
 	_stSite.CreatedAt = field.NewTime(tableName, "created_at")
 	_stSite.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_stSite.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_stSite.Sort = field.NewInt(tableName, "sort")
+	_stSite.Tags = field.NewString(tableName, "tags")
+	_stSite.PriceType = field.NewInt8(tableName, "price_type")
 	_stSite.ViewCount = field.NewInt(tableName, "view_count")
+	_stSite.IntroBasic = field.NewString(tableName, "intro_basic")
+	_stSite.IntroUse = field.NewString(tableName, "intro_use")
+	_stSite.IntroFeatures = field.NewString(tableName, "intro_features")
+	_stSite.PriceDesc = field.NewString(tableName, "price_desc")
+	_stSite.Similar = field.NewString(tableName, "similar")
+	_stSite.Social = field.NewString(tableName, "social")
+	_stSite.MarkRate = field.NewString(tableName, "mark_rate")
 	_stSite.Featured = field.NewInt8(tableName, "featured")
-	_stSite.Status = field.NewInt8(tableName, "status")
 
 	_stSite.fillFieldMap()
 
@@ -57,27 +66,37 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 type stSite struct {
 	stSiteDo stSiteDo
 
-	ALL         field.Asterisk
-	ID          field.Int
-	CategoryID  field.Int
-	Title       field.String
-	Slug       field.String
-	Icon        field.String
-	IconRemote        field.String
-	IconCss     field.String
-	Description field.String
-	ImgPreview  field.String
-	ImgRemote  field.String
-	Tags  field.String
-	URL         field.String
-	IsUsed      field.Bool
-	CreatedAt   field.Time
-	UpdatedAt   field.Time
-	DeletedAt   field.Time
-	Sort        field.Int
-	ViewCount        field.Int
-	Featured        field.Int8
+	ALL           field.Asterisk
+	ID            field.Int
+	Slug          field.String
+	CategoryID    field.Int
+	Category      field.String
+	Title         field.String
+	Icon          field.String
+	IconCSS       field.String
+	IconRemote    field.String
+	Description   field.String
+	DescS         field.String
+	URL           field.String
+	ImgPreview    field.String
+	ImgRemote     field.String
+	IsUsed        field.Bool
 	Status        field.Int8
+	CreatedAt     field.Time
+	UpdatedAt     field.Time
+	DeletedAt     field.Time
+	Sort          field.Int
+	Tags          field.String
+	PriceType     field.Int8
+	ViewCount     field.Int
+	IntroBasic    field.String
+	IntroUse      field.String
+	IntroFeatures field.String
+	PriceDesc     field.String
+	Similar       field.String
+	Social        field.String
+	MarkRate      field.String
+	Featured      field.Int8
 
 	fieldMap map[string]field.Expr
 }
@@ -95,25 +114,35 @@ func (s stSite) As(alias string) *stSite {
 func (s *stSite) updateTableName(table string) *stSite {
 	s.ALL = field.NewAsterisk(table)
 	s.ID = field.NewInt(table, "id")
-	s.CategoryID = field.NewInt(table, "category_id")
-	s.Title = field.NewString(table, "title")
 	s.Slug = field.NewString(table, "slug")
+	s.CategoryID = field.NewInt(table, "category_id")
+	s.Category = field.NewString(table, "category")
+	s.Title = field.NewString(table, "title")
 	s.Icon = field.NewString(table, "icon")
+	s.IconCSS = field.NewString(table, "icon_css")
 	s.IconRemote = field.NewString(table, "icon_remote")
-	s.IconCss = field.NewString(table, "icon_css")
 	s.Description = field.NewString(table, "description")
+	s.DescS = field.NewString(table, "desc_s")
+	s.URL = field.NewString(table, "url")
 	s.ImgPreview = field.NewString(table, "img_preview")
 	s.ImgRemote = field.NewString(table, "img_remote")
-	s.URL = field.NewString(table, "url")
-	s.Tags = field.NewString(table, "tags")
 	s.IsUsed = field.NewBool(table, "is_used")
+	s.Status = field.NewInt8(table, "status")
 	s.CreatedAt = field.NewTime(table, "created_at")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
 	s.DeletedAt = field.NewTime(table, "deleted_at")
 	s.Sort = field.NewInt(table, "sort")
+	s.Tags = field.NewString(table, "tags")
+	s.PriceType = field.NewInt8(table, "price_type")
 	s.ViewCount = field.NewInt(table, "view_count")
+	s.IntroBasic = field.NewString(table, "intro_basic")
+	s.IntroUse = field.NewString(table, "intro_use")
+	s.IntroFeatures = field.NewString(table, "intro_features")
+	s.PriceDesc = field.NewString(table, "price_desc")
+	s.Similar = field.NewString(table, "similar")
+	s.Social = field.NewString(table, "social")
+	s.MarkRate = field.NewString(table, "mark_rate")
 	s.Featured = field.NewInt8(table, "featured")
-	s.Status = field.NewInt8(table, "status")
 
 	s.fillFieldMap()
 
@@ -138,27 +167,37 @@ func (s *stSite) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *stSite) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 11)
+	s.fieldMap = make(map[string]field.Expr, 30)
 	s.fieldMap["id"] = s.ID
-	s.fieldMap["category_id"] = s.CategoryID
-	s.fieldMap["title"] = s.Title
 	s.fieldMap["slug"] = s.Slug
+	s.fieldMap["category_id"] = s.CategoryID
+	s.fieldMap["category"] = s.Category
+	s.fieldMap["title"] = s.Title
 	s.fieldMap["icon"] = s.Icon
+	s.fieldMap["icon_css"] = s.IconCSS
 	s.fieldMap["icon_remote"] = s.IconRemote
-	s.fieldMap["icon_css"] = s.IconCss
 	s.fieldMap["description"] = s.Description
+	s.fieldMap["desc_s"] = s.DescS
+	s.fieldMap["url"] = s.URL
 	s.fieldMap["img_preview"] = s.ImgPreview
 	s.fieldMap["img_remote"] = s.ImgRemote
-	s.fieldMap["url"] = s.URL
-	s.fieldMap["tags"] = s.Tags
 	s.fieldMap["is_used"] = s.IsUsed
+	s.fieldMap["status"] = s.Status
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["updated_at"] = s.UpdatedAt
 	s.fieldMap["deleted_at"] = s.DeletedAt
 	s.fieldMap["sort"] = s.Sort
+	s.fieldMap["tags"] = s.Tags
+	s.fieldMap["price_type"] = s.PriceType
 	s.fieldMap["view_count"] = s.ViewCount
+	s.fieldMap["intro_basic"] = s.IntroBasic
+	s.fieldMap["intro_use"] = s.IntroUse
+	s.fieldMap["intro_features"] = s.IntroFeatures
+	s.fieldMap["price_desc"] = s.PriceDesc
+	s.fieldMap["similar"] = s.Similar
+	s.fieldMap["social"] = s.Social
+	s.fieldMap["mark_rate"] = s.MarkRate
 	s.fieldMap["featured"] = s.Featured
-	s.fieldMap["status"] = s.Status
 }
 
 func (s stSite) clone(db *gorm.DB) stSite {
@@ -348,9 +387,6 @@ func (s stSiteDo) Save(values ...*model.StSite) error {
 
 func (s stSiteDo) First() (*model.StSite, error) {
 	if result, err := s.DO.First(); err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
-		}
 		return nil, err
 	} else {
 		return result.(*model.StSite), nil

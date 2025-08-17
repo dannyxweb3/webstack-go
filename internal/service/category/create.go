@@ -51,7 +51,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 			existItem.Icon = req.Icon
 		}
 		if req.IconCss != "" {
-			existItem.IconCss = req.IconCss
+			existItem.IconCSS = req.IconCss
 		}
 		_, err := s.categoryRepo.WithContext(ctx).Update(existItem, s.categoryRepo.WhereByID(existItem.ID))
 		if err != nil {
@@ -67,7 +67,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 				Slug:      existItem.Slug,
 				Title:     existItem.Title,
 				Icon:      existItem.Icon,
-				IconCss:   existItem.IconCss,
+				IconCss:   existItem.IconCSS,
 				CreatedAt: existItem.CreatedAt,
 				UpdatedAt: existItem.UpdatedAt,
 				IsUsed:    existItem.IsUsed,
@@ -82,7 +82,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 				ParentID: req.ParentID,
 				Title:    req.Title,
 				Icon:     req.Icon,
-				IconCss:  req.IconCss,
+				IconCSS:  req.IconCss,
 				Desc:     req.Desc,
 				Level:    req.Level,
 				IsUsed:   true,
@@ -99,7 +99,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 			Sort:      category.Sort,
 			Title:     category.Title,
 			Icon:      category.Icon,
-			IconCss:   category.IconCss,
+			IconCss:   category.IconCSS,
 			CreatedAt: category.CreatedAt,
 			UpdatedAt: category.UpdatedAt,
 			IsUsed:    category.IsUsed,

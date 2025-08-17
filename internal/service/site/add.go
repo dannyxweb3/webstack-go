@@ -77,7 +77,7 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 			existItem.ImgPreview = req.ImgPreview
 		}
 		if req.IconCss != "" {
-			existItem.IconCss = req.IconCss
+			existItem.IconCSS = req.IconCss
 		}
 		if req.CategoryID != 0 {
 			existItem.CategoryID = req.CategoryID
@@ -141,7 +141,7 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 			Description:   req.Description,
 			URL:           req.Url,
 			ImgPreview:    req.ImgPreview,
-			IconCss:       req.IconCss,
+			IconCSS:       req.IconCss,
 			CategoryID:    req.CategoryID,
 			Category:      req.Category,
 			IsUsed:        true,

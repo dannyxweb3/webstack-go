@@ -159,17 +159,18 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 
 	// popular tools
 	popTools, _, _ := s.siteRepo.WithContext(ctx).FindPage(1, 20, query.StSite.Columns(query.StSite.ViewCount))
-	for _, st := range favTools {
+	for _, st := range popTools {
 		resp.PopularTools = append(resp.PopularTools, SiteModelToDto(st))
 	}
 
 	// popular categories // use random instead
-	popTools, _, _ := s.categoryRepo.WithContext(ctx).FindPage(1, 20, query.StCategory.Columns(query.StCategory.Count))
-	for _, st := range favTools {
-		resp.PopularTools = append(resp.PopularTools, SiteModelToDto(st))
+	popCates, _, _ := s.categoryRepo.WithContext(ctx).FindPage(1, 20, query.StCategory.Columns(query.StCategory.Count))
+	for _, st := range popCates {
+		resp.PopularCategories = append(resp.PopularCategories, CategoryModelToDto(st))
 	}
 
 	// featured tools
+	// qc := query.Q.WithContext(ctx)
 
 	// randome tools
 

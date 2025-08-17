@@ -27,7 +27,7 @@ type iWhereStCategoryFunc interface {
 	WhereBySlug(slug string) func(dao gen.Dao) gen.Dao
 	WhereByIcon(icon string) func(dao gen.Dao) gen.Dao
 	WhereByIconCss(iconcss string) func(dao gen.Dao) gen.Dao
-	WhereByLevel(level int32) func(dao gen.Dao) gen.Dao
+	WhereByLevel(level int) func(dao gen.Dao) gen.Dao
 	WhereByIsUsed(isUsed bool) func(dao gen.Dao) gen.Dao
 	WhereByCreatedAt(createdAt time.Time) func(dao gen.Dao) gen.Dao
 	WhereByUpdatedAt(updatedAt time.Time) func(dao gen.Dao) gen.Dao
@@ -96,11 +96,11 @@ func (s *stCategoryDao) WhereByIcon(icon string) func(dao gen.Dao) gen.Dao {
 
 func (s *stCategoryDao) WhereByIconCss(iconcss string) func(dao gen.Dao) gen.Dao {
 	return func(dao gen.Dao) gen.Dao {
-		return dao.Where(query.StCategory.IconCss.Eq(iconcss))
+		return dao.Where(query.StCategory.IconCSS.Eq(iconcss))
 	}
 }
 
-func (s *stCategoryDao) WhereByLevel(level int32) func(dao gen.Dao) gen.Dao {
+func (s *stCategoryDao) WhereByLevel(level int) func(dao gen.Dao) gen.Dao {
 	return func(dao gen.Dao) gen.Dao {
 		return dao.Where(query.StCategory.Level.Eq(level))
 	}
