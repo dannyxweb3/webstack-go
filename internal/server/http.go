@@ -88,8 +88,8 @@ func NewHTTPServer(
 	// /tools/<main-category>/<category>/<tool-slug>
 	// /tools/<main-category>/   ← 一级分类列表
 	// /tools/<main-category>/<category>/  ← 二级分类列表
-	s.GET("/tool.html", indexHandler.Tool)
-	s.GET("/tool", indexHandler.Tool)
+	// s.GET("/tool.html", indexHandler.Tool)
+	s.GET("/tool/:slug", indexHandler.Tool)
 	s.GET("/submit.html", indexHandler.Submit)
 	s.GET("/submit", indexHandler.Submit)
 	s.GET("/disclaimer.html", indexHandler.Disclaimer)

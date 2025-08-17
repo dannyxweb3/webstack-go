@@ -32,6 +32,8 @@ type Service interface {
 	AddYourSite(ctx *gin.Context) (*v1.AddYourSiteResp, error)
 	// CategoryDetail
 	CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.CategorySitesResp, error)
+	// ToolDetail
+	ToolDetail(ctx *gin.Context, slug string) (*v1.ToolDetailResp, error)
 }
 
 type service struct {

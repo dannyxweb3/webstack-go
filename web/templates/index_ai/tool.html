@@ -48,13 +48,12 @@
             Categories
         </a>
         <div class="dropdown-menu px-2">
-            <a class="dropdown-item" href="/categories">All AI Categories</a>
-            <a class="dropdown-item" href="#">图像生成（Image Generation）</a>
-            <a class="dropdown-item" href="#">文本生成（Text Generation）</a>
-            <a class="dropdown-item" href="#">数据分析（Data Analysis）</a>
-            <a class="dropdown-item" href="#">语音与音频（Speech & Audio）</a>
-            <a class="dropdown-item" href="#">开发者工具（Developer Tools）</a>
-            <a class="dropdown-item" href="#">其他工具</a>
+          <a class="dropdown-item" href="/categories">All AI Categories</a>
+          <a class="dropdown-item" href="/category/ai-image-generation">Image Generation</a>
+          <a class="dropdown-item" href="/category/ai-text-generation">Text Generation</a>
+          <a class="dropdown-item" href="/category/ai-data-analysis">Data Analysis</a>
+          <a class="dropdown-item" href="/category/speech-audio">Speech & Audio</a>
+          <a class="dropdown-item" href="/category/developer-tools">Developer Tools</a>
         </div>
         </li>
 
@@ -64,10 +63,10 @@
             Featured
         </a>
         <div class="dropdown-menu px-2">
-            <a class="dropdown-item" href="#">赞助的AI工具</a>
-            <a class="dropdown-item" href="#">最新AI工具</a>
-            <a class="dropdown-item" href="#">免费AI工具</a>
-            <a class="dropdown-item" href="#">最流行的AI工具</a>
+          <a class="dropdown-item" href="/featured">Featured AI Tools</a>
+          <a class="dropdown-item" href="/newest">Newest AI Tools</a>
+          <a class="dropdown-item" href="/free-ai-tools">Free AI Tools</a>
+          <a class="dropdown-item" href="/most-popular-ai-tools">Most Popular AI Tools</a>
         </div>
         </li>
 
@@ -77,9 +76,9 @@
             Explore Resources
         </a>
         <div class="dropdown-menu px-2">
-            <a class="dropdown-item" href="#">AI教程</a>
-            <a class="dropdown-item" href="/news">AI News</a>
-            <a class="dropdown-item" href="/community">AI Communities</a>
+          <a class="dropdown-item" href="/ai-tutorials">AI Tutorials</a>
+          <a class="dropdown-item" href="/news">AI News</a>
+          <a class="dropdown-item" href="/community">AI Comminities</a>
         </div>
         </li>
 
@@ -171,42 +170,43 @@
                 <div class="col-md-7">
                     <div class="d-flex align-items-center mb-3">
                         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
-                             class="tool-logo mr-3" alt="GitHub Logo">
+                             class="tool-logo mr-3" alt="{{.Title}} Logo">
                         <div>
-                            <h1>GitHub</h1>
-                            <span class="badge badge-primary">代码托管</span>
+                            <h1>{{.Title}}</h1>
+                            <span class="badge badge-primary">{{.Category}}</span>
                         </div>
                     </div>
                     
                     <div class="mb-3">
-                        <p><i class="fas fa-link mr-2"></i> <a href="https://github.com" target="_blank">https://github.com</a></p>
+                        <p><i class="fas fa-link mr-2"></i> <a href="{{.Url}}" target="_blank">{{.Url}}</a></p>
                     </div>
                     
                     <div class="mb-4">
-                        <h5>标签</h5>
+                        <h5>Tags</h5>
                         <div>
-                            <span class="tag">开发者工具</span>
-                            <span class="tag">版本控制</span>
-                            <span class="tag">开源</span>
-                            <span class="tag">协作</span>
+                            {{range $tag := .Tags}}
+                            <span class="tag">{{$tag}}</span>
+                            {{end}}
                         </div>
                     </div>
                     
                     <div>
-                        <h5>社交媒体</h5>
+                        <h5>Social Media Links</h5>
                         <div>
-                            <a href="https://twitter.com/github" class="social-icon"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.linkedin.com/company/github" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                          {{range $social := .Socials}}
+                            <a href="{{$social}}" class="social-icon"><i class="fab fa-twitter"></i></a>
+                          {{end}}
+                            <!-- <a href="https://www.linkedin.com/company/github" class="social-icon"><i class="fab fa-linkedin"></i></a>
                             <a href="https://www.facebook.com/GitHub" class="social-icon"><i class="fab fa-facebook"></i></a>
-                            <a href="https://www.youtube.com/github" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.youtube.com/github" class="social-icon"><i class="fab fa-youtube"></i></a> -->
                         </div>
                     </div>
                 </div>
                 
                 <!-- 1.2 右侧预览图 -->
                 <div class="col-md-5">
-                    <img src="https://via.placeholder.com/600x400?text=GitHub+Preview" 
-                         class="preview-image" alt="GitHub 预览">
+                    <img src="{{.ImgRemote}}" 
+                         class="preview-image" alt="{{.Title}} Preview">
                 </div>
             </div>
             
@@ -222,21 +222,22 @@
                 <div class="col-md-12 col-sm-12">
                     <!-- 3.1 基本介绍 -->
                     <div class="mb-5">
-                        <h3 class="section-title">基本介绍</h3>
-                        <p>GitHub 是全球最大的代码托管平台，拥有超过 4000 万开发者用户。它提供 Git 仓库托管、代码审查、问题跟踪、持续集成等功能，是开源项目和团队协作的首选平台。</p>
+                        <h3 class="section-title">Introduction</h3>
+                        <p>{{.IntroBasic}}</p>
                         
-                        <h5 class="mt-4">主要用法</h5>
-                        <ul>
+                        <h5 class="mt-4">How To Use</h5>
+                        <!-- <ul>
                             <li>托管和管理 Git 仓库</li>
                             <li>参与开源项目协作</li>
                             <li>使用 GitHub Actions 自动化工作流</li>
                             <li>通过 GitHub Pages 部署静态网站</li>
-                        </ul>
+                        </ul> -->
+                        <p>{{.IntroUse}}</p>
                     </div>
                     
                     <!-- 3.2 收费模式 -->
                     <div class="mb-5">
-                        <h3 class="section-title">收费模式</h3>
+                        <h3 class="section-title">Pricing</h3>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead class="thead-light">
@@ -247,6 +248,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <tr>
                                         <td>免费版</td>
                                         <td>免费</td>
@@ -269,7 +271,7 @@
                     
                     <!-- 3.3 类似网址推荐 -->
                     <div class="mb-5">
-                        <h3 class="section-title">类似网站</h3>
+                        <h3 class="section-title">Similar Tools</h3>
                         <div class="d-flex flex-wrap">
                             <a href="#" class="similar-site">
                                 <img src="https://gitlab.com/assets/favicon-72a2cad5025aa931d6ea56c3201d1f18e68a91b8552e53a1ff2db6ddee1de8d6.png" alt="GitLab">

@@ -25,7 +25,13 @@ func (h *Handler) Index(ctx *gin.Context) {
 	ctx.HTML(http.StatusOK, "index.html", resp)
 }
 func (h *Handler) Tool(ctx *gin.Context) {
-	resp, err := h.indexService.Index(ctx)
+	slug := ctx.Param("slug")
+	if slug == "" {
+		// h.Index(ctx)
+		ctx.Redirect(301, "/")
+		return
+	}
+	resp, err := h.indexService.ToolDetail(ctx, slug)
 	if err != nil {
 		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
 		return
