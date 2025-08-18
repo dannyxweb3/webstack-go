@@ -12,10 +12,10 @@ const TableNameStSite = "st_site"
 
 // StSite mapped from table <st_site>
 type StSite struct {
-	ID             int        `gorm:"column:id;type:int;primaryKey;autoIncrement:true" json:"id"`
+	ID             int        `gorm:"column:id;type:int(11);primaryKey;autoIncrement:true" json:"id"`
 	Slug           string     `gorm:"column:slug;type:varchar(255);not null" json:"slug"`
-	MainCategoryID int        `gorm:"column:main_category_id;type:int;not null" json:"main_category_id"`
-	CategoryID     int        `gorm:"column:category_id;type:int;not null" json:"category_id"`
+	MainCategoryID int        `gorm:"column:main_category_id;type:int(11);not null" json:"main_category_id"`
+	CategoryID     int        `gorm:"column:category_id;type:int(11);not null" json:"category_id"`
 	Category       string     `gorm:"column:category;type:varchar(255);not null" json:"category"`
 	Title          string     `gorm:"column:title;type:varchar(255);not null" json:"title"`
 	Icon           string     `gorm:"column:icon;type:text;not null" json:"icon"`
@@ -31,10 +31,10 @@ type StSite struct {
 	CreatedAt      *time.Time `gorm:"column:created_at;type:datetime;not null;default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt      *time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP" json:"updated_at"`
 	DeletedAt      *time.Time `gorm:"column:deleted_at;type:datetime" json:"deleted_at"`
-	Sort           int        `gorm:"column:sort;type:int;not null" json:"sort"`
+	Sort           int        `gorm:"column:sort;type:int(11);not null" json:"sort"`
 	Tags           string     `gorm:"column:tags;type:text;not null" json:"tags"`
 	PriceType      int8       `gorm:"column:price_type;type:tinyint;not null" json:"price_type"`
-	ViewCount      int        `gorm:"column:view_count;type:int;not null" json:"view_count"`
+	ViewCount      int        `gorm:"column:view_count;type:int(11);not null" json:"view_count"`
 	IntroBasic     string     `gorm:"column:intro_basic;type:text;not null" json:"intro_basic"`
 	IntroUse       string     `gorm:"column:intro_use;type:text;not null" json:"intro_use"`
 	IntroFeatures  string     `gorm:"column:intro_features;type:text;not null" json:"intro_features"`
@@ -43,6 +43,7 @@ type StSite struct {
 	Social         string     `gorm:"column:social;type:text;not null" json:"social"`
 	MarkRate       string     `gorm:"column:mark_rate;type:varchar(10);not null" json:"mark_rate"`
 	Featured       int8       `gorm:"column:featured;type:tinyint;not null" json:"featured"`
+	PriceTags      string     `gorm:"column:price_tags;type:varchar(255);not null" json:"price_tags"`
 }
 
 // TableName StSite's table name

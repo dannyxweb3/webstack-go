@@ -58,6 +58,7 @@ func newStSite(db *gorm.DB, opts ...gen.DOOption) stSite {
 	_stSite.Social = field.NewString(tableName, "social")
 	_stSite.MarkRate = field.NewString(tableName, "mark_rate")
 	_stSite.Featured = field.NewInt8(tableName, "featured")
+	_stSite.PriceTags = field.NewString(tableName, "price_tags")
 
 	_stSite.fillFieldMap()
 
@@ -99,6 +100,7 @@ type stSite struct {
 	Social         field.String
 	MarkRate       field.String
 	Featured       field.Int8
+	PriceTags      field.String
 
 	fieldMap map[string]field.Expr
 }
@@ -146,6 +148,7 @@ func (s *stSite) updateTableName(table string) *stSite {
 	s.Social = field.NewString(table, "social")
 	s.MarkRate = field.NewString(table, "mark_rate")
 	s.Featured = field.NewInt8(table, "featured")
+	s.PriceTags = field.NewString(table, "price_tags")
 
 	s.fillFieldMap()
 
@@ -170,7 +173,7 @@ func (s *stSite) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (s *stSite) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 31)
+	s.fieldMap = make(map[string]field.Expr, 32)
 	s.fieldMap["id"] = s.ID
 	s.fieldMap["slug"] = s.Slug
 	s.fieldMap["main_category_id"] = s.MainCategoryID
@@ -202,6 +205,7 @@ func (s *stSite) fillFieldMap() {
 	s.fieldMap["social"] = s.Social
 	s.fieldMap["mark_rate"] = s.MarkRate
 	s.fieldMap["featured"] = s.Featured
+	s.fieldMap["price_tags"] = s.PriceTags
 }
 
 func (s stSite) clone(db *gorm.DB) stSite {

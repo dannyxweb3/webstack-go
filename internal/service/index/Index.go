@@ -44,37 +44,37 @@ func categoryTree(nodes []*v1.TreeNode) []*v1.TreeNode {
 }
 
 // categorySites 将站点数据归类到分类站点中
-func categorySites(sites []*model.StSite, treeNodes []*v1.TreeNode) (data []*v1.CategorySite) {
-	for _, node := range treeNodes {
-		categorySite := &v1.CategorySite{
-			Category: node.Name,
-			CateId:   node.Id,
-			CateIcon: node.Icon,
-			SiteList: []model.StSite{},
-		}
+// func categorySites(sites []*model.StSite, treeNodes []*v1.TreeNode) (data []*v1.CategorySite) {
+// 	for _, node := range treeNodes {
+// 		categorySite := &v1.CategorySite{
+// 			Category: node.Name,
+// 			CateId:   node.Id,
+// 			CateIcon: node.Icon,
+// 			SiteList: []model.StSite{},
+// 		}
 
-		for _, site := range sites {
-			if site.CategoryID == node.Id {
-				categorySite.SiteList = append(categorySite.SiteList, *site)
-			}
-		}
-		//  Sort 字段进行升序排序
-		sort.Slice(categorySite.SiteList, func(i, j int) bool {
-			return categorySite.SiteList[i].Sort < categorySite.SiteList[j].Sort
-		})
+// 		for _, site := range sites {
+// 			if site.CategoryID == node.Id {
+// 				categorySite.SiteList = append(categorySite.SiteList, *site)
+// 			}
+// 		}
+// 		//  Sort 字段进行升序排序
+// 		sort.Slice(categorySite.SiteList, func(i, j int) bool {
+// 			return categorySite.SiteList[i].Sort < categorySite.SiteList[j].Sort
+// 		})
 
-		if len(categorySite.SiteList) > 0 {
-			data = append(data, categorySite)
-		}
+// 		if len(categorySite.SiteList) > 0 {
+// 			data = append(data, categorySite)
+// 		}
 
-		if len(node.Child) > 0 {
-			childCategorySites := categorySites(sites, node.Child)
-			data = append(data, childCategorySites...)
-		}
-	}
+// 		if len(node.Child) > 0 {
+// 			childCategorySites := categorySites(sites, node.Child)
+// 			data = append(data, childCategorySites...)
+// 		}
+// 	}
 
-	return data
-}
+// 	return data
+// }
 
 // Index 获取首页数据
 func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
@@ -83,21 +83,21 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		sysConfig *model.SysConfig
 		// sites     []*model.StSite
 
-		categories []*model.StCategory
+		// categories []*model.StCategory
 		// 一级分类
 		// mainCategories []*model.StCategory
 	)
 
 	// s.Logger.Info("Test Index") // ok
-	g.Go(func() (err error) {
-		// categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByParentID(0))
-		categories, err = query.StCategory.WithContext(ctx).
-			Where(query.StCategory.ParentID.Eq(0)).
-			Order(query.StCategory.Sort.Abs()).
-			Find()
-		// s.Logger.Info("Get Categories:", zap.Any("categories", categories), zap.Error(err)) // ok
-		return err
-	})
+	// g.Go(func() (err error) {
+	// 	// categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByParentID(0))
+	// 	// categories, err = query.StCategory.WithContext(ctx).
+	// 	// 	Where(query.StCategory.ParentID.Eq(0)).
+	// 	// 	Order(query.StCategory.Sort.Abs()).
+	// 	// 	Find()
+	// 	// // s.Logger.Info("Get Categories:", zap.Any("categories", categories), zap.Error(err)) // ok
+	// 	return err
+	// })
 
 	// g.Go(func() (err error) {
 	// 	// sites, err = s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByIsUsed(true))
@@ -115,16 +115,16 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		return nil, err
 	}
 
-	nodes := make([]*v1.TreeNode, len(categories))
-	for i, category := range categories {
-		nodes[i] = &v1.TreeNode{
-			Id:   category.ID,
-			Pid:  category.ParentID,
-			Name: category.Title,
-			Icon: category.Icon,
-			Sort: category.Sort,
-		}
-	}
+	// nodes := make([]*v1.TreeNode, len(categories))
+	// for i, category := range categories {
+	// 	nodes[i] = &v1.TreeNode{
+	// 		Id:   category.ID,
+	// 		Pid:  category.ParentID,
+	// 		Name: category.Title,
+	// 		Icon: category.Icon,
+	// 		Sort: category.Sort,
+	// 	}
+	// }
 
 	// categoryTree := categoryTree(buildTree(nodes, 0))
 	// categorySites := categorySites(sites, categoryTree)
