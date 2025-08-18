@@ -235,11 +235,20 @@
                     </div>
                     <div class="tool-free">FREE</div>
                     <div class="tool-image-container">
+                      <a href="/tool/{{$site.Slug}}">
                         <img src="{{$site.ImgRemote}}" alt="{{$site.Title}}" class="tool-image">
+                      </a>
                     </div>
                     <div class="tool-body">
-                        <h4 class="tool-title">{{$site.Title}}</h4>
-                        <p class="tool-desc">{{$site.Description}}</p>
+                        <h4 class="tool-title tool-actions">
+                          <a href="/tool/{{$site.Slug}}">
+                            <span class="">{{$site.Title}}</span>
+                          </a>
+                          <a class="" href="{{$site.URL}}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                        </h4>
+                        <a href="/tool/{{$site.Slug}}">
+                          <p class="tool-desc">{{$site.Description}}</p>
+                        </a>
                         <div class="tool-meta">
                             <div class="tool-rating">
                                 <i class="fas fa-star"></i>
@@ -254,16 +263,16 @@
                                 <i class="far fa-eye"></i> {{$site.ViewCount}}
                             </div>
                         </div>
-                        <div class="tool-tags">
+                        <div class="tool-tags" style="max-height: 200px; overflow: hidden;">
                           {{range $tag := $site.Tags}}
                             <span class="tool-tag">{{$tag}}</span>
                           {{end}}
                         </div>
-                        <div class="tool-actions">
+                        <div class="tool-actions" style="display:none;">
                             <a href="{{$site.URL}}" class="btn btn-sm btn-outline-primary">Visit</a>
                             <a href="/tool/{{$site.Slug}}" class="btn btn-sm btn-outline-secondary">Detail</a>
                         </div>
-                    </div>
+                      </div>
                 </div>
             </div>
             {{end}}
