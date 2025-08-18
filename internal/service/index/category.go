@@ -37,7 +37,8 @@ func (s *service) CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.C
 		page = 1
 	}
 
-	sysConfig, _ = s.configRepo.WithContext(ctx).FindOne()
+	// sysConfig, _ = s.configRepo.WithContext(ctx).FindOne()
+	sysConfig, _ = query.SysConfig.WithContext(ctx).First()
 	if sysConfig != nil {
 
 		res.ConfigSite = &v1.ConfigSite{

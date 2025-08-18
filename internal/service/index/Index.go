@@ -90,7 +90,11 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 
 	// s.Logger.Info("Test Index") // ok
 	g.Go(func() (err error) {
-		categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByParentID(0))
+		// categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByParentID(0))
+		categories, err = query.StCategory.WithContext(ctx).
+			Where(query.StCategory.ParentID.Eq(0)).
+			Order(query.StCategory.Sort.Abs()).
+			Find()
 		// s.Logger.Info("Get Categories:", zap.Any("categories", categories), zap.Error(err)) // ok
 		return err
 	})
@@ -102,7 +106,8 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	// })
 
 	g.Go(func() (err error) {
-		sysConfig, err = s.configRepo.WithContext(ctx).FindOne()
+		// sysConfig, err = s.configRepo.WithContext(ctx).FindOne()
+		sysConfig, err = query.SysConfig.WithContext(ctx).First()
 		return err
 	})
 
