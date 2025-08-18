@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"gorm.io/driver/mysql"
+	"gorm.io/gen/field"
 	"gorm.io/gorm"
 
 	"gorm.io/gen"
@@ -23,6 +24,32 @@ func connectDB(dsn string) *gorm.DB {
 		panic(fmt.Errorf("connect db fail: %w", err))
 	}
 	return db
+}
+
+func WithInt11Annotation() gen.ModelOpt {
+	return gen.FieldType("int", "int32")
+}
+
+func WithGormTags() gen.ModelOpt {
+
+	return gen.FieldGORMTag("age", func(tag field.GormTag) field.GormTag {
+		tag.Set("type", "int(11)")
+		tag.Set("not null", "")
+		return tag
+	})
+
+	// return gen.FieldGORMTag(func(field *schema.Field) (tag string) {
+	// 	if field.DataType == "int" {
+	// 		return `gorm:"type:int(11)"`
+	// 	}
+	// 	return ""
+	// })
+}
+
+func IntTagConverter(tag field.GormTag) field.GormTag {
+	tag.Set("type", "int(11)")
+	tag.Set("not null", "")
+	return tag
 }
 
 func main() {
@@ -81,7 +108,21 @@ func main() {
 	// 从连接的数据库为所有表生成Model结构体和CRUD代码
 	// 也可以手动指定需要生成代码的数据表
 	// g.ApplyBasic(g.GenerateAllTable()...)
-	g.ApplyBasic(g.GenerateModel("st_site"), g.GenerateModel("st_category"))
+	g.ApplyBasic(
+		g.GenerateModel("st_site",
+			gen.FieldGORMTag("category_id", IntTagConverter),
+			gen.FieldGORMTag("main_category_id", IntTagConverter),
+			gen.FieldGORMTag("sort", IntTagConverter),
+			gen.FieldGORMTag("view_count", IntTagConverter),
+		),
+		g.GenerateModel("st_category",
+			gen.FieldGORMTag("parent_id", IntTagConverter),
+			gen.FieldGORMTag("level", IntTagConverter),
+			gen.FieldGORMTag("sort", IntTagConverter),
+			gen.FieldGORMTag("count", IntTagConverter),
+			gen.FieldGORMTag("free_count", IntTagConverter),
+		),
+	)
 
 	// 执行并生成代码
 	g.Execute()

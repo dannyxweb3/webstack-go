@@ -12,7 +12,7 @@ const TableNameStSite = "st_site"
 
 // StSite mapped from table <st_site>
 type StSite struct {
-	ID             int        `gorm:"column:id;type:int(11);primaryKey;autoIncrement:true" json:"id"`
+	ID             int        `gorm:"column:id;type:int;primaryKey;autoIncrement:true" json:"id"`
 	Slug           string     `gorm:"column:slug;type:varchar(255);not null" json:"slug"`
 	MainCategoryID int        `gorm:"column:main_category_id;type:int(11);not null" json:"main_category_id"`
 	CategoryID     int        `gorm:"column:category_id;type:int(11);not null" json:"category_id"`

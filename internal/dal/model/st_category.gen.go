@@ -13,21 +13,21 @@ const TableNameStCategory = "st_category"
 // StCategory mapped from table <st_category>
 type StCategory struct {
 	ID        int        `gorm:"column:id;type:int;primaryKey;autoIncrement:true" json:"id"`
-	ParentID  int        `gorm:"column:parent_id;type:int;not null" json:"parent_id"`
+	ParentID  int        `gorm:"column:parent_id;type:int(11);not null" json:"parent_id"`
 	Slug      string     `gorm:"column:slug;type:varchar(255);not null" json:"slug"`
 	Title     string     `gorm:"column:title;type:varchar(255);not null" json:"title"`
 	Icon      string     `gorm:"column:icon;type:varchar(255);not null" json:"icon"`
 	IconCSS   string     `gorm:"column:icon_css;type:varchar(255);not null" json:"icon_css"`
-	Level     int        `gorm:"column:level;type:int;not null" json:"level"`
+	Level     int        `gorm:"column:level;type:int(11);not null" json:"level"`
 	IsUsed    bool       `gorm:"column:is_used;type:tinyint(1);not null" json:"is_used"`
 	Status    int8       `gorm:"column:status;type:tinyint;not null" json:"status"`
-	Sort      int        `gorm:"column:sort;type:int;not null" json:"sort"`
+	Sort      int        `gorm:"column:sort;type:int(11);not null" json:"sort"`
 	CreatedAt *time.Time `gorm:"column:created_at;type:datetime;not null;default:CURRENT_TIMESTAMP" json:"created_at"`
 	UpdatedAt *time.Time `gorm:"column:updated_at;type:datetime;not null;default:CURRENT_TIMESTAMP" json:"updated_at"`
 	DeletedAt *time.Time `gorm:"column:deleted_at;type:datetime" json:"deleted_at"`
 	Desc      string     `gorm:"column:desc;type:varchar(255);not null" json:"desc"`
-	Count     int        `gorm:"column:count;type:int;not null" json:"count"`
-	FreeCount int        `gorm:"column:free_count;type:int;not null" json:"free_count"`
+	Count     int        `gorm:"column:count;type:int(11);not null" json:"count"`
+	FreeCount int        `gorm:"column:free_count;type:int(11);not null" json:"free_count"`
 	Tools     string     `gorm:"column:tools;type:varchar(255)" json:"tools"`
 }
 
