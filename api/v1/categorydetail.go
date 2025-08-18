@@ -10,6 +10,8 @@ type CategorySitesResp struct {
 		Tags []string
 	}
 
+	Paginator Paginator
+
 	// 每个一级分类下的前8个
 	// Featured (3)
 	FeaturedTools []*Site

@@ -56,7 +56,8 @@ func (s *service) ToolDetail(ctx *gin.Context, slug string) (*v1.ToolDetailResp,
 	// res.Category = CategoryModelToDto(cate)
 
 	// sites under main categories
-	site, _ := query.StSite.WithContext(ctx).Where(query.StSite.Slug.Eq(slug)).First()
+	site, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Slug.Eq(slug)).First()
 	res.Site = SiteModelToDto(site)
 	// newCateSite.Cnt = int(cnt)
 	res.Tags = strings.Split(site.Tags, ",")
@@ -70,14 +71,19 @@ func (s *service) ToolDetail(ctx *gin.Context, slug string) (*v1.ToolDetailResp,
 	}
 
 	// featured tools
-	featuredTools, _, _ := query.StSite.WithContext(ctx).Where(query.StSite.Featured.Eq(1)).FindByPage(1, 3)
+	featuredTools, _, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Featured.Eq(1)).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage(1, 3)
 	for _, st := range featuredTools {
 		res.FeaturedTools = append(res.FeaturedTools, SiteModelToDto(st))
 	}
 
 	// randome tools
 	rnd := (time.Now().UnixMicro() % 2000)
-	randomTools, _, _ := query.StSite.WithContext(ctx).FindByPage(int(rnd), 20)
+	randomTools, _, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage(int(rnd), 20)
 	for _, st := range randomTools {
 		res.RandomTools = append(res.RandomTools, SiteModelToDto(st))
 	}

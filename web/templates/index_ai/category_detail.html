@@ -165,20 +165,22 @@
         <div class="col-lg-8 col-md-8 col-sm-12">
           <div class="page-header">
             <div>
-              <h1><i class="{{.IconCss}} mr-2"></i>{{.Title}}</h1>
-              <p class="text-muted">{{.Desc}}</p>
-              <span class="badge badge-secondary mr-2">156 Tools</span>
-              <span class="badge badge-success mr-2">32 Free</span>
+              <h1><i class="{{.IconCss}} mr-2"></i>Best AI Tools List For {{.Title}}</h1>
+              <p class="text-muted">
+                {{if eq .Desc ""}} See All {{.Count}} Tools For: {{.Title}}  {{else}} {{.Desc}} {{end}}
+              </p>
+              <span class="badge badge-secondary mr-2">{{.Count}} Tools</span>
+              <span class="badge badge-success mr-2">{{.FreeCount}} Free</span>
 
             </div>
           </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
           <!-- 右侧广告 -->
-          <div class="ad-placeholder">
+          <div class="ad-placeholder" style="display:none;">
             <i class="fas fa-ad"></i> 广告位招租
             <div class="small">联系: ads@ainav.com</div>
-        </div>
+          </div>
 
         </div>
       </div>
@@ -266,7 +268,7 @@
             {{end}}
             
             <!-- 页面底部广告位 -->
-            <div class="col-12 mb-4 fade-in">
+            <div class="col-12 mb-4 fade-in" style="display:none;">
                 <div class="ad-item">
                     <i class="fas fa-ad"></i>
                     <h5>广告位招租</h5>
@@ -277,20 +279,54 @@
         </div>
         
         <!-- 分页 -->
-        <nav aria-label="工具分页" class="mt-4">
+        <nav aria-label="Paginator" class="mt-4" id="paginator">
             <ul class="pagination justify-content-center">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                <li class="page-item  {{if eq .Paginator.CurPage 1}}disabled{{end}}">
+                    <a class="page-link" href="?page={{sub .Paginator.CurPage 1}}" aria-label="Previous">
                         <i class="fas fa-angle-left"></i>
                     </a>
                 </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <!-- 第一页（当当前页不在前几页时显示） -->
+                {{if gt .Paginator.CurPage (add .Paginator.PageRange 1)}}
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link" href="?page=1">1</a>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                {{end}}
+                
+                <!-- 中间页码 -->
+                {{$start := max 1 (sub .Paginator.CurPage (div .Paginator.PageRange 2))}}
+                {{$end := min .Paginator.TotalPages (add .Paginator.CurPage (div .Paginator.PageRange 2))}}
+                
+                {{if eq $start 1}}
+                    {{$end = min .Paginator.TotalPages .Paginator.PageRange}}
+                {{end}}
+                
+                {{if eq $end .Paginator.TotalPages}}
+                    {{$start = max 1 (sub .Paginator.TotalPages (sub .Paginator.PageRange 1))}}
+                {{end}}
+                
+                {{range $page := seq $start $end}}
+                <li class="page-item {{if eq $page $.Paginator.CurPage}}active{{end}}">
+                    <a class="page-link" href="?page={{$page}}">{{$page}}</a>
+                </li>
+                {{end}}
+                
+                <!-- 最后一页（当当前页不在后几页时显示） -->
+                {{if lt .Paginator.CurPage (sub .Paginator.TotalPages .Paginator.PageRange)}}
+                <li class="page-item disabled">
+                    <span class="page-link">...</span>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{.Paginator.TotalPages}}">{{.Paginator.TotalPages}}</a>
+                </li>
+                {{end}}
+                
+                <!-- 下一页按钮 -->
+                <li class="page-item {{if eq .Paginator.CurPage .Paginator.TotalPages}}disabled{{end}}">
+                    <a class="page-link" href="?page={{add .Paginator.CurPage 1}}" aria-label="Next">
                         <i class="fas fa-angle-right"></i>
                     </a>
                 </li>

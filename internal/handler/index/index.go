@@ -7,6 +7,7 @@ package index
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 
@@ -80,7 +81,8 @@ func (h *Handler) CategoryDetail(ctx *gin.Context) {
 		h.Categories(ctx)
 		return
 	}
-	page := ctx.GetInt("page")
+	pageStr := ctx.Query("page")
+	page, _ := strconv.Atoi(pageStr)
 	resp, err := h.indexService.CategoryDetail(ctx, cateSlug, page)
 	if err != nil {
 		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)

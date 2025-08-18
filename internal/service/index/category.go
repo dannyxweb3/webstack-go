@@ -59,7 +59,11 @@ func (s *service) CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.C
 	res.Category = CategoryModelToDto(cate)
 
 	// sites under main categories
-	sites, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.CreatedAt.Desc()).Where(query.StSite.CategoryID.Eq(cate.ID)).FindByPage(page, 20)
+	sites, cnt, _ := query.StSite.WithContext(ctx).
+		Order(query.StSite.CreatedAt.Desc()).
+		Where(query.StSite.CategoryID.Eq(cate.ID)).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage((page-1)*20, 20)
 	for _, st := range sites {
 		res.Sites = append(res.Sites, struct {
 			*model.StSite
@@ -68,6 +72,16 @@ func (s *service) CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.C
 			StSite: st,
 			Tags:   strings.Split(st.Tags, ","),
 		})
+	}
+
+	res.Category.Count = int(cnt)
+	res.Paginator.TotalItems = int(cnt)
+	res.Paginator.PageSize = 20
+	res.Paginator.CurPage = page
+	res.Paginator.TotalPages = (res.Paginator.TotalItems + res.Paginator.PageSize - 1) / res.Paginator.PageSize
+	res.Paginator.PageRange = 5
+	if res.Paginator.CurPage > res.Paginator.TotalPages {
+		res.Paginator.CurPage = res.Paginator.TotalPages
 	}
 	// newCateSite.Cnt = int(cnt)
 
@@ -79,7 +93,10 @@ func (s *service) CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.C
 	}
 
 	// featured tools
-	featuredTools, _, _ := query.StSite.WithContext(ctx).Where(query.StSite.Featured.Eq(1)).FindByPage(1, 3)
+	featuredTools, _, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Featured.Eq(1)).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage(1, 3)
 	for _, st := range featuredTools {
 		res.FeaturedTools = append(res.FeaturedTools, SiteModelToDto(st))
 	}
@@ -89,7 +106,9 @@ func (s *service) CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.C
 	for rnd > cnt {
 		rnd /= 2
 	}
-	randomTools, _, _ := query.StSite.WithContext(ctx).FindByPage(int(rnd), 20)
+	randomTools, _, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage(int(rnd), 20)
 	for _, st := range randomTools {
 		res.RandomTools = append(res.RandomTools, SiteModelToDto(st))
 	}

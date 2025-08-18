@@ -155,8 +155,14 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 		}
 
 		// sites under main categories
-		sites, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.CreatedAt.Desc()).Where(query.StSite.MainCategoryID.Eq(ct.ID)).FindByPage(1, 8)
+		sites, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.CreatedAt.Desc()).
+			Where(query.StSite.MainCategoryID.Eq(ct.ID)).
+			Where(query.StSite.Status.Eq(1)).
+			FindByPage(1, 8)
 		for _, st := range sites {
+			if st.Icon == "" {
+				st.Icon = st.IconRemote
+			}
 			newCateSite.SiteList = append(newCateSite.SiteList, *st)
 		}
 		newCateSite.Cnt = int(cnt)
@@ -171,8 +177,15 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 			}
 			if mainCateIdx < 2 {
 				// 防止加载过多，只加载前两个
-				sitesOfSubCates, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.CreatedAt.Desc()).Where(query.StSite.CategoryID.Eq(subCate.CateId)).FindByPage(1, 5)
+				sitesOfSubCates, cnt, _ := query.StSite.WithContext(ctx).
+					Order(query.StSite.CreatedAt.Desc()).
+					Where(query.StSite.CategoryID.Eq(subCate.CateId)).
+					Where(query.StSite.Status.Eq(1)).
+					FindByPage(1, 5)
 				for _, st := range sitesOfSubCates {
+					if st.Icon == "" {
+						st.Icon = st.IconRemote
+					}
 					subCate.SiteList = append(subCate.SiteList, *st)
 				}
 				subCate.Cnt = int(cnt)
@@ -189,14 +202,20 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	// favTools, _ := s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByStatus(1), func(dao gen.Dao) gen.Dao {
 	// return dao.Where(query.StSite.Slug.In(defaultFavTools...))
 	// })
-	favTools, _ := query.StSite.WithContext(ctx).Where(query.StSite.Slug.In(defaultFavTools...)).Find()
+	favTools, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Slug.In(defaultFavTools...)).
+		Where(query.StSite.Status.Eq(1)).
+		Find()
 	for _, st := range favTools {
 		resp.FavTools = append(resp.FavTools, SiteModelToDto(st))
 	}
 
 	// popular tools
 	// popTools, _, _ := s.siteRepo.WithContext(ctx).FindPage(1, 20, query.StSite.Columns(query.StSite.ViewCount))
-	popTools, cnt, _ := query.StSite.WithContext(ctx).Order(query.StSite.ViewCount).FindByPage(1, 20)
+	popTools, cnt, _ := query.StSite.WithContext(ctx).
+		Order(query.StSite.ViewCount).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage(1, 20)
 	for _, st := range popTools {
 		resp.PopularTools = append(resp.PopularTools, SiteModelToDto(st))
 	}
@@ -209,7 +228,10 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	}
 
 	// featured tools
-	featuredTools, _, _ := query.StSite.WithContext(ctx).Where(query.StSite.Featured.Eq(1)).FindByPage(1, 3)
+	featuredTools, _, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Featured.Eq(1)).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage(1, 3)
 	for _, st := range featuredTools {
 		resp.FeaturedTools = append(resp.FeaturedTools, SiteModelToDto(st))
 	}
@@ -219,7 +241,9 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	for rnd > cnt {
 		rnd /= 2
 	}
-	randomTools, _, _ := query.StSite.WithContext(ctx).FindByPage(int(rnd), 20)
+	randomTools, _, _ := query.StSite.WithContext(ctx).
+		Where(query.StSite.Status.Eq(1)).
+		FindByPage(int(rnd), 20)
 	for _, st := range randomTools {
 		resp.RandomTools = append(resp.RandomTools, SiteModelToDto(st))
 	}

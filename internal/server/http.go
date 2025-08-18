@@ -18,6 +18,7 @@ import (
 	indexHandler "github.com/ch3nnn/webstack-go/internal/handler/index"
 	siteHandler "github.com/ch3nnn/webstack-go/internal/handler/site"
 	userHandler "github.com/ch3nnn/webstack-go/internal/handler/user"
+	"github.com/ch3nnn/webstack-go/internal/helper"
 	"github.com/ch3nnn/webstack-go/internal/middleware"
 	"github.com/ch3nnn/webstack-go/pkg/jwt"
 	"github.com/ch3nnn/webstack-go/pkg/log"
@@ -52,9 +53,7 @@ func NewHTTPServer(
 
 	// s.SetHTMLTemplate(template.Must(template.New("").ParseFS(assets.Templates, "templates/**/*")))
 	temp := template.New("")
-	temp.Funcs(template.FuncMap{
-		"sub": func(a, b int) int { return a - b },
-	})
+	temp.Funcs(helper.GetTplFuncs())
 	temp = template.Must(temp.ParseFS(assets.Templates, "templates/**/*"))
 	confIndexTheme := conf.GetString("template.index_theme")
 	if confIndexTheme != "" {
