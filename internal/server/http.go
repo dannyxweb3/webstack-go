@@ -49,7 +49,7 @@ func NewHTTPServer(
 	s.MaxMultipartMemory = 32 << 20 // 32MB
 
 	s.StaticFS("/assets", http.FS(assets.Static))
-	s.StaticFS("/wp", http.FS(assets.WpContent))
+	// s.StaticFS("/wp", http.FS(assets.WpContent))
 
 	// s.SetHTMLTemplate(template.Must(template.New("").ParseFS(assets.Templates, "templates/**/*")))
 	temp := template.New("")
