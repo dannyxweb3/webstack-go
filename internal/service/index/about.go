@@ -9,10 +9,12 @@ import (
 	"github.com/gin-gonic/gin"
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
+	"github.com/ch3nnn/webstack-go/internal/dal/query"
 )
 
 func (s *service) About(ctx *gin.Context) (*v1.AboutResp, error) {
-	sysConfig, err := s.configRepo.WithContext(ctx).FindOne()
+	sysConfig, err := query.SysConfig.WithContext(ctx).First()
+	// sysConfig, err := s.configRepo.WithContext(ctx).FindOne()
 	if err != nil {
 		return nil, err
 	}

@@ -10,10 +10,12 @@ import (
 	"go.uber.org/zap"
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
+	"github.com/ch3nnn/webstack-go/internal/dal/query"
 )
 
 func (s *service) ContactUs(ctx *gin.Context) (*v1.ContactUsResp, error) {
-	sysConfig, err := s.configRepo.WithContext(ctx).FindOne()
+	sysConfig, err := query.SysConfig.WithContext(ctx).First()
+	// sysConfig, err := s.configRepo.WithContext(ctx).FindOne()
 	if err != nil {
 		return nil, err
 	}

@@ -44,6 +44,7 @@ type StSite struct {
 	MarkRate       string     `gorm:"column:mark_rate;type:varchar(10);not null" json:"mark_rate"`
 	Featured       int8       `gorm:"column:featured;type:tinyint;not null" json:"featured"`
 	PriceTags      string     `gorm:"column:price_tags;type:varchar(255);not null" json:"price_tags"`
+	Origin         string     `gorm:"column:origin;type:varchar(10);not null" json:"origin"`
 }
 
 // TableName StSite's table name

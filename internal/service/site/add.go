@@ -9,11 +9,12 @@ import (
 	"context"
 	"strconv"
 
-	"github.com/duke-git/lancet/v2/condition"
 	"go.uber.org/zap"
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
+	"github.com/ch3nnn/webstack-go/internal/converter"
 	"github.com/ch3nnn/webstack-go/internal/dal/model"
+	"github.com/ch3nnn/webstack-go/internal/dal/query"
 )
 
 func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp, error) {
@@ -21,12 +22,15 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 	var id = 0
 	if req.Category != "" {
 		originCate := req.Category
-		existCates, _ := s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByTitle(req.Category))
+		// query.StCategory.WithContext(ctx)
+		// existCates, _ := s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByTitle(req.Category))
+
+		existCates, _ := query.StCategory.WithContext(ctx).Where(query.StCategory.Title.Eq(req.Category)).Find()
 		if len(existCates) > 0 && existCates[0].ID > 0 {
 			req.CategoryID = existCates[0].ID
 		}
 		s.Logger.Logger.Info("add by category", zap.Any("existCates", existCates))
-		existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereBySlug(req.Category))
+		existCates, _ = query.StCategory.WithContext(ctx).Where(query.StCategory.Slug.Eq(req.Category)).Find()
 		if len(existCates) > 0 && existCates[0].ID > 0 {
 			req.CategoryID = existCates[0].ID
 		}
@@ -34,7 +38,8 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 
 		predictCateId, e := strconv.Atoi(req.Category)
 		if e == nil && predictCateId > 0 {
-			existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByID(predictCateId))
+			existCates, _ = query.StCategory.WithContext(ctx).Where(query.StCategory.ID.Eq(predictCateId)).Find()
+			// existCates, _ = s.categoryRepository.WithContext(ctx).FindAll(s.categoryRepository.WhereByID(predictCateId))
 			if len(existCates) > 0 && existCates[0].ID > 0 {
 				req.CategoryID = existCates[0].ID
 			}
@@ -44,15 +49,16 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 		if req.CreateCategory == 1 && req.CategoryID == 0 {
 			s.Logger.Logger.Info("try to add category", zap.Any("category", req.Category))
 			// 创建分类
-			newCategory, err := s.categoryRepository.WithContext(ctx).Create(&model.StCategory{
+			newCategory := &model.StCategory{
 				Title: originCate,
 				Slug:  originCate,
-			})
+			}
+			err := query.StCategory.WithContext(ctx).Create(newCategory)
 			if err != nil {
 				s.Logger.Logger.Info("add by new category failed", zap.Error(err))
 				return &v1.SiteAddResp{}, err
 			}
-			if newCategory != nil {
+			if newCategory.ID == 0 {
 				req.CategoryID = newCategory.ID
 				s.Logger.Logger.Info("add by new category", zap.Any("newCategory", newCategory))
 			}
@@ -60,7 +66,8 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 	}
 
 	// 先查询是否存在,存在则更新
-	existItems, _ := s.siteRepository.WithContext(ctx).FindAll(s.siteRepository.WhereByURL(req.Url))
+	// existItems, _ := s.siteRepository.WithContext(ctx).FindAll(s.siteRepository.WhereByURL(req.Url))
+	existItems, _ := query.StSite.WithContext(ctx).Where(query.StSite.URL.Eq(req.Url)).Find()
 	if len(existItems) > 0 {
 		existItem := existItems[0]
 		// do update
@@ -124,9 +131,16 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 		if req.Tags != "" {
 			existItem.Tags = req.Tags
 		}
-		existItem.IsUsed = true
+		if req.PriceTags != "" {
+			existItem.PriceTags = req.PriceTags
+		}
+		if req.Origin != "" {
+			existItem.Origin = req.Origin
+		}
+		// existItem.IsUsed = true
 		existItem.Sort = 0 // 新增的默认排序为0
-		_, err := s.siteRepository.WithContext(ctx).Update(existItem, s.siteRepository.WhereByURL(req.Url), s.siteRepository.WhereByID(existItem.ID))
+		// _, err := s.siteRepository.WithContext(ctx).Update(existItem, s.siteRepository.WhereByURL(req.Url), s.siteRepository.WhereByID(existItem.ID))
+		_, err := query.StSite.WithContext(ctx).Where(query.StSite.URL.Eq(req.Url)).Where(query.StSite.ID.Eq(existItem.ID)).Updates(existItem)
 		id = existItem.ID
 		if err != nil {
 			s.Logger.Logger.Info("add by update failed", zap.Error(err))
@@ -135,32 +149,8 @@ func (s *service) Add(ctx context.Context, req *v1.SiteAddReq) (*v1.SiteAddResp,
 		s.Logger.Logger.Info("add by update", zap.Any("existitem", existItem))
 	} else {
 
-		newItem, err := s.siteRepository.WithContext(ctx).Create(&model.StSite{
-			Title:         condition.Ternary(req.Title != "", req.Title, req.Url),
-			Icon:          req.Icon,
-			Description:   req.Description,
-			URL:           req.Url,
-			ImgPreview:    req.ImgPreview,
-			IconCSS:       req.IconCss,
-			CategoryID:    req.CategoryID,
-			Category:      req.Category,
-			IsUsed:        true,
-			Sort:          0,
-			Slug:          req.Slug,
-			IntroBasic:    req.IntroBasic,
-			IntroUse:      req.IntroUse,
-			IntroFeatures: req.IntroFeatures,
-			PriceDesc:     req.PriceDesc,
-			Similar:       req.Similar,
-			Social:        req.Social,
-			MarkRate:      req.MarkRate,
-			PriceType:     req.PriceType,
-			ViewCount:     0,
-			IconRemote:    req.IconRemote,
-			ImgRemote:     req.ImgRemote,
-			DescS:         req.DescS,
-			Tags:          req.Tags,
-		})
+		newItem := converter.SiteDtoToModel(&req.Site)
+		err := query.StSite.WithContext(ctx).Create(newItem)
 		if err != nil {
 			s.Logger.Logger.Info("add by new failed", zap.Error(err))
 			return &v1.SiteAddResp{}, err

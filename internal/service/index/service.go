@@ -13,7 +13,6 @@ import (
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
 	"github.com/ch3nnn/webstack-go/internal/dal/model"
-	"github.com/ch3nnn/webstack-go/internal/dal/repository"
 	s "github.com/ch3nnn/webstack-go/internal/service"
 )
 
@@ -40,22 +39,22 @@ type Service interface {
 
 type service struct {
 	*s.Service
-	siteRepo     repository.IStSiteDao
-	categoryRepo repository.IStCategoryDao
-	configRepo   repository.ISysConfigDao
+	// siteRepo repository.IStSiteDao
+	// categoryRepo repository.IStCategoryDao
+	// configRepo repository.ISysConfigDao
 }
 
 func NewService(
 	s *s.Service,
-	siteRepo repository.IStSiteDao,
-	categoryRepo repository.IStCategoryDao,
-	configRepo repository.ISysConfigDao,
+	// siteRepo repository.IStSiteDao,
+	// categoryRepo repository.IStCategoryDao,
+	// configRepo repository.ISysConfigDao,
 ) Service {
 	return &service{
-		Service:      s,
-		siteRepo:     siteRepo,
-		categoryRepo: categoryRepo,
-		configRepo:   configRepo,
+		Service: s,
+		// siteRepo: siteRepo,
+		// categoryRepo: categoryRepo,
+		// configRepo: configRepo,
 	}
 }
 

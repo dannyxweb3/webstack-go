@@ -45,7 +45,7 @@ func NewWire(viperViper *viper.Viper, logger *log.Logger) (*app.App, func(), err
 	iStSiteDao := repository.NewStSiteDao()
 	iStCategoryDao := repository.NewStCategoryDao()
 	iSysConfigDao := repository.NewSysConfigDao()
-	indexService := index.NewService(serviceService, iStSiteDao, iStCategoryDao, iSysConfigDao)
+	indexService := index.NewService(serviceService)
 	indexHandler := index2.NewHandler(handlerHandler, indexService)
 	iSysUserDao := repository.NewSysUserDao()
 	iSysMenuDao := repository.NewSysMenuDao()

@@ -34,7 +34,8 @@ func (s *service) ToolDetail(ctx *gin.Context, slug string) (*v1.ToolDetailResp,
 		return res, errors.New("No slug given")
 	}
 
-	sysConfig, _ = s.configRepo.WithContext(ctx).FindOne()
+	sysConfig, _ = query.SysConfig.WithContext(ctx).First()
+	// sysConfig, _ = s.configRepo.WithContext(ctx).FindOne()
 	if sysConfig != nil {
 
 		res.ConfigSite = &v1.ConfigSite{

@@ -42,6 +42,8 @@ type Site struct {
 	Social         string `json:"social" form:"social"`                 // 社交信息
 	MarkRate       string `json:"mark_rate" form:"mark_rate"`           // 评分
 	Featured       int8   `json:"featured" form:"featured"`
+	PriceTags      string `json:"price_tags" form:"price_tags"`
+	Origin         string `json:"origin" form:"origin"`
 
 	CreateCategory int `json:"create_category" form:"create_category"` // 创建分类ID 如果不存在
 
