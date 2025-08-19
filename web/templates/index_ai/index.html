@@ -339,7 +339,7 @@
                     {{if eq $tool.PriceType 1}}
                     <span class="badge badge-info position-absolute" style="top:5px;right:5px;">FREE</span>
                     {{else}}
-                    <span class="badge badge-success position-absolute" style="top:5px;right:5px;">FREE</span>
+                    <!-- <span class="badge badge-success position-absolute" style="top:5px;right:5px;">FREE</span> -->
                     {{end}}
 
                     <!-- 内容 -->
@@ -385,7 +385,9 @@
                     </span>
 
                     <!-- FREE 标签 -->
+                    {{if eq $site.PriceType 1}}
                     <span class="badge badge-info position-absolute" style="top:5px;right:5px;">FREE</span>
+                    {{end}}
 
                     <!-- 内容 -->
                     <div class="d-flex align-items-center mb-2">

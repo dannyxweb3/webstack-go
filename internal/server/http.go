@@ -104,6 +104,11 @@ func NewHTTPServer(
 	s.GET("/category", indexHandler.CategoryDetail)
 	s.GET("/category/:cate", indexHandler.CategoryDetail)
 	s.GET("/tools/:searchType", indexHandler.ToolListFeatured)
+
+	s.GET("/ai-tutorials", func(ctx *gin.Context) {
+		ctx.Redirect(301, "https://www.tutorialspoint.com/artificial_intelligence/index.htm")
+	})
+
 	// About HTML
 	// s.GET("/about", func(ctx *gin.Context) {
 	// 	ctx.HTML(http.StatusOK, "about.html", nil)
