@@ -206,7 +206,7 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	}
 
 	// randome tools
-	rnd := time.Now().UnixMicro() % 2000
+	rnd := time.Now().UnixMicro() % 200
 	for rnd > cnt {
 		rnd /= 2
 	}

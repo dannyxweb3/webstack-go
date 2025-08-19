@@ -108,7 +108,7 @@ func (s *service) CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.C
 	}
 
 	// randome tools
-	rnd := time.Now().UnixMicro() % 2000
+	rnd := time.Now().UnixMicro() % 200
 	for rnd > cnt {
 		rnd /= 2
 	}

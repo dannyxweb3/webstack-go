@@ -80,7 +80,7 @@ func (s *service) ToolDetail(ctx *gin.Context, slug string) (*v1.ToolDetailResp,
 	}
 
 	// randome tools
-	rnd := (time.Now().UnixMicro() % 2000)
+	rnd := (time.Now().UnixMicro() % 200)
 	randomTools, _, _ := query.StSite.WithContext(ctx).
 		Where(query.StSite.Status.Eq(1)).
 		FindByPage(int(rnd), 20)

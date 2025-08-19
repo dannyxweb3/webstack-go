@@ -122,7 +122,7 @@ func (s *service) ToolListFeatured(ctx *gin.Context, searchType string, page int
 	}
 
 	// randome tools
-	rnd := time.Now().UnixMicro() % 2000
+	rnd := time.Now().UnixMicro() % 200
 	for rnd > cnt {
 		rnd /= 2
 	}
