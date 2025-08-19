@@ -380,7 +380,7 @@
                 <div class="col-md-3 mb-4">
                   <div class="site-card position-relative">
                     <!-- 置顶按钮 -->
-                    <span class="btn-top position-absolute" style="top:-10px;left:5px;">
+                    <span class="btn-top position-absolute" style="top:-10px;left:5px;" data-name="{{$site.Title}}" data-icon="{{$site.Icon}}" data-url="{{$site.URL}}" >
                       <i class="fas fa-thumbtack"></i>
                     </span>
 
@@ -858,8 +858,12 @@
         // 置顶按钮点击事件（你可以在这里加自己的逻辑）
         $('.btn-top').on('click', function(e){
           e.stopPropagation();
-          let siteName = $(this).closest('.site-card').find('.site-name').text();
-          alert('置顶功能触发：' + siteName);
+          // let siteName = $(this).closest('.site-card').find('.site-name').text();
+          let item = {name:$(this).attr('data-name'),url:$(this).attr('data-url'),icon:$(this).attr('data-icon')}
+          console.log('addFavorite:', item);
+          addFavoriteItem(item);
+
+          // alert('置顶功能触发：' + siteName);
           // 这里可以调用你的其他功能
         });
       

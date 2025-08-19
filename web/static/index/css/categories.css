@@ -89,6 +89,10 @@ body {
     /* border-bottom: 2px solid #e1e5eb; */
 }
 
+.category-title a {
+    color: var(--primary-color);
+}
+
 /* 二级分类卡片 */
 .subcategory-card {
     background: white;
