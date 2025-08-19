@@ -81,29 +81,7 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	var (
 		g         errgroup.Group
 		sysConfig *model.SysConfig
-		// sites     []*model.StSite
-
-		// categories []*model.StCategory
-		// 一级分类
-		// mainCategories []*model.StCategory
 	)
-
-	// s.Logger.Info("Test Index") // ok
-	// g.Go(func() (err error) {
-	// 	// categories, err = s.categoryRepo.WithContext(ctx).FindAllOrderBySort(query.StCategory.Sort.Abs(), s.categoryRepo.WhereByParentID(0))
-	// 	// categories, err = query.StCategory.WithContext(ctx).
-	// 	// 	Where(query.StCategory.ParentID.Eq(0)).
-	// 	// 	Order(query.StCategory.Sort.Abs()).
-	// 	// 	Find()
-	// 	// // s.Logger.Info("Get Categories:", zap.Any("categories", categories), zap.Error(err)) // ok
-	// 	return err
-	// })
-
-	// g.Go(func() (err error) {
-	// 	// sites, err = s.siteRepo.WithContext(ctx).FindAll(s.siteRepo.WhereByIsUsed(true))
-	// 	// s.Logger.Info("Get Sites:", zap.Any("sites", sites), zap.Error(err)) // ok
-	// 	// return err
-	// })
 
 	g.Go(func() (err error) {
 		// sysConfig, err = s.configRepo.WithContext(ctx).FindOne()
@@ -114,20 +92,6 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	if err := g.Wait(); err != nil {
 		return nil, err
 	}
-
-	// nodes := make([]*v1.TreeNode, len(categories))
-	// for i, category := range categories {
-	// 	nodes[i] = &v1.TreeNode{
-	// 		Id:   category.ID,
-	// 		Pid:  category.ParentID,
-	// 		Name: category.Title,
-	// 		Icon: category.Icon,
-	// 		Sort: category.Sort,
-	// 	}
-	// }
-
-	// categoryTree := categoryTree(buildTree(nodes, 0))
-	// categorySites := categorySites(sites, categoryTree)
 
 	resp := &v1.IndexResp{
 		ConfigSite: &v1.ConfigSite{
@@ -220,7 +184,7 @@ func (s *service) Index(ctx context.Context) (*v1.IndexResp, error) {
 	popTools, cnt, _ := query.StSite.WithContext(ctx).
 		Order(query.StSite.ViewCount).
 		Where(query.StSite.Status.Eq(1)).
-		FindByPage(1, 20)
+		FindByPage(1, 8)
 	for _, st := range popTools {
 		resp.PopularTools = append(resp.PopularTools, SiteModelToDto(st))
 	}

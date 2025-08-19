@@ -103,6 +103,7 @@ func NewHTTPServer(
 	s.GET("/communities", indexHandler.Community)
 	s.GET("/category", indexHandler.CategoryDetail)
 	s.GET("/category/:cate", indexHandler.CategoryDetail)
+	s.GET("/tools/:searchType", indexHandler.ToolListFeatured)
 	// About HTML
 	// s.GET("/about", func(ctx *gin.Context) {
 	// 	ctx.HTML(http.StatusOK, "about.html", nil)

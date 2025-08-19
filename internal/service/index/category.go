@@ -60,10 +60,15 @@ func (s *service) CategoryDetail(ctx *gin.Context, slug string, page int) (*v1.C
 	res.Category = CategoryModelToDto(cate)
 
 	// sites under main categories
-	sites, cnt, _ := query.StSite.WithContext(ctx).
+	siteQuery := query.StSite.WithContext(ctx).
 		Order(query.StSite.CreatedAt.Desc()).
-		Where(query.StSite.CategoryID.Eq(cate.ID)).
-		Where(query.StSite.Status.Eq(1)).
+		Where(query.StSite.Status.Eq(1))
+	if cate.ParentID == 0 {
+		siteQuery = siteQuery.Where(query.StSite.MainCategoryID.Eq(cate.ID))
+	} else {
+		siteQuery = siteQuery.Where(query.StSite.CategoryID.Eq(cate.ID))
+	}
+	sites, cnt, _ := siteQuery.
 		FindByPage((page-1)*20, 20)
 	for _, st := range sites {
 		res.Sites = append(res.Sites, struct {

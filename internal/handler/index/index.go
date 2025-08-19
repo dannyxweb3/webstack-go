@@ -93,6 +93,24 @@ func (h *Handler) CategoryDetail(ctx *gin.Context) {
 
 	ctx.HTML(http.StatusOK, "category_detail.html", resp)
 }
+func (h *Handler) ToolListFeatured(ctx *gin.Context) {
+	searchType := ctx.Param("searchType")
+	if searchType == "" {
+		h.Categories(ctx)
+		return
+	}
+	pageStr := ctx.Query("page")
+	page, _ := strconv.Atoi(pageStr)
+	resp, err := h.indexService.ToolListFeatured(ctx, searchType, page)
+	if err != nil {
+		v1.HandleError(ctx, http.StatusInternalServerError, err, nil)
+		return
+	}
+
+	h.saveHTMLToFile(ctx, resp, "category_detail.html")
+
+	ctx.HTML(http.StatusOK, "category_detail.html", resp)
+}
 func (h *Handler) News(ctx *gin.Context) {
 	resp, err := h.indexService.Index(ctx)
 	if err != nil {
