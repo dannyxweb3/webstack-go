@@ -200,18 +200,18 @@
         <div class="submit-form">
             <div class="text-center">
                 <h2><i class="fas fa-plus-circle mr-3"></i>Submit Tool</h2>
-                <p class="lead">推荐优质网站，共建导航社区</p>
+                <p class="lead">Recommend high-quality websites and build a navigation community</p>
             </div>
             <form id="websiteSubmitForm">
                 <!-- 基本信息 -->
                 <div class="form-section">
-                    <h4><i class="fas fa-info-circle form-icon"></i>基本信息</h4>
+                    <h4><i class="fas fa-info-circle form-icon"></i>Information</h4>
                     <div class="form-group">
-                        <label for="websiteName">网站名称 *</label>
+                        <label for="websiteName">Tool/Webiste Name *</label>
                         <input type="text" class="form-control" id="websiteName" required>
                     </div>
                     <div class="form-group">
-                        <label for="websiteUrl">网站地址 (URL) *</label>
+                        <label for="websiteUrl">Link (URL) *</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">https://</span>
@@ -220,63 +220,62 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="websiteLogo">网站Logo URL</label>
+                        <label for="websiteLogo">Logo URL</label>
                         <input type="url" class="form-control" id="websiteLogo">
-                        <small class="form-text text-muted">建议尺寸：120×120像素，透明背景PNG格式最佳</small>
+                        <small class="form-text text-muted">Recommended size should be larger than: 48×48 pixels, PNG format with transparent background is best</small>
                     </div>
                     <div class="form-group">
-                        <label for="websiteDesc">网站简介 *</label>
+                        <label for="websiteDesc">Description *</label>
                         <textarea class="form-control" id="websiteDesc" rows="3" required></textarea>
-                        <small class="form-text text-muted">50-200字，简要描述网站的主要功能和特色</small>
+                        <small class="form-text text-muted">50-200 words, briefly describe the main functions and features of the website</small>
                     </div>
                 </div>
 
                 <!-- 分类信息 -->
                 <div class="form-section">
-                    <h4><i class="fas fa-tags form-icon"></i>分类信息</h4>
+                    <h4><i class="fas fa-tags form-icon"></i>Category</h4>
                     <div class="form-group">
-                        <label>网站类型 *</label>
+                        <label>Category *</label>
                         <select class="form-control" id="websiteCategory" required>
-                            <option value="">-- 请选择 --</option>
-                            <option value="tool">工具类</option>
-                            <option value="design">设计资源</option>
-                            <option value="develop">开发技术</option>
-                            <option value="productivity">效率办公</option>
-                            <option value="ai">人工智能</option>
-                            <option value="other">其他</option>
+                            <option value="">-- Please Select --</option>
+                            <option value="website">Website</option>
+                            <option value="software">Software / Command Tools</option>
+                            <option value="app">Applications</option>
+                            <option value="community">Community/Forum</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>标签</label>
+                        <label>Tags</label>
                         <div class="mb-2">
-                            <input type="text" class="form-control tag-input" id="tagInput" placeholder="输入标签后按回车">
-                            <small class="form-text text-muted">添加3-5个关键词标签，帮助用户更好地找到这个网站</small>
+                            <input type="text" class="form-control tag-input" id="tagInput" placeholder="Input the tag name and press Enter">
+                            <small class="form-text text-muted">Add 3-5 keyword tags to help users find this website better</small>
                         </div>
                         <div id="tagContainer">
                             <!-- 动态生成的标签会显示在这里 -->
-                            <span class="badge badge-primary tag-badge">开发者工具 <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>
-                            <span class="badge badge-primary tag-badge">代码托管 <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>
+                            <span class="badge badge-primary tag-badge">Developer Tools <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>
+                            <span class="badge badge-primary tag-badge">Image Generation <i class="fas fa-times ml-1" onclick="removeTag(this)"></i></span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 社交媒体 -->
                 <div class="form-section">
-                    <h4><i class="fas fa-share-alt form-icon"></i>社交媒体</h4>
+                    <h4><i class="fas fa-share-alt form-icon"></i>Social Media Links</h4>
                     <div class="form-group">
                         <label for="twitterUrl">Twitter</label>
-                        <input type="url" class="form-control" id="twitterUrl" placeholder="https://twitter.com/用户名">
+                        <input type="url" class="form-control" id="twitterUrl" placeholder="https://twitter.com/username">
                     </div>
                     <div class="form-group">
-                        <label for="githubUrl">GitHub</label>
-                        <input type="url" class="form-control" id="githubUrl" placeholder="https://github.com/用户名">
+                        <label for="youtubeUrl">Youtube</label>
+                        <input type="url" class="form-control" id="youtubeUrl" placeholder="https://youtube.com/username">
                     </div>
                 </div>
 
                 <!-- 提交按钮 -->
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary btn-lg px-5">
-                        <i class="fas fa-paper-plane mr-2"></i>提交审核
+                        <i class="fas fa-paper-plane mr-2"></i>Submit
                     </button>
                 </div>
             </form>
