@@ -11,7 +11,6 @@ import (
 
 	v1 "github.com/ch3nnn/webstack-go/api/v1"
 	"github.com/ch3nnn/webstack-go/internal/converter"
-	"github.com/ch3nnn/webstack-go/internal/dal/model"
 	"github.com/ch3nnn/webstack-go/internal/dal/query"
 	"go.uber.org/zap"
 )
@@ -70,17 +69,7 @@ func (s *service) Create(ctx context.Context, req *v1.CategoryCreateReq) (*v1.Ca
 		}, nil
 	} else {
 
-		category := &model.StCategory{
-			ParentID: req.ParentID,
-			Title:    req.Title,
-			Icon:     req.Icon,
-			IconCSS:  req.IconCss,
-			Desc:     req.Desc,
-			Level:    req.Level,
-			IsUsed:   true,
-			Sort:     req.Sort,
-			Slug:     req.Slug,
-		}
+		category := converter.CategoryDtoToModel(&req.Category)
 		err := query.StCategory.WithContext(ctx).Create(category)
 		// _, err := s.categoryRepo.WithContext(ctx).Create()
 		if err != nil {
