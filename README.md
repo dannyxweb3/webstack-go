@@ -45,6 +45,12 @@
 2. 执行 `go build -o ./bin/server ./cmd/server` 编译项目，生成可执行文件 server 
 3. 编译完执行 `./bin/server -conf=config/prod.yml` 首次启动程序之后，会生成 SQLite 数据库，并自动创建表结构
 
+**3、如果修改了数据库，genmodel**
+```
+go build cmd/gen/genmodel.go
+./genmodel
+```
+此操作会覆盖internal/dal/model/st_site.gen.go、internal/dal/query/st_site.gen.go、internal/dal/query/gen.go。
 
 **3、Docker 运行服务**
 #### 下载镜像
